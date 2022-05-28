@@ -1,0 +1,203 @@
+.detailPage {
+  position: relative;
+  .detail-page {
+    background-color: var(--main-color);
+    .detail-aria {
+      background: linear-gradient(to right, #464246, #101111);
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      iframe {
+        margin-top: 15px;
+        border: none;
+        width: 100%;
+        height: 550px;
+      }
+
+      .loginWatchPage {
+        margin-left: 250px;
+        margin-top: 30px;
+        .btnLoginWatchPage {
+          padding: 15px 30px 15px 30px;
+          cursor: pointer;
+          border: none;
+          border-radius: 10px;
+          background-color: white;
+          font-weight: bold;
+          font-size: 18px;
+        }
+      }
+
+      .actor-detail-aria {
+        border-top: 1px solid White;
+        height: 100%;
+        margin-top: 50px;
+        cursor: pointer;
+        h3 {
+          color: white;
+          text-align: center;
+          margin-top: 15px;
+          letter-spacing: 3px;
+        }
+        .actor-detail-aria-v2 {
+          width: 70%;
+          margin-left: 150px;
+          .singleActorPlace {
+            margin-top: 10px;
+            width: 50%;
+          }
+        }
+      }
+
+      .trailerDetailAria {
+        margin: 30px 0;
+      }
+
+      .trailerDescAria {
+        width: 80%;
+        p {
+          color: white;
+          text-align: center;
+          letter-spacing: 2px;
+          font-size: 18px;
+        }
+        img {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .detail {
+        display: flex;
+
+        .leftSide {
+          position: relative;
+          flex: 3;
+          margin-top: 100px;
+          margin-left: 50px;
+          margin-right: 20px;
+          .btnAria {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .btnAddToWatchList {
+              margin: 20px 0 0 30px;
+              font-size: 12px;
+              padding: 7px 20px;
+              border: 1px solid orange;
+              border-radius: 5px;
+              color: #101111;
+              cursor: pointer;
+              letter-spacing: 2px;
+              font-weight: bold;
+            }
+            .btnXemPhim {
+              margin: 20px 0 0 0;
+              padding: 7px 38px;
+              background-color: transparent;
+              border: 1px solid orange;
+              border-radius: 5px;
+              color: orange;
+              cursor: pointer;
+              letter-spacing: 2px;
+              font-weight: bold;
+              &:hover {
+                background-color: rgb(122, 105, 74);
+                transition: all 0.5 ease;
+              }
+            }
+          }
+          .itemInfo {
+            display: none;
+          }
+          img {
+            width: 500px;
+            height: 700px;
+            object-fit: cover;
+          }
+          &:hover {
+            img {
+              opacity: 0.3;
+              transition: all 0.5s ease;
+            }
+            .itemInfo {
+              position: absolute;
+              top: 320px;
+              left: 220px;
+              display: flex;
+              flex-direction: column;
+              padding: 5px;
+              margin-top: 20px;
+              cursor: pointer;
+              .icons {
+                display: flex;
+                margin-bottom: 10px;
+                .icon {
+                  border: 2px solid orange;
+                  padding: 5px;
+                  border-radius: 50%;
+                  margin-right: 10px;
+                  font-size: 64px;
+                  color: orange;
+                }
+              }
+            }
+          }
+        }
+        .rightSide {
+          margin-top: 100px;
+          flex: 6;
+          color: rgb(172, 165, 165);
+
+          .directorInfoPrev {
+            display: none;
+          }
+          .directorInfo:hover {
+            span {
+              display: flex;
+              color: red;
+            }
+          }
+
+          .directorAvatar {
+            img {
+              height: 150px;
+              width: 150px;
+              object-fit: cover;
+              border-radius: 50%;
+            }
+          }
+          .actorShowName {
+            cursor: pointer;
+            display: flex;
+          }
+          .imdb {
+            background-color: yellow;
+            color: #101111;
+            font-weight: bold;
+            padding: 3px;
+            border-radius: 5px;
+          }
+
+          .limit {
+            border: 1px solid red;
+            color: rgb(250, 124, 124);
+          }
+
+          .year {
+          }
+
+          span {
+            font-size: 18px;
+            color: white;
+          }
+
+          h4 {
+            color: rgb(231, 176, 75);
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

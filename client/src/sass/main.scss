@@ -1,0 +1,29 @@
+//layouts
+
+@import "./Layouts/list";
+@import "./Layouts/footer";
+@import "./Layouts/featured";
+@import "./Layouts/listItem";
+@import "./Layouts/navbar";
+@import "./Layouts/pagination";
+@import "./Layouts/users";
+@import "./Layouts/actor";
+@import "./Layouts/listitemtag";
+@import "./Layouts/commentlist";
+@import "./Layouts/skeleton";
+//pages
+
+@import "./Pages/home";
+@import "./Pages/login";
+@import "./Pages/register";
+@import "./Pages/watch";
+@import "./Pages/detail";
+@import "./Pages/moviegenre";
+@import "./Pages/movienation";
+@import "./Pages/movieyear";
+@import "./Pages/userpage";
+
+//mixin
+
+@import "./Helper/mixin";
+@import "./Helper/app";

@@ -1,0 +1,182 @@
+.userpagearia {
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 50%
+    ),
+    url("https://miro.medium.com/max/1400/1*5lyavS59mazOFnb55Z6znQ.png");
+  background-size: cover;
+  .userPage {
+    position: relative;
+
+    .user-page {
+      display: flex;
+      .leftSide {
+        .infoUserAria {
+          display: flex;
+          .userAria {
+            flex: 5;
+            margin: 100px 0 50px 0;
+            display: flex;
+            flex-direction: column;
+            .magicTab {
+              display: flex;
+              flex-direction: column;
+              position: relative;
+              background-color: transparent;
+              margin: 100px auto 0;
+              border: none;
+
+              .bloc-tabs {
+                display: flex;
+
+                .tabs {
+                  color: #fff;
+                  font-weight: bold;
+                  padding: 15px;
+                  text-align: center;
+                  width: 50%;
+                  background-color: transparent;
+                  cursor: pointer;
+                  border: none;
+                  box-sizing: content-box;
+                  position: relative;
+                  outline: none;
+
+                  .accountProfile {
+                    font-size: 30px;
+                    &:hover {
+                      transform: scale(1.4);
+                      transition: all 0.5s;
+                      color: yellow;
+                    }
+                  }
+                  .editProfile {
+                    font-size: 30px;
+                    &:hover {
+                      transform: scale(1.4);
+                      transition: all 0.5s;
+                      color: lightcoral;
+                    }
+                  }
+                  .bookmarkMovie {
+                    font-size: 30px;
+                    &:hover {
+                      transform: scale(1.4);
+                      transition: all 0.5s;
+                      color: aqua;
+                    }
+                  }
+                }
+                .closeTab {
+                  color: #fff;
+                  font-weight: bold;
+                  text-align: center;
+                  background: transparent;
+                  border: none;
+                  box-sizing: content-box;
+                  position: absolute;
+                  outline: none;
+                  right: 15px;
+                  font-size: 16px;
+                  cursor: pointer;
+                  &:hover {
+                    transform: scale(1.3);
+                    transition: all 0.5s;
+                    color: red;
+                  }
+                }
+
+                .active-tabs {
+                  background-color: transparent;
+                  border: none;
+
+                  &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 50px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: calc(80%);
+                    height: 5px;
+                    background: rgb(88, 147, 241);
+                  }
+                }
+              }
+              .content-tabs {
+                flex-grow: 1;
+
+                .content {
+                  background: transparent;
+                  padding: 20px;
+                  width: 100%;
+                  height: 100%;
+                  display: none;
+                  color: white;
+                  font-weight: bold;
+
+                  button {
+                    padding: 5px 25px;
+                    font-weight: bold;
+                    border: 1px solid rgb(115, 115, 201);
+                    border-radius: 10px;
+                    text-align: center;
+                    margin-left: 220px;
+                    background-color: transparent;
+                    color: #fff;
+                    &:hover {
+                      background-color: rgb(154, 154, 197);
+                      transition: 0.5s;
+                    }
+                  }
+                }
+                small {
+                  font-weight: bold;
+                  color: white;
+                  letter-spacing: 2px;
+                  margin-left: 15px;
+                  font-size: 14px;
+                }
+                p {
+                  margin-top: 15px;
+                  color: white;
+                  margin-left: 15px;
+                }
+                .userAvatar {
+                  height: 200px;
+                  width: 200px;
+                  border-radius: 50%;
+                  object-fit: cover;
+                }
+                .userPageName {
+                  margin-left: 25px;
+                  color: white;
+                  font-weight: bold;
+                  font-size: 35px;
+                  letter-spacing: 2px;
+                }
+                .active-content {
+                  display: block;
+                }
+              }
+            }
+          }
+          .sideBarAria {
+            flex: 4;
+          }
+        }
+        .watchListAria {
+          text-align: center;
+          h1 {
+            font-weight: bold;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  .footerAria {
+    border-top: 1px solid white;
+  }
+}

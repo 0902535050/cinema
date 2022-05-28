@@ -1,0 +1,129 @@
+.cardBoxItemTag {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .boxItemTag {
+    width: 250px;
+    margin: 0 10px;
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s;
+    background-color: var(--main-color);
+    border-radius: 7px;
+    img {
+      display: block;
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 7px;
+    }
+    .movie-Title-Item-Tag {
+      display: none;
+    }
+    .moreInfoItemTag {
+      display: none;
+    }
+    .controlAria {
+      display: none;
+    }
+    .supportSubItemTag {
+      display: flex;
+      position: absolute;
+      color: blue;
+      background-color: rgb(226, 212, 212, 0.6);
+      border-radius: 5px;
+      left: 0;
+      top: 0;
+      margin: 5px 0 0 5px;
+      padding: 2px;
+      z-index: 11;
+      font-weight: bold;
+    }
+
+    .itemInfoMovieItemTag {
+      display: none;
+    }
+    &:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      align-items: center;
+      justify-content: center;
+      img {
+        opacity: 0.3;
+      }
+      .controlAria {
+        display: flex;
+        position: absolute;
+        color: white;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+
+        .delete-sweep {
+          font-size: 30px;
+          transition: all 0.5s;
+          &:hover {
+            color: red;
+          }
+        }
+      }
+      .itemInfoMovieItemTag {
+        display: flex;
+        position: absolute;
+        margin-top: 60px;
+        font-size: 15px;
+        font-weight: bold;
+        .limit {
+          border: 1px solid red;
+          padding: 1px 3px;
+          margin: 0 5px;
+          color: red;
+        }
+        .year {
+          color: lightblue;
+          margin: 0 5px;
+        }
+        .duration {
+          color: lightblue;
+          margin: 0 5px;
+        }
+        .imdb {
+          display: flex;
+          color: yellow;
+        }
+        .genre {
+          color: lightblue;
+          margin: 0 5px;
+        }
+      }
+      .supportSubItemTag {
+        color: rgb(62, 62, 190);
+      }
+      .movie-Title-Item-Tag {
+        display: flex;
+        position: absolute;
+        font-weight: bold;
+        color: orange;
+      }
+
+      .moreInfoItemTag {
+        cursor: pointer;
+        display: flex;
+        position: absolute;
+        bottom: 20px;
+        border-radius: 3px 10px;
+        border: 1px solid orange;
+        padding: 5px 10px;
+        color: orange;
+        font-weight: bold;
+        transition: all 0.5s;
+        .btn-more-info {
+          font-size: 14px;
+        }
+        &:hover {
+          background-color: rgb(230, 185, 102);
+        }
+      }
+    }
+  }
+}

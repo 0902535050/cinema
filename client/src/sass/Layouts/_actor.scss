@@ -1,0 +1,32 @@
+.actorPage {
+  position: relative;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    width: 150px;
+    object-fit: cover;
+    &:hover {
+      -webkit-box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.7);
+      box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.7);
+      transform: scale(0.9);
+    }
+    .card-top {
+      img {
+        width: 150px;
+        height: 160px;
+        object-fit: cover;
+        transform: translate(-1px, -3px);
+        border-radius: 5px;
+      }
+    }
+    .card-bot {
+      text-align: center;
+      .actorName {
+        color: #000;
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.home {
+  background-color: var(--main-color);
+  overflow: hidden;
+  max-width: 100%;
+  .showList {
+    margin-top: 125px;
+  }
+  background: linear-gradient(
+    to bottom,
+    rgb(0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  //  , url("https://miro.medium.com/max/1400/1*5lyavS59mazOFnb55Z6znQ.png");
+
+  opacity: 0.9;
+}
