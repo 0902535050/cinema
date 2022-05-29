@@ -173,6 +173,26 @@ export default function Watch() {
     } catch (err) {
       console.log(err);
     }
+    let array = changedV2.filter((id) => id !== userId);
+    setChangedV2(array);
+    setFlag(changedV2.length);
+    try {
+      await axios.put(
+        "/movies/" + movie._id,
+        {
+          listLiked: array,
+        },
+        {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MTgyNTIwNywiZXhwIjoxOTExMDI1MjA3fQ.zUnmi1ldGu_OBidqwP6V2MQc1cpCohfWySOxLIwww18",
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+    setLoading(!loading);
   };
 
   const removeUserDisLikeMovie = async (userId) => {
@@ -219,6 +239,26 @@ export default function Watch() {
     } catch (err) {
       console.log(err);
     }
+    let array = changedV3.filter((id) => id !== user);
+    setChangedV3(array);
+    setFlag(changedV3.length);
+    try {
+      await axios.put(
+        "/movies/" + movie._id,
+        {
+          listDisLiked: array,
+        },
+        {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MTgyNTIwNywiZXhwIjoxOTExMDI1MjA3fQ.zUnmi1ldGu_OBidqwP6V2MQc1cpCohfWySOxLIwww18",
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+
     setLoading(!loading);
   };
 
