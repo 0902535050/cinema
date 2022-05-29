@@ -1,8 +1,11 @@
-input.form-control, input.form-control:focus{
-    background: #F0F0FF;
+input.form-control,
+input.form-control:focus {
+  background: #fff;
 }
 
-.error{
-    position: absolute;
-    color:red;
+.error {
+  position: absolute;
+  color: red;
+  font-size: 12px;
+  font-style: italic;
 }

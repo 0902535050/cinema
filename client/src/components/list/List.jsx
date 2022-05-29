@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function List({ list }) {
+export default function List({ list, setOpenModal, setViaMovie }) {
   const settings = {
     dots: true,
     infinite: false,
@@ -52,7 +52,11 @@ export default function List({ list }) {
             <Slider {...settings}>
               {list.content.map((item, i) => (
                 <div className="itemPlace" key={i}>
-                  <ListItem item={item} />
+                  <ListItem
+                    item={item}
+                    setOpenModal={setOpenModal}
+                    setViaMovie={setViaMovie}
+                  />
                 </div>
               ))}
             </Slider>

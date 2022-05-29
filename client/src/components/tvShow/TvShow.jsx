@@ -48,9 +48,15 @@ const Rating = styled.span`
 `;
 
 export function TvShow({ item }) {
+  const setMovieOnLocalStorage = () => {
+    localStorage.setItem("movies", JSON.stringify(item));
+  };
   return (
     <TvShowContainer>
-      <Link to={{ pathname: "/detail", movie: item }}>
+      <Link
+        to={{ pathname: "/watch", movie: item }}
+        onClick={setMovieOnLocalStorage}
+      >
         <div className="itemAria d-flex">
           <Thumbnail>
             <img src={item.img} />

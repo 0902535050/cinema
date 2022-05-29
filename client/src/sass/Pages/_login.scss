@@ -1,12 +1,6 @@
 .login {
   max-width: 100%;
   height: 100vh;
-  background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 100%
-    ),
-    url("https://miro.medium.com/max/1400/1*5lyavS59mazOFnb55Z6znQ.png");
   background-size: cover;
   position: relative;
   .top {
@@ -31,58 +25,78 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #000;
 
     form {
       width: 440px;
       height: 600px;
       padding: 30px;
       border-radius: 5px;
-      background-color: var(--main-color);
+      background-color: #fff;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
 
-      .errorMsg {
-        font-size: 14px;
-        color: red;
+      h1 {
+        text-align: center;
       }
-      .signUpLink {
-        font-size: 14px;
-        color: purple;
-        margin-left: 5px;
-        text-decoration: none;
+      .top {
+        display: flex;
+        justify-content: center;
+        .wrapper {
+          .logo {
+            height: 80px;
+            width: 80px;
+            object-fit: cover;
+          }
+        }
       }
+
       input {
         height: 40px;
         border-radius: 5px;
-        background-color: gray;
-        color: white;
+        background-color: rgb(220, 220, 238);
+        color: #000;
         padding-left: 10px;
+
         &::placeholder {
           color: lightgray;
           font-size: 14px;
           font-weight: bold;
         }
       }
+
+      .signUpLink {
+        font-size: 14px;
+        margin-left: 5px;
+        text-decoration: none;
+        span {
+          color: purple;
+          &:hover {
+            color: #000;
+          }
+        }
+      }
+
       .loginButton {
         height: 50px;
         border-radius: 5px;
-        background-color: red;
         color: white;
         border: none;
         font-size: 20px;
         font-weight: 500;
         cursor: pointer;
+        background: linear-gradient(to right, #00dbde, #fc00ff);
+        transition: all 1.5s;
         &:hover {
-          color: rgb(110, 34, 34);
+          background: linear-gradient(to left, #00dbde, #fc00ff);
         }
       }
 
       span {
-        color: lightgray;
+        color: rgb(133, 92, 92);
         font-weight: bold;
-        height: 0;
+        padding: 10px 0;
       }
     }
   }

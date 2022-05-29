@@ -1,0 +1,125 @@
+.modalBackground {
+  position: fixed;
+  z-index: 100;
+  top: 15%;
+  left: 36%;
+  .modalContainer {
+    width: 600px;
+    height: 600px;
+    border-radius: 12px;
+    background-color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    .modalTrailer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 335px;
+      border: none;
+      border-radius: 12px;
+    }
+
+    .body {
+      position: absolute;
+      top: 350px;
+      font-weight: bold;
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      .movieTitle {
+        color: orange;
+      }
+      .movieDesc {
+        text-align: center;
+        color: lightgray;
+        margin-right: 15px;
+        letter-spacing: 1px;
+      }
+      .itemInfoTop {
+        display: flex;
+        font-size: 14px;
+        font-weight: 600;
+        color: gray;
+        padding: 15px;
+        justify-content: center;
+        .limit {
+          border: 1px solid red;
+          padding: 1px 3px;
+          margin: 0 10px;
+          color: red;
+        }
+        .year {
+          color: white;
+          margin: 0 10px;
+        }
+        .duration {
+          color: white;
+          margin: 0 10px;
+        }
+        .imdb {
+          display: flex;
+          color: yellow;
+        }
+        .genre {
+          color: white;
+          margin: 0 10px;
+        }
+      }
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+
+      .linkStyle {
+        color: #000;
+        text-decoration: none;
+      }
+      .btnPlayFromListItem {
+        padding: 5px 40px;
+        border: none;
+        margin-left: 15px;
+        border-radius: 5px;
+        margin-right: 5px;
+        color: #000;
+        font-weight: bold;
+        background: linear-gradient(to right, #00dbde, #fc00ff);
+        transition: all 1.5s;
+        &:hover {
+          background: linear-gradient(to left, #00dbde, #fc00ff);
+        }
+      }
+      .btnAddFromListItem {
+        font-size: 12px;
+        padding: 5px 40px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 5px;
+        color: #000;
+        font-weight: bold;
+        background: linear-gradient(to right, #00dbde, #fc00ff);
+        transition: all 1.5s;
+        &:hover {
+          background: linear-gradient(to left, #00dbde, #fc00ff);
+        }
+      }
+
+      .btnInfoFromListItem {
+        padding: 5px 40px;
+        border: none;
+        border-radius: 5px;
+
+        color: #000;
+        font-weight: bold;
+        background: linear-gradient(to right, #00dbde, #fc00ff);
+        transition: all 1.5s;
+        &:hover {
+          background: linear-gradient(to left, #00dbde, #fc00ff);
+        }
+      }
+    }
+  }
+}

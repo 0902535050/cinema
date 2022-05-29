@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { login } from "../../authContext/apiCalls";
@@ -8,7 +8,12 @@ import { TextField } from "../../components/textfield/TextField";
 
 export default function Login() {
   const { dispatch } = useContext(AuthContext);
-
+  const [height, setHeight] = useState(window.innerHeight);
+  useEffect(() => {
+    window.onresize = function () {
+      setHeight(window.innerHeight);
+    };
+  }, []);
   const handleSubmit = (values) => {
     login(values, dispatch);
   };
@@ -30,12 +35,10 @@ export default function Login() {
   });
   localStorage.clear();
   return (
-    <div className="login">
-      <div className="top">
-        <div className="wrapper">
-          <img className="logo" src="img/logo.png" alt="" />
-        </div>
-      </div>
+    <div
+      className="login"
+      style={{ backgroundImage: "url('./img/bgDangKy.jpg')", height }}
+    >
       <div className="container">
         <Formik
           initialValues={{
@@ -48,7 +51,13 @@ export default function Login() {
           {(formikProps) => (
             <div>
               <Form className="formRegister">
+                <div className="top">
+                  <div className="wrapper">
+                    <img className="logo" src="img/logo.png" alt="" />
+                  </div>
+                </div>
                 <h1>Đăng Nhập</h1>
+
                 <TextField
                   label="Email"
                   name="email"
@@ -68,7 +77,7 @@ export default function Login() {
                 <span>
                   Bạn lần đầu đến Vinema?
                   <Link className="signUpLink" to="/register">
-                    <b>Đăng ký ngay!</b>
+                    <span>Đăng ký ngay!</span>
                   </Link>
                 </span>
                 <small>

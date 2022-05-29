@@ -4,9 +4,18 @@ import { useHistory, Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { TextField } from "../../components/textfield/TextField";
 import * as Yup from "yup";
+import { useEffect, useState } from "react";
 
 export default function Register() {
   const history = useHistory();
+
+  const [height, setHeight] = useState(window.innerHeight);
+  useEffect(() => {
+    window.onresize = function () {
+      setHeight(window.innerHeight);
+    };
+  }, []);
+
   const validate = Yup.object().shape({
     email: Yup.string()
       .required("Không được bỏ trống !")
@@ -34,12 +43,10 @@ export default function Register() {
   };
 
   return (
-    <div className="register">
-      <div className="top">
-        <div className="wrapper">
-          <img className="logo" src="img/logo.png" alt="none" />
-        </div>
-      </div>
+    <div
+      className="register "
+      style={{ backgroundImage: "url('./img/bgDangKy.jpg')", height }}
+    >
       <div className="container">
         <Formik
           initialValues={{
@@ -53,6 +60,11 @@ export default function Register() {
           {(formikProps) => (
             <div>
               <Form className="formRegister">
+                <div className="top">
+                  <div className="wrapper">
+                    <img className="logo" src="img/logo.png" alt="none" />
+                  </div>
+                </div>
                 <h1>Đăng ký</h1>
                 <TextField
                   label="Email"
@@ -78,7 +90,7 @@ export default function Register() {
                 <span>
                   Bạn đã có tài khoản tại Vinema?
                   <Link className="signUpLink" to="/login">
-                    <b>Đăng nhập ngay!</b>
+                    <span>Đăng nhập ngay!</span>
                   </Link>
                 </span>
                 <small>

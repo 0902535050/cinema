@@ -5,12 +5,14 @@ import Navbar from "../../components/navbar/Navbar";
 import axios from "axios";
 import Footer from "../../components/footer/Footer";
 import Skeleton from "../../components/skeleton/Skeleton";
+import Modal from "../../components/modal/Modal";
 
 const Home = ({ type }) => {
   const [lists, setLists] = useState([]);
   const [genre, setGenre] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [openModal, setOpenModal] = useState(false);
+  const [viaMovie, setViaMovie] = useState({});
   useEffect(() => {
     const getRandomLists = async () => {
       setLoading(true);
@@ -35,8 +37,6 @@ const Home = ({ type }) => {
     getRandomLists();
   }, [type, genre]);
 
-  localStorage.setItem("movies", JSON.stringify(null));
-
   return (
     <>
       {/* LIST */}
@@ -48,13 +48,23 @@ const Home = ({ type }) => {
           <Navbar />
           {/* FEATURE */}
           <Featured type={type} setGenre={setGenre} />
+          {openModal ? (
+            <Modal movie={viaMovie} setOpenModal={setOpenModal} />
+          ) : (
+            ""
+          )}
 
           {/* LIST */}
           <div className="showList">
             {lists.map((list, index) => {
               return (
                 <div key={index}>
-                  <List list={list} />;
+                  <List
+                    list={list}
+                    setOpenModal={setOpenModal}
+                    setViaMovie={setViaMovie}
+                  />
+                  ;
                 </div>
               );
             })}
