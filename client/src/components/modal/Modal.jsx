@@ -1,8 +1,6 @@
 import {
-  Add,
   Bookmark,
   Check,
-  DetailsOutlined,
   InfoOutlined,
   PlayArrow,
   Star,
@@ -10,7 +8,6 @@ import {
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalState";
-import "./modal.scss";
 
 function Modal({ movie, setOpenModal }) {
   const { addMovieToWatchList, watchList } = useContext(GlobalContext);
@@ -29,7 +26,7 @@ function Modal({ movie, setOpenModal }) {
         onMouseLeave={() =>
           setTimeout(() => {
             setOpenModal(false);
-          }, 2000)
+          }, 3000)
         }
       >
         <div>
@@ -42,17 +39,14 @@ function Modal({ movie, setOpenModal }) {
         <div className="body">
           <span className="movieTitle">{movie.title}</span>
           <span className="movieDesc">
-            {String(movie.desc).substring(0, 250)}
+            {String(movie.desc).substring(0, 240) + "..."}
           </span>
           <div className="itemInfoTop">
-            <span className="limit">Giới hạn: {movie.limit}+</span>
+            <span className="limit">Giới hạn {movie.limit}+</span>
             <span className="year">Năm {movie.year}</span>
             <span className="genre">Thể loại {movie.genre}</span>
             <span className="duration">Thời lượng {movie.duration}min</span>
-            <span className="imdb">
-              IMDb {movie.imdb}
-              <Star style={{ color: "orange", fontSize: "19px" }} />
-            </span>
+            <span className="imdb">IMDb {movie.imdb}</span>
           </div>
         </div>
         <div className="footer">

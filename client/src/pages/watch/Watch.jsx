@@ -78,7 +78,7 @@ export default function Watch() {
       }
     };
     getMovies();
-  }, [loading, isShowComment, flag, movie._id]);
+  }, [loading, flag, movie._id]);
 
   const onViewCommentClick = () => {
     //immutable

@@ -93,10 +93,6 @@ export default function Register() {
                     <span>Đăng nhập ngay!</span>
                   </Link>
                 </span>
-                <small>
-                  Trang này được bảo vệ bởi reCAPTCHA của Google để đảm bảo bạn
-                  không phải là bot. <b>Tìm hiểu thêm</b>.
-                </small>
               </Form>
             </div>
           )}

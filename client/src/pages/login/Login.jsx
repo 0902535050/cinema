@@ -80,10 +80,6 @@ export default function Login() {
                     <span>Đăng ký ngay!</span>
                   </Link>
                 </span>
-                <small>
-                  Trang này được bảo vệ bởi reCAPTCHA của Google để đảm bảo bạn
-                  không phải là bot. <b>Tìm hiểu thêm</b>.
-                </small>
               </Form>
             </div>
           )}

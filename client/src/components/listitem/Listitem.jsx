@@ -83,7 +83,7 @@ export default function Listitem({ item, setOpenModal, setViaMovie }) {
                 <Visibility className="iconWatch" />
               </button>
             </div>
-            <div className="itemInfoTop">
+            <div className="itemInfoTop container">
               <span className="limit">{movie.limit}+</span>
               <span className="year">{movie.year}</span>
               <span className="genre">{movie.genre}</span>
