@@ -45,12 +45,12 @@ function Modal({ movie, setOpenModal }) {
             {String(movie.desc).substring(0, 250)}
           </span>
           <div className="itemInfoTop">
-            <span className="limit">{movie.limit}+</span>
-            <span className="year">{movie.year}</span>
-            <span className="genre">{movie.genre}</span>
-            <span className="duration">{movie.duration}min</span>
+            <span className="limit">Giới hạn: {movie.limit}+</span>
+            <span className="year">Năm {movie.year}</span>
+            <span className="genre">Thể loại {movie.genre}</span>
+            <span className="duration">Thời lượng {movie.duration}min</span>
             <span className="imdb">
-              {movie.imdb}
+              IMDb {movie.imdb}
               <Star style={{ color: "orange", fontSize: "19px" }} />
             </span>
           </div>
