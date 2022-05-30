@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Actor({ item, type }) {
   const [actor, setActor] = useState({});
-  console.log(type);
   useEffect(() => {
     const getActor = async () => {
       try {
@@ -24,13 +24,17 @@ export default function Actor({ item, type }) {
     <>
       {type === "name" ? (
         <div>
-          <span>{String(actor.name).substring(0, 16) + " ,"}</span>
+          <Link to={{ pathname: "/actorpage", actor: actor }}>
+            <span>{String(actor.name).substring(0, 16) + " ,"}</span>
+          </Link>
         </div>
       ) : (
         <div className="actorPage">
           <div className="card">
             <div className="card-top">
-              <img className="actorImg" src={actor.profilePic} alt="" />
+              <Link to={{ pathname: "/actorpage", actor: actor }}>
+                <img className="actorImg" src={actor.profilePic} alt="" />
+              </Link>
             </div>
             <div className="card-bot">
               <span className="actorName">

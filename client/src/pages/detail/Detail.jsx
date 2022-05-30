@@ -163,10 +163,6 @@ export default function Detail() {
                   </span>
                 </>
               )}
-              {/* Đạo diễn:{" "}
-              <span style={{ cursor: "pointer", color: "blue" }}>
-                {movie.director.directorName}
-              </span> */}
               <br />
               <div className="directorAvatar">
                 {movie.director.directorAva ? (

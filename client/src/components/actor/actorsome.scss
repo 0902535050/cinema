@@ -1,0 +1,16 @@
+.actorPageSome {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .actorImg {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .actorName {
+    color: #fff;
+  }
+}

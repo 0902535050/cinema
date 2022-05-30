@@ -1,14 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import {
-  PlayArrow,
-  Star,
-  DetailsOutlined,
-  Add,
-  Check,
-  Visibility,
-} from "@material-ui/icons";
+import { PlayArrow, Star, Visibility } from "@material-ui/icons";
 import axios from "axios";
 import { GlobalContext } from "../../context/GlobalState";
 import Modal from "../modal/Modal";
@@ -16,12 +9,6 @@ import Modal from "../modal/Modal";
 export default function Listitem({ item, setOpenModal, setViaMovie }) {
   const [isHovered, setIsHovered] = useState(false);
   const [movie, setMovie] = useState({});
-
-  const { addMovieToWatchList, watchList } = useContext(GlobalContext);
-  let storiedMovie = watchList.find((o) => o._id === movie._id);
-
-  const watchListDisabled = storiedMovie ? true : false;
-
   useEffect(() => {
     const getMovie = async () => {
       try {
@@ -56,7 +43,9 @@ export default function Listitem({ item, setOpenModal, setViaMovie }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <span className="supportSub">{movie.isSup}</span>
+        <span className="supportSub">
+          {movie.isSup === null ? "" : movie.isSup}
+        </span>
         <img src={movie.img} alt="" className="" />
 
         {isHovered && (

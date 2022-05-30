@@ -17,6 +17,7 @@ import {
 import { useContext, useState } from "react";
 import { AuthContext } from "./authContext/AuthContext";
 import UserPage from "./pages/userPage/UserPage";
+import ActorPage from "./pages/actorPage/ActorPage";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -64,6 +65,9 @@ const App = () => {
             </Route>
             <Route path="/userpage">
               <UserPage />
+            </Route>
+            <Route path="/actorpage">
+              <ActorPage />
             </Route>
           </>
         )}
