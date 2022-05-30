@@ -10,6 +10,7 @@
     transition: all 0.5s;
     background-color: var(--main-color);
     border-radius: 7px;
+
     img {
       display: block;
       width: 100%;
@@ -102,8 +103,12 @@
       .movie-Title-Item-Tag {
         display: flex;
         position: absolute;
-        font-weight: bold;
-        color: orange;
+        text-align: center;
+        .movieName {
+          color: orange;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
       }
 
       .moreInfoItemTag {

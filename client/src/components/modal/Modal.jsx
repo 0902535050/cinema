@@ -26,7 +26,7 @@ function Modal({ movie, setOpenModal }) {
         onMouseLeave={() =>
           setTimeout(() => {
             setOpenModal(false);
-          }, 3000)
+          }, 2000)
         }
       >
         <div>
@@ -34,6 +34,7 @@ function Modal({ movie, setOpenModal }) {
             className="modalTrailer"
             src={movie.trailer}
             allowFullScreen="true"
+            title="Trailer"
           />
         </div>
         <div className="body">

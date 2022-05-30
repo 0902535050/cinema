@@ -98,9 +98,7 @@ export default function Featured({ type, setGenre }) {
 
       <div className="info">
         <img className="imgTitle" src={content.imgTitle} alt="" />
-        <span className="featuredTitle">
-          {String(content.title).substring(0, 13)}
-        </span>
+        <span className="featuredTitle">{content.title}</span>
         {isShowDetail ? (
           <span className="desc">{content.desc}</span>
         ) : (

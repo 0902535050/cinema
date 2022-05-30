@@ -12,7 +12,9 @@ export default function ListitemTag({ movie }) {
               <div className="boxItemTag card p-0 overflow-hidden shadow">
                 <img src={item.img} className="" alt="" />
                 <div className="movie-Title-Item-Tag">
-                  <span>{String(item.title).substring(0, 13)}</span>
+                  <div className="movieName">
+                    <span>{item.title}</span>
+                  </div>
                 </div>
                 <span className="supportSubItemTag">{item.isSup}</span>
                 <div className="itemInfoMovieItemTag">

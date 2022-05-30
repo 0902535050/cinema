@@ -15,7 +15,6 @@ export default function Detail() {
   const movie = location.movie || JSON.parse(localStorage.getItem("movies"));
   const [isShowDetail, setIsShowDetail] = useState(true);
   const { addMovieToWatchList, watchList } = useContext(GlobalContext);
-  const userNow = JSON.parse(localStorage.getItem("user"));
   let storiedMovie = watchList.find((o) => o._id === movie._id);
   const watchListDisabled = storiedMovie ? true : false;
 
@@ -107,7 +106,7 @@ export default function Detail() {
                   onClick={() => addMovieToWatchList(movie)}
                   className="btnAddToWatchList"
                 >
-                  Lưu xem sau
+                  {watchListDisabled ? "Phim đã lưu" : "Lưu xem sau"}
                 </button>
               </div>
             </div>

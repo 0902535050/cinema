@@ -4,6 +4,7 @@ import {
   loginStart,
   loginSuccess,
   updateUser,
+  updateUserAva,
 } from "./AuthActions";
 
 export const login = async (user, dispatch) => {
@@ -17,7 +18,7 @@ export const login = async (user, dispatch) => {
 };
 export const editUser = async (values, dispatch) => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
-  console.log(values);
+
   try {
     const res = await axios.put(
       "/users/" + currentUser._id,
@@ -34,6 +35,27 @@ export const editUser = async (values, dispatch) => {
       }
     );
     dispatch(updateUser(res.data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const editUserAvatar = async (img, dispatch) => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  try {
+    const res = await axios.put(
+      "/users/" + currentUser._id,
+      {
+        profilePic: img,
+      },
+      {
+        headers: {
+          token:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MTgyNTIwNywiZXhwIjoxOTExMDI1MjA3fQ.zUnmi1ldGu_OBidqwP6V2MQc1cpCohfWySOxLIwww18",
+        },
+      }
+    );
+    dispatch(updateUserAva(res.data));
   } catch (err) {
     console.log(err);
   }

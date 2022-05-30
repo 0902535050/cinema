@@ -143,11 +143,60 @@
                   color: white;
                   margin-left: 15px;
                 }
-                .userAvatar {
-                  height: 200px;
-                  width: 200px;
-                  border-radius: 50%;
-                  object-fit: cover;
+                .modalBackgroundShow {
+                  position: fixed;
+                  z-index: 100;
+                  top: 33%;
+                  left: 36%;
+                  .modalShowContainer {
+                    width: 400px;
+                    height: 150px;
+                    border-radius: 12px;
+                    background-color: var(--main-color);
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 25px;
+                    justify-content: center;
+                    align-items: center;
+                    .btnCloseEditForm {
+                      position: absolute;
+                      right: 0;
+                      border: none;
+                      top: 0;
+                      &:hover {
+                        font-size: 14px;
+                      }
+                    }
+                    .btnSubmit {
+                      position: absolute;
+                      bottom: 10px;
+                    }
+                  }
+                }
+                .avatarAria {
+                  display: flex;
+                  position: relative;
+                  .userAvatar {
+                    height: 200px;
+                    width: 200px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                  }
+                  .changeAvatarAria {
+                    cursor: pointer;
+                    position: absolute;
+                    left: 150px;
+                    top: 150px;
+                    background: gray;
+                    padding: 10px;
+                    border-radius: 50%;
+                    .iconChangeAvatar {
+                      &:hover {
+                        transform: scale(1.5);
+                      }
+                    }
+                  }
                 }
                 .userPageName {
                   margin-left: 25px;

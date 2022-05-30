@@ -5,22 +5,27 @@ import ListitemTag from "../../components/listitem/ListitemTag";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { GlobalContext } from "../../context/GlobalState";
-import { editUser } from "../../authContext/apiCalls";
+import { editUser, editUserAvatar } from "../../authContext/apiCalls";
 import { useHistory } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { TextField } from "../../components/textfield/TextField";
 import * as Yup from "yup";
-import { AccountCircle, Bookmark, Close, Edit } from "@material-ui/icons";
+import { AccountCircle, Bookmark, CameraAlt, Edit } from "@material-ui/icons";
 import ListitemWatchList from "../../components/listitem/ListitemWatctList";
+import storage from "../../firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Avatar from "@mui/material/Avatar";
+
 export default function UserPage() {
   const history = useHistory();
   const { watchList } = useContext(GlobalContext);
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const createdAt = new Date(currentUser.createdAt).toLocaleDateString();
-
   const { dispatch } = useContext(AuthContext);
   const [toggleState, setToggleState] = useState(1);
-
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState(null);
+  const [isShowEdit, setIsShowEdit] = useState(false);
   const toggleTab = (index) => {
     setToggleState(index);
   };
@@ -47,9 +52,34 @@ export default function UserPage() {
       .required("Không được bỏ trống !"),
   });
 
+  const handleSubmitImg = () => {
+    const imageRef = ref(storage, "image");
+    uploadBytes(imageRef, image)
+      .then(() => {
+        getDownloadURL(imageRef)
+          .then((url) => {
+            setUrl(url);
+            editUserAvatar(url, dispatch);
+          })
+          .catch((error) => {
+            console.log(error.message, "error getting the image url");
+          });
+        setImage(null);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+
+    history.push("/");
+  };
+
   const handleSubmit = (values) => {
     editUser(values, dispatch);
     history.push("/");
+  };
+
+  const showEditAvatar = () => {
+    setIsShowEdit(!isShowEdit);
   };
 
   return (
@@ -102,15 +132,51 @@ export default function UserPage() {
                         toggleState === 1 ? "content active-content" : "content"
                       }
                     >
-                      <img
-                        src={
-                          currentUser.profilePic !== ""
-                            ? currentUser.profilePic
-                            : "https://picsum.photos/200/200"
-                        }
-                        alt=""
-                        className="userAvatar"
-                      />
+                      <div className="avatarAria">
+                        <Avatar
+                          className="userAvatar"
+                          src={
+                            currentUser.profilePic !== ""
+                              ? url || currentUser.profilePic
+                              : "https://picsum.photos/200/200"
+                          }
+                        />
+                        <div className="changeAvatarAria">
+                          <CameraAlt
+                            className="iconChangeAvatar"
+                            onClick={showEditAvatar}
+                          />
+                        </div>
+                      </div>
+                      {isShowEdit ? (
+                        <>
+                          <div className="modalBackgroundShow">
+                            <div className="modalShowContainer">
+                              <button
+                                className="btnCloseEditForm"
+                                onClick={() => {
+                                  setIsShowEdit(false);
+                                }}
+                              >
+                                X
+                              </button>
+                              <input
+                                className="updateImg"
+                                type="file"
+                                onChange={(e) => setImage(e.target.files[0])}
+                              />
+                              <button
+                                className="btnSubmit"
+                                onClick={handleSubmitImg}
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        ""
+                      )}
                       <br />
                       <span className="userPageName">
                         {currentUser.username}
@@ -189,6 +255,7 @@ export default function UserPage() {
                                 type="password"
                                 onChange={formikProps.handleChange}
                               />
+
                               <button type="submit" className="updateButton">
                                 Cập nhật
                               </button>
