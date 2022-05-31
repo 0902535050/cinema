@@ -1,80 +1,80 @@
 import "./widgetLg.css";
-
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import moment from "moment";
+import { DeleteOutline } from "@material-ui/icons";
+import User from "../user/User";
+import { deleteComments } from "../../context/commentContext/apiCalls";
+import { CommentContext } from "../../context/commentContext/CommentContext";
 export default function WidgetLg() {
-  const Button = ({ type }) => {
-    return <button className={"widgetLgButton " + type}>{type}</button>;
+  const [comment, setComment] = useState([]);
+  const { dispatch } = useContext(CommentContext);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const getAllComment = async () => {
+      try {
+        const res = await axios.get("/comments?new=true", {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+          },
+        });
+        setComment(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getAllComment();
+  }, [loading]);
+
+  const handleDelete = (id) => {
+    setLoading(!loading);
+    deleteComments(id, dispatch);
   };
+
   return (
     <div className="widgetLg">
-      <h3 className="widgetLgTitle">Latest transactions</h3>
+      <h3 className="widgetLgTitle">Những bình luận gần đây</h3>
       <table className="widgetLgTable">
         <tbody>
           <tr className="widgetLgTr">
-            <th className="widgetLgTh">Customer</th>
-            <th className="widgetLgTh">Date</th>
-            <th className="widgetLgTh">Amount</th>
-            <th className="widgetLgTh">Status</th>
+            <th className="widgetLgTh">Người tạo</th>
+            <th className="widgetLgTh">Nội dung bình luận</th>
+            <th className="widgetLgTh">Vị trí</th>
+            <th className="widgetLgTh">Thời gian tạo</th>
+            <th className="widgetLgTh">Ngày tạo</th>
+            <th className="widgetLgTh"></th>
           </tr>
-          <tr className="widgetLgTr">
-            <td className="widgetLgUser">
-              <img
-                src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                alt=""
-                className="widgetLgImg"
-              />
-              <span className="widgetLgName">Susan Carol</span>
-            </td>
-            <td className="widgetLgDate">2 Jun 2021</td>
-            <td className="widgetLgAmount">$122.00</td>
-            <td className="widgetLgStatus">
-              <Button type="Approved" />
-            </td>
-          </tr>
-          <tr className="widgetLgTr">
-            <td className="widgetLgUser">
-              <img
-                src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                alt=""
-                className="widgetLgImg"
-              />
-              <span className="widgetLgName">Susan Carol</span>
-            </td>
-            <td className="widgetLgDate">2 Jun 2021</td>
-            <td className="widgetLgAmount">$122.00</td>
-            <td className="widgetLgStatus">
-              <Button type="Declined" />
-            </td>
-          </tr>
-          <tr className="widgetLgTr">
-            <td className="widgetLgUser">
-              <img
-                src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                alt=""
-                className="widgetLgImg"
-              />
-              <span className="widgetLgName">Susan Carol</span>
-            </td>
-            <td className="widgetLgDate">2 Jun 2021</td>
-            <td className="widgetLgAmount">$122.00</td>
-            <td className="widgetLgStatus">
-              <Button type="Pending" />
-            </td>
-          </tr>
-          <tr className="widgetLgTr">
-            <td className="widgetLgUser">
-              <img
-                src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                alt=""
-                className="widgetLgImg"
-              />
-              <span className="widgetLgName">Susan Carol</span>
-            </td>
-            <td className="widgetLgDate">2 Jun 2021</td>
-            <td className="widgetLgAmount">$122.00</td>
-            <td className="widgetLgStatus">
-              <Button type="Approved" />
-            </td>
-          </tr>
+          {comment.map((item, index) => {
+            const createdAt = moment(item.createdAt)
+              .startOf("second")
+              .fromNow();
+            const createdAtDate = new Date(item.createdAt).toLocaleDateString();
+
+            return (
+              <tr key={index} className="widgetLgTr">
+                <td className="widgetLgUser">
+                  <User userId={item.creator} />
+                </td>
+                <td className="widgetLgContent">
+                  <span>{item.content}</span>
+                </td>
+                <td className="widgetLgLocation">
+                  <span>{item.location}</span>
+                </td>
+                <td className="widgetLgDate">{createdAt}</td>
+                <td className="widgetLgAmount">{createdAtDate}</td>
+                <td className="widgetLgStatus">
+                  {/* <Button type={type} item={item} /> */}
+
+                  <DeleteOutline
+                    className="widgetLgButton"
+                    onClick={() => handleDelete(item._id)}
+                  />
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

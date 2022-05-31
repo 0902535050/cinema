@@ -13,7 +13,7 @@
     "axios": "^0.26.1",
     "bootstrap": "^5.1.3",
     "dotenv": "^16.0.0",
-    "firebase": "^9.8.2",
+    "firebase": "^8.7.1",
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "http-proxy-middleware": "^2.0.6",

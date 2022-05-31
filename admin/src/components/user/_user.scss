@@ -1,0 +1,15 @@
+.userInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .imgUserFromAdmin {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .userName {
+    margin-left: 5px;
+    color: rgb(31, 125, 168);
+  }
+}

@@ -1,10 +1,12 @@
 import "./newProduct.css";
 import { useContext, useState } from "react";
-
+import storage from "../../firebase";
 import { createMovies } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
+import { useHistory } from "react-router-dom";
 
 export default function NewProduct() {
+  const history = useHistory();
   const [movie, setMovie] = useState(null);
   const [img, setImg] = useState(null);
   const [imgTitle, setImgTitle] = useState(null);
@@ -59,11 +61,9 @@ export default function NewProduct() {
   const handleSubmit = (e) => {
     e.preventDefault();
     createMovies(movie, dispatch);
+    history.push("/");
   };
-  console.log(movie);
-  console.log(img);
-  console.log(trailer);
-  console.log(video);
+
   return (
     <div className="newProduct">
       <h1 className="addProductTitle">New Movie</h1>

@@ -10,4 +10,5 @@ export default function Skeleton({ type }) {
     </div>
   );
   if (type === "circle") return <Circle />;
+  if (type === "load") return <Circle />;
 }

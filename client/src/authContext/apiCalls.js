@@ -42,11 +42,12 @@ export const editUser = async (values, dispatch) => {
 
 export const editUserAvatar = async (img, dispatch) => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
+  console.log(img);
   try {
     const res = await axios.put(
       "/users/" + currentUser._id,
       {
-        profilePic: img,
+        profilePic: img.avatar,
       },
       {
         headers: {

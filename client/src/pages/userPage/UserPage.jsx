@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 import Footer from "../../components/footer/Footer";
-import ListitemTag from "../../components/listitem/ListitemTag";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { GlobalContext } from "../../context/GlobalState";
@@ -13,8 +12,9 @@ import * as Yup from "yup";
 import { AccountCircle, Bookmark, CameraAlt, Edit } from "@material-ui/icons";
 import ListitemWatchList from "../../components/listitem/ListitemWatctList";
 import storage from "../../firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 import Avatar from "@mui/material/Avatar";
+import Skeleton from "../../components/skeleton/Skeleton";
 
 export default function UserPage() {
   const history = useHistory();
@@ -22,10 +22,12 @@ export default function UserPage() {
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const createdAt = new Date(currentUser.createdAt).toLocaleDateString();
   const { dispatch } = useContext(AuthContext);
+  const [isLoading, setLoading] = useState(false);
   const [toggleState, setToggleState] = useState(1);
-  const [image, setImage] = useState(null);
-  const [url, setUrl] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const [isShowEdit, setIsShowEdit] = useState(false);
+  const [uploaded, setUploaded] = useState(0);
+  const [movie, setMovie] = useState(null);
   const toggleTab = (index) => {
     setToggleState(index);
   };
@@ -52,26 +54,46 @@ export default function UserPage() {
       .required("Không được bỏ trống !"),
   });
 
-  const handleSubmitImg = () => {
-    const imageRef = ref(storage, "image");
-    uploadBytes(imageRef, image)
-      .then(() => {
-        getDownloadURL(imageRef)
-          .then((url) => {
-            setUrl(url);
-            editUserAvatar(url, dispatch);
-          })
-          .catch((error) => {
-            console.log(error.message, "error getting the image url");
+  const upload = (items) => {
+    items.forEach((item) => {
+      const fileName = new Date().getTime() + item.label + item.file.name;
+      const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is" + progress + " %done.");
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+            setMovie((prev) => {
+              return { ...prev, [item.label]: url };
+            });
+            setUploaded((pre) => pre + 1);
           });
-        setImage(null);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+        }
+      );
+    });
+  };
 
+  const handleUpload = (e) => {
+    if (uploaded === 0) {
+      setLoading(true);
+      e.preventDefault();
+      upload([{ file: avatar, label: "avatar" }]);
+    } else setLoading(false);
+  };
+
+  const handleSubmitImg = (e) => {
+    e.preventDefault();
+    editUserAvatar(movie, dispatch);
     history.push("/");
   };
+  console.log(avatar);
 
   const handleSubmit = (values) => {
     editUser(values, dispatch);
@@ -137,7 +159,7 @@ export default function UserPage() {
                           className="userAvatar"
                           src={
                             currentUser.profilePic !== ""
-                              ? url || currentUser.profilePic
+                              ? currentUser.profilePic
                               : "https://picsum.photos/200/200"
                           }
                         />
@@ -160,17 +182,31 @@ export default function UserPage() {
                               >
                                 X
                               </button>
+                              <label>Cập nhật ảnh đại diện</label>
                               <input
                                 className="updateImg"
+                                name="avatar"
                                 type="file"
-                                onChange={(e) => setImage(e.target.files[0])}
+                                onChange={(e) => setAvatar(e.target.files[0])}
                               />
-                              <button
-                                className="btnSubmit"
-                                onClick={handleSubmitImg}
-                              >
-                                Submit
-                              </button>
+
+                              {uploaded === 1 ? (
+                                <button
+                                  className="addProductButton"
+                                  onClick={handleSubmitImg}
+                                >
+                                  Cập nhật
+                                </button>
+                              ) : isLoading ? (
+                                <Skeleton type="circle" />
+                              ) : (
+                                <button
+                                  className="addProductButton"
+                                  onClick={handleUpload}
+                                >
+                                  Tải ảnh
+                                </button>
+                              )}
                             </div>
                           </div>
                         </>

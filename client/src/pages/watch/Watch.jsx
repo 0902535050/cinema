@@ -109,6 +109,7 @@ export default function Watch() {
         {
           content: commentContent,
           creator: userNow._id,
+          location: movie.title,
         },
         {
           headers: {

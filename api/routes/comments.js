@@ -37,10 +37,14 @@ router.put("/:id", verify, async (req, res) => {
 });
 //GET ALL COMMENT
 router.get("/", verify, async (req, res) => {
+  const query = req.query.new;
   if (req.user.isAdmin) {
     try {
-      const comments = await Comment.find();
-      res.status(200).json(comments.reverse());
+      const comments = query
+        ? await Comment.find().sort({ _id: -1 }).limit(30)
+        : await Comment.find();
+      res.status(200).json(comments);
+      // res.status(200).json(comments.reverse().limit(5)); // 1 cách để đảo comment mới lên đầu
     } catch (error) {
       res.status(500).json(error);
     }
@@ -48,27 +52,6 @@ router.get("/", verify, async (req, res) => {
     res.status(403).json("You are not allowed!");
   }
 });
-
-// router.get("/exact", verify, async (req, res) => {
-//   const ownQuery = req.query.own;
-//   let comments;
-//   try {
-//     if (ownQuery) {
-//       comments = await Comment.aggregate([
-//         { $sample: { size: 10 } },
-//         {
-//           $match: { own: ownQuery },
-//         },
-//       ]);
-//     } else {
-//       comments = await Comment.aggregate([{ $sample: { size: 10 } }]);
-//     }
-
-//     res.status(200).json(comments);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 router.get("/find/:id", verify, async (req, res) => {
   try {
@@ -78,4 +61,18 @@ router.get("/find/:id", verify, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.delete("/:id", verify, async (req, res) => {
+  if (req.user.isAdmin) {
+    try {
+      await Comment.findByIdAndDelete(req.params.id);
+      res.status(200).json("The comment has been deleted!");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json("You are not allowed!");
+  }
+});
+
 module.exports = router;
