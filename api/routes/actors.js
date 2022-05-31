@@ -70,4 +70,17 @@ router.get("/", verify, async (req, res) => {
   }
 });
 
+router.get("/random", verify, async (req, res) => {
+  if (req.user.isAdmin) {
+    try {
+      const actors = await Actor.aggregate([{ $sample: { size: 3 } }]);
+      res.status(200).json(actors.reverse());
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  } else {
+    res.status(403).json("You are not allowed!");
+  }
+});
+
 module.exports = router;

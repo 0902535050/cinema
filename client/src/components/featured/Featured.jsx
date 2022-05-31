@@ -1,66 +1,46 @@
-import { InfoOutlined, PlayArrow } from "@material-ui/icons";
+import { InfoOutlined, PlayArrow, Star } from "@material-ui/icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Featured({ type, setGenre }) {
-  const [content, setContent] = useState({});
-  const [isShowDetail, setIsShowDetail] = useState(false);
+export default function Featured() {
+  const [movie, setMovie] = useState({});
 
   useEffect(() => {
-    const getRandomContent = async () => {
+    var n = Math.floor(Math.random() * 62);
+    const getRandom = async () => {
       try {
-        const res = await axios.get(`/movies/random?type=${type}`, {
+        const res = await axios.get(`/movies`, {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mjk1ODI3NywiZXhwIjoxOTEyMTU4Mjc3fQ.Heinb3EcvZ5OhivlA-ocY-9rBm8QyFLog_mXKae_D6E",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
           },
         });
-        setContent(res.data[0]);
+
+        setMovie(res.data[n]);
       } catch (err) {
         console.log(err);
       }
     };
-    getRandomContent();
-  }, [type]);
+    getRandom();
+  }, []);
+  console.log(movie);
   useEffect(() => {
     var count = 1;
     setInterval(() => {
       document.getElementById("radio" + count).checked = true;
       count++;
-      if (count > 3) {
+      if (count > 4) {
         count = 1;
       }
     }, 6000);
   }, []);
 
-  const onViewDetailClick = () => {
-    //immutable
-    setIsShowDetail(!isShowDetail);
+  const setMovieOnLocalStorage = () => {
+    localStorage.setItem("movies", JSON.stringify(movie));
   };
-
   return (
     <div className="featured">
-      {type && (
-        <div className="category">
-          <span>{type === "movie" ? "Movies" : "Series"}</span>
-          <select
-            name="genre"
-            id="genre"
-            className="genre"
-            onChange={(e) => setGenre(e.target.value)}
-          >
-            <option>Genre</option>
-            <option value="adventure">Adventure</option>
-            <option value="comedy">Comedy</option>
-            <option value="crime">Crime</option>
-            <option value="action">Action</option>
-            <option value="toon">Toon</option>
-            <option value="romance">Romance</option>
-            <option value="horror">Horror</option>
-          </select>
-        </div>
-      )}
       <div className="slider">
         <div className="slides">
           <input type="radio" name="radio-btn" id="radio1" />
@@ -69,13 +49,13 @@ export default function Featured({ type, setGenre }) {
           <input type="radio" name="radio-btn" id="radio4" />
 
           <div className="slide first">
-            <img src={content.img} alt="" />
+            <img src={movie.img} alt="" />
           </div>
           <div className="slide">
-            <img src={content.imgTitle} alt="" />
+            <img src={movie.imgTitle} alt="" />
           </div>
           <div className="slide">
-            <img src={content.imgSm} alt="" />
+            <img src={movie.imgSm} alt="" />
           </div>
           <div className="slide">
             <img src="https://picsum.photos/2048/1024" alt="" />
@@ -97,27 +77,31 @@ export default function Featured({ type, setGenre }) {
       </div>
 
       <div className="info">
-        <img className="imgTitle" src={content.imgTitle} alt="" />
-        <span className="featuredTitle">{content.title}</span>
-        {isShowDetail ? (
-          <span className="desc">{content.desc}</span>
-        ) : (
-          <span className="desc">
-            {String(content.desc).substring(0, 16) + "..."}
+        <img className="imgTitle" src={movie.imgTitle} alt="" />
+        <span className="featuredTitle">{movie.title}</span>
+        <div className="itemInfoTop container">
+          <span className="limit">{movie.limit}+</span>
+          <span className="year">{movie.year}</span>
+          <span className="genre">{movie.genre}</span>
+          <span className="duration">{movie.duration}min</span>
+          <span className="imdb">
+            {movie.imdb}
+            <Star style={{ color: "orange", fontSize: "19px" }} />
           </span>
-        )}
-
+        </div>
         <div className="buttons">
-          <Link to={{ pathname: "/watch", movie: content }}>
-            <button className="play">
+          <Link to={{ pathname: "/watch", movie: movie }}>
+            <button className="play" onClick={setMovieOnLocalStorage}>
               <PlayArrow />
               <span>Xem ngay</span>
             </button>
           </Link>
-          <button onClick={onViewDetailClick} className="more">
-            <InfoOutlined />
-            <span>{isShowDetail ? "Rút gọn" : "Mô tả"}</span>
-          </button>
+          <Link to={{ pathname: "/detail", movie: movie }}>
+            <button className="play" onClick={setMovieOnLocalStorage}>
+              <InfoOutlined />
+              <span>Chi tiết</span>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

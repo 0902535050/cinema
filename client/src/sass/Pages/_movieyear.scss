@@ -2,13 +2,14 @@
   background: linear-gradient(to bottom, black 0%, black 100%);
   .categoryYearMovie {
     .cinemaPngMovie {
-      width: 70px;
-      height: 70px;
+      width: 100px;
+
       object-fit: cover;
     }
 
     .yearSelect {
-      padding: 5px 0px;
+      padding: 10px 0px;
+      border: 2px solid #fff;
       border-radius: 10px;
       width: 20%;
       text-align: center;

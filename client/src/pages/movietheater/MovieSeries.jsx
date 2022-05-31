@@ -5,10 +5,11 @@ import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import Pagination from "../../components/pagination/Pagination";
 import ListitemTag from "../../components/listitem/ListitemTag";
+
 import Skeleton from "../../components/skeleton/Skeleton";
-export default function MovieNation() {
+export default function MovieSeries() {
   const [allMovie, setAllMovie] = useState([]);
-  const [nation, setNation] = useState(null);
+  const [type, setType] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage] = useState(8);
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,7 @@ export default function MovieNation() {
     const getAll = async () => {
       try {
         const res = await axios.get(
-          `/movies/tagnation${nation ? "?nation=" + nation : ""}`,
+          `/movies/tagseries${type ? "?type=" + type : ""}`,
           {
             headers: {
               token:
@@ -31,7 +32,7 @@ export default function MovieNation() {
       setLoading(false);
     };
     getAll();
-  }, [nation]);
+  }, [type]);
 
   //Get current movies
   const indexOfLastMovie = currentPage * moviesPerPage;
@@ -48,29 +49,23 @@ export default function MovieNation() {
       {loading ? (
         <Skeleton type="circle" />
       ) : (
-        <div className="homeNationMovie">
+        <div className="homeSeriesMovie">
           {/* NAVBAR */}
           <Navbar />
           {/* FEATURE */}
           <Featured />
 
-          <div className="categoryNationMovie container mt-5 mb-5">
+          <div className="categorySeriesMovie container mt-5 mb-5">
             <img src="img/cinema.jpg" className="cinemaPngMovie" alt="none" />
             <select
-              name="nation"
-              id="nation"
-              className="nationSelect"
-              onChange={(e) => setNation(e.target.value)}
+              name="series"
+              id="series"
+              className="seriesSelect"
+              onChange={(e) => setType(e.target.value)}
             >
-              <option>Chọn quốc gia</option>
-              <option value="USA">Hoa Kỳ</option>
-              <option value="Paris">Pháp</option>
-              <option value="Anh">Anh</option>
-              <option value="Canada">Canada</option>
-              <option value="Korea">Hàn Quốc</option>
-              <option value="Mexico">Mê-xi-cô</option>
-              <option value="Chinese">Trung Quốc</option>
-              <option value="Japanese">Nhật Bản</option>
+              <option>Chọn</option>
+              <option value="series">Phim nhiều tập</option>
+              <option value="movie">Phim lẻ</option>
             </select>
           </div>
 

@@ -24,7 +24,7 @@ const Home = ({ type }) => {
           {
             headers: {
               token:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MTgyNTIwNywiZXhwIjoxOTExMDI1MjA3fQ.zUnmi1ldGu_OBidqwP6V2MQc1cpCohfWySOxLIwww18",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
             },
           }
         );
@@ -36,6 +36,9 @@ const Home = ({ type }) => {
     };
     getRandomLists();
   }, [type, genre]);
+  useEffect(() => {
+    localStorage.setItem("movies", JSON.stringify(null));
+  }, []);
 
   return (
     <>
@@ -47,7 +50,7 @@ const Home = ({ type }) => {
           {/* NAVBAR */}
           <Navbar />
           {/* FEATURE */}
-          <Featured type={type} setGenre={setGenre} />
+          <Featured />
           {openModal ? (
             <Modal movie={viaMovie} setOpenModal={setOpenModal} />
           ) : (

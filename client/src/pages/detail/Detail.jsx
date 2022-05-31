@@ -1,4 +1,9 @@
-import { PlayArrow } from "@material-ui/icons";
+import {
+  Bookmark,
+  Check,
+  PlayArrow,
+  PlayCircleOutline,
+} from "@material-ui/icons";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
@@ -8,7 +13,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GlobalContext } from "../../context/GlobalState";
-import axios from "axios";
 
 export default function Detail() {
   const location = useLocation();
@@ -98,7 +102,9 @@ export default function Detail() {
                   to={{ pathname: "/watch", movie: movie }}
                   className="link"
                 >
-                  <button className="btnXemPhim">Xem</button>
+                  <button className="btnXemPhim">
+                    <PlayCircleOutline /> Xem
+                  </button>
                 </Link>
 
                 <button
@@ -106,7 +112,15 @@ export default function Detail() {
                   onClick={() => addMovieToWatchList(movie)}
                   className="btnAddToWatchList"
                 >
-                  {watchListDisabled ? "Phim đã lưu" : "Lưu xem sau"}
+                  {watchListDisabled ? (
+                    <>
+                      <Check /> Phim đã lưu
+                    </>
+                  ) : (
+                    <>
+                      <Bookmark /> Lưu xem sau
+                    </>
+                  )}
                 </button>
               </div>
             </div>

@@ -18,6 +18,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "./authContext/AuthContext";
 import UserPage from "./pages/userPage/UserPage";
 import ActorPage from "./pages/actorPage/ActorPage";
+import MovieSeries from "./pages/movietheater/MovieSeries";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -41,12 +42,12 @@ const App = () => {
         </Route>
         {user && (
           <>
-            <Route path="/movies">
+            {/* <Route path="/movies">
               <Home type="movie" />
             </Route>
             <Route path="/series">
               <Home type="series" />
-            </Route>
+            </Route> */}
             <Route path="/watch">
               <Watch />
             </Route>
@@ -59,6 +60,9 @@ const App = () => {
             </Route>
             <Route path="/year">
               <MovieYear />
+            </Route>
+            <Route path="/type">
+              <MovieSeries />
             </Route>
             <Route path="/detail">
               <Detail />

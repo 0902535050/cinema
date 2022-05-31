@@ -83,17 +83,20 @@
             .btnAddToWatchList {
               margin: 20px 0 0 30px;
               font-size: 12px;
-              padding: 7px 20px;
+              width: 160px;
+              height: 40px;
               border: 1px solid orange;
               border-radius: 5px;
-              color: #101111;
               cursor: pointer;
               letter-spacing: 2px;
               font-weight: bold;
+              background-color: transparent;
+              color: orange;
             }
             .btnXemPhim {
               margin: 20px 0 0 0;
-              padding: 7px 38px;
+              width: 160px;
+              height: 40px;
               background-color: transparent;
               border: 1px solid orange;
               border-radius: 5px;

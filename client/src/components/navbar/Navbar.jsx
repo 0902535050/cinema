@@ -57,34 +57,22 @@ const Navbar = () => {
               </span>
             </div>
           </Link>
-          <Link to="/series" className="link">
-            <div className="seriesMovies">
-              <span className="navbarmainLinks">
-                <Tv className="tvIcon" />
-                PHIM NHIỀU TẬP
-              </span>
-            </div>
-          </Link>
-          <Link to="/movies" className="link">
-            <div className="singleMovies">
-              <span className="navbarmainLinks">
-                <Theaters className="singleIcon" />
-                PHIM LẺ
-              </span>
-            </div>
-          </Link>
+
           <div className="singleFilm">
             <FilterList />
             DANH SÁCH PHIM
             <div className="selectGenre">
               <Link to="/phimchieurap" className="linkSelect">
-                <span className="itemGenre">PHIM CHIẾU RẠP</span>
+                <span className="itemGenre">PHIM THEO THỂ LOẠI</span>
               </Link>
               <Link to="/year" className="linkSelect">
                 <span className="itemGenre">PHIM THEO NĂM</span>
               </Link>
               <Link to="/nation" className="linkSelect">
                 <span className="itemGenre">PHIM THEO QUỐC GIA</span>
+              </Link>
+              <Link to="/type" className="linkSelect">
+                <span className="itemGenre">TV SHOWS</span>
               </Link>
             </div>
           </div>

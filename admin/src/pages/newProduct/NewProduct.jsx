@@ -1,6 +1,6 @@
 import "./newProduct.css";
 import { useContext, useState } from "react";
-import storage from "../../firebase";
+
 import { createMovies } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 

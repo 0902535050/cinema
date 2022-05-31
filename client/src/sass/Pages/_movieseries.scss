@@ -1,17 +1,16 @@
-.homeNationMovie {
+.homeSeriesMovie {
   background: linear-gradient(to bottom, black 0%, black 100%);
-  .categoryNationMovie {
+  .categorySeriesMovie {
     .cinemaPngMovie {
       width: 100px;
-
       object-fit: cover;
     }
 
-    .nationSelect {
+    .seriesSelect {
       padding: 10px 0px;
+      border: 2px solid #fff;
       border-radius: 10px;
       width: 20%;
-      border: 2px solid #fff;
       text-align: center;
       font-weight: bold;
       background-color: transparent;
@@ -27,7 +26,6 @@
     align-items: center;
     justify-content: center;
   }
-
   .footerAria {
     border-top: 1px solid white;
   }

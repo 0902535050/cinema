@@ -8,7 +8,6 @@
     height: 600px;
     border-radius: 12px;
     background-color: var(--main-color);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     flex-direction: column;
     padding: 25px;
@@ -81,7 +80,8 @@
         text-decoration: none;
       }
       .btnPlayFromListItem {
-        padding: 5px 40px;
+        width: 170px;
+        height: 40px;
         border: none;
         margin-left: 15px;
         border-radius: 5px;
@@ -96,8 +96,9 @@
         }
       }
       .btnAddFromListItem {
+        width: 170px;
+        height: 40px;
         font-size: 12px;
-        padding: 5px 40px;
         border: none;
         border-radius: 5px;
         margin-right: 5px;
@@ -111,7 +112,8 @@
       }
 
       .btnInfoFromListItem {
-        padding: 5px 40px;
+        width: 170px;
+        height: 40px;
         border: none;
         border-radius: 5px;
 

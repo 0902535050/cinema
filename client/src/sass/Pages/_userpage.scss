@@ -194,6 +194,7 @@
                     .iconChangeAvatar {
                       &:hover {
                         transform: scale(1.5);
+                        transition: all 0.5s;
                       }
                     }
                   }

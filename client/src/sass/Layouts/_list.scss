@@ -6,17 +6,17 @@
   .listTitle {
     color: orange;
     letter-spacing: 2px;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 400;
     margin-left: 90px;
     font-weight: bold;
     .cinemaPng {
-      width: 60px;
-      height: 60px;
+      width: 100px;
+      height: 100px;
       position: absolute;
-      left: 40px;
+      left: 15px;
       z-index: -1;
-      top: -18px;
+      top: -40px;
     }
   }
 

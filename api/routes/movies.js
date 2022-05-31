@@ -65,22 +65,25 @@ router.get("/find/:id", verify, async (req, res) => {
 
 //Get movie random
 
-router.get("/random", verify, async (req, res) => {
+router.get("/tagseries", verify, async (req, res) => {
   const type = req.query.type;
-  let movie;
   try {
-    if (type === "movie") {
-      movie = await Movie.aggregate([
-        { $match: { isSeries: true } },
-        { $sample: { size: 1 } },
-      ]);
+    if (type === "all") {
+      movies = await Movie.aggregate([{ $sample: { size: 100 } }]);
     } else {
-      movie = await Movie.aggregate([
-        { $match: { isSeries: false } },
-        { $sample: { size: 1 } },
-      ]);
+      if (type === "movie") {
+        movies = await Movie.aggregate([
+          { $match: { isSeries: false } },
+          { $sample: { size: 100 } },
+        ]);
+      } else {
+        movies = await Movie.aggregate([
+          { $match: { isSeries: true } },
+          { $sample: { size: 100 } },
+        ]);
+      }
     }
-    res.status(200).json(movie);
+    res.status(200).json(movies);
   } catch (err) {
     res.status(500).json(err);
   }

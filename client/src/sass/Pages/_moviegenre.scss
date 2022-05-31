@@ -2,15 +2,15 @@
   background: linear-gradient(to bottom, black 0%, black 100%);
   .categoryGenreMovie {
     .cinemaPngMovie {
-      width: 70px;
-      height: 70px;
+      width: 100px;
       object-fit: cover;
     }
 
     .genreSelect {
-      padding: 5px 0px;
+      padding: 10px 0px;
       border-radius: 10px;
       width: 20%;
+      border: 2px solid #fff;
       text-align: center;
       font-weight: bold;
       background-color: transparent;

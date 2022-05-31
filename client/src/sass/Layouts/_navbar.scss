@@ -31,6 +31,7 @@
       }
       .homePage {
         position: relative;
+        margin: 0 35px;
         .homeIcon {
           position: absolute;
           top: -7px;
@@ -94,7 +95,7 @@
             display: flex;
             position: absolute;
             flex-direction: column;
-            left: 750px;
+            left: 620px;
           }
         }
       }
@@ -102,7 +103,7 @@
 
     .right {
       display: flex;
-      flex: 5;
+      flex: 8;
 
       .endSearchBarAria {
         .searchBarAria {
@@ -114,7 +115,7 @@
         position: absolute;
         display: flex;
         top: 20px;
-        right: 210px;
+        right: 300px;
         .icon {
           margin: 0px 15px;
           cursor: pointer;

@@ -5,16 +5,25 @@ import {
   PlayArrow,
   Star,
 } from "@material-ui/icons";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalState";
 
 function Modal({ movie, setOpenModal }) {
   const { addMovieToWatchList, watchList } = useContext(GlobalContext);
   let storiedMovie = watchList.find((o) => o._id === movie._id);
-
   const watchListDisabled = storiedMovie ? true : false;
 
+  const ref = useRef();
+  useEffect(() => {
+    const checkIfClickOutSide = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpenModal(false);
+    };
+    document.addEventListener("click", checkIfClickOutSide);
+    return () => {
+      document.removeEventListener("click", checkIfClickOutSide);
+    };
+  }, [setOpenModal]);
   const setMovieOnLocalStorage = () => {
     localStorage.setItem("movies", JSON.stringify(movie));
   };
@@ -23,11 +32,12 @@ function Modal({ movie, setOpenModal }) {
     <div className="modalBackground">
       <div
         className="modalContainer"
-        onMouseLeave={() =>
-          setTimeout(() => {
-            setOpenModal(false);
-          }, 2000)
-        }
+        ref={ref}
+        // onMouseLeave={() =>
+        //   setTimeout(() => {
+        //     setOpenModal(false);
+        //   }, 2000)
+        // }
       >
         <div>
           <iframe
@@ -40,7 +50,7 @@ function Modal({ movie, setOpenModal }) {
         <div className="body">
           <span className="movieTitle">{movie.title}</span>
           <span className="movieDesc">
-            {String(movie.desc).substring(0, 240) + "..."}
+            {String(movie.desc).substring(0, 230) + "..."}
           </span>
           <div className="itemInfoTop">
             <span className="limit">Giới hạn {movie.limit}+</span>
