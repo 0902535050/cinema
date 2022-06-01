@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
@@ -15,10 +15,10 @@ import storage from "../../firebase";
 
 import Avatar from "@mui/material/Avatar";
 import Skeleton from "../../components/skeleton/Skeleton";
+import axios from "axios";
 
 export default function UserPage() {
   const history = useHistory();
-  const { watchList } = useContext(GlobalContext);
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const createdAt = new Date(currentUser.createdAt).toLocaleDateString();
   const { dispatch } = useContext(AuthContext);
@@ -28,6 +28,25 @@ export default function UserPage() {
   const [isShowEdit, setIsShowEdit] = useState(false);
   const [uploaded, setUploaded] = useState(0);
   const [movie, setMovie] = useState(null);
+  const [flag, setFlag] = useState(1000);
+  const [users, setUsers] = useState({});
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get("/users/find/" + currentUser._id, {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+          },
+        });
+        setUsers(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getUser();
+  }, [flag]);
+
   const toggleTab = (index) => {
     setToggleState(index);
   };
@@ -93,7 +112,6 @@ export default function UserPage() {
     editUserAvatar(movie, dispatch);
     history.push("/");
   };
-  console.log(avatar);
 
   const handleSubmit = (values) => {
     editUser(values, dispatch);
@@ -309,15 +327,23 @@ export default function UserPage() {
                       }
                     >
                       <div className="watchListAria">
-                        {watchList.length > 0 ? (
-                          <div className="myWatchListAria">
+                        {users.watchList !== undefined ? (
+                          <>
                             <h1>Danh sách phim của tôi</h1>
-
-                            <ListitemWatchList
-                              movie={watchList}
-                              type="watchList"
-                            />
-                          </div>
+                            <div className="myWatchListAria">
+                              {users.watchList.map((item, index) => {
+                                return (
+                                  <div className="" key={index}>
+                                    <ListitemWatchList
+                                      item={item}
+                                      type="watchList"
+                                      setFlag={setFlag}
+                                    />
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </>
                         ) : (
                           <h2 className="no-movies mb-5">
                             Không có phim trong danh sách

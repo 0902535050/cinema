@@ -1,10 +1,12 @@
 import axios from "axios";
 import {
+  addToWatchList,
   loginFailure,
   loginStart,
   loginSuccess,
   updateUser,
   updateUserAva,
+  removeFromWatchList,
 } from "./AuthActions";
 
 export const login = async (user, dispatch) => {
@@ -35,6 +37,50 @@ export const editUser = async (values, dispatch) => {
       }
     );
     dispatch(updateUser(res.data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const removeMovieFromWatchList = async (movieList, dispatch) => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  try {
+    const res = await axios.put(
+      "/users/" + currentUser._id,
+      {
+        watchList: movieList,
+      },
+      {
+        headers: {
+          token:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+        },
+      }
+    );
+    dispatch(removeFromWatchList(res.data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const addMovieItemToWatchList = async (movieList, dispatch) => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  console.log(movieList);
+
+  try {
+    const res = await axios.put(
+      "/users/" + currentUser._id,
+      {
+        watchList: movieList,
+      },
+      {
+        headers: {
+          token:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+        },
+      }
+    );
+    dispatch(addToWatchList(res.data));
   } catch (err) {
     console.log(err);
   }

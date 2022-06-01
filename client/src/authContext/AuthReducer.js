@@ -31,6 +31,19 @@ const AuthReducer = (state, action) => {
         isFetching: true,
         error: false,
       };
+    case "ADD_TO_WATCH_LIST":
+      return {
+        user: action.payload,
+        isFetching: true,
+        error: false,
+      };
+
+    case "REMOVE_MOVIE_FROM_WATCH_LIST":
+      return {
+        user: action.payload,
+        isFetching: true,
+        error: false,
+      };
     case "LOGOUT":
       return {
         user: null,

@@ -5,6 +5,7 @@ import axios from "axios";
 
 export default function WidgetSm() {
   const [newUsers, setNewUsers] = useState([]);
+  const [type, setType] = useState("");
   useEffect(() => {
     const getNewUsers = async () => {
       try {
@@ -28,6 +29,7 @@ export default function WidgetSm() {
       <ul className="widgetSmList">
         {newUsers.map((user, index) => (
           <li key={index} className="widgetSmListItem">
+            <span>{index + 1}.</span>
             <img
               src={user.profilePic || "https://picsum.photos/50/50"}
               alt=""
@@ -36,10 +38,6 @@ export default function WidgetSm() {
             <div className="widgetSmUser">
               <span className="widgetSmUsername">{user.username}</span>
             </div>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Active
-            </button>
           </li>
         ))}
       </ul>

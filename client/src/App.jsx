@@ -42,12 +42,6 @@ const App = () => {
         </Route>
         {user && (
           <>
-            {/* <Route path="/movies">
-              <Home type="movie" />
-            </Route>
-            <Route path="/series">
-              <Home type="series" />
-            </Route> */}
             <Route path="/watch">
               <Watch />
             </Route>

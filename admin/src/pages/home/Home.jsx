@@ -41,7 +41,7 @@ export default function Home() {
         statsList.map((item) =>
           setUserStats((prev) => [
             ...prev,
-            { name: MONTHS[item._id - 1], "New User": item.total },
+            { name: MONTHS[item._id - 1], "Người dùng mới": item.total },
           ])
         );
       } catch (e) {
@@ -57,7 +57,7 @@ export default function Home() {
         data={userStats}
         title="Thống kê số user"
         grid
-        dataKey="New User"
+        dataKey="Người dùng mới"
       />
       <div className="homeWidgets">
         <WidgetSm />

@@ -40,8 +40,8 @@ export default function WidgetLg() {
           <tr className="widgetLgTr">
             <th className="widgetLgTh">Người tạo</th>
             <th className="widgetLgTh">Nội dung bình luận</th>
-            <th className="widgetLgTh">Vị trí</th>
-            <th className="widgetLgTh">Thời gian tạo</th>
+            <th className="widgetLgTh">Vị trí phim</th>
+            <th className="widgetLgTh">Thời điểm tạo</th>
             <th className="widgetLgTh">Ngày tạo</th>
             <th className="widgetLgTh"></th>
           </tr>

@@ -12,16 +12,18 @@ import Actor from "../../components/actor/Actor";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { GlobalContext } from "../../context/GlobalState";
+import { addMovieItemToWatchList } from "../../authContext/apiCalls";
+import { AuthContext } from "../../authContext/AuthContext";
 
 export default function Detail() {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   const location = useLocation();
   const movie = location.movie || JSON.parse(localStorage.getItem("movies"));
   const [isShowDetail, setIsShowDetail] = useState(true);
-  const { addMovieToWatchList, watchList } = useContext(GlobalContext);
-  let storiedMovie = watchList.find((o) => o._id === movie._id);
+  const { dispatch, user } = useContext(AuthContext);
+  let storiedMovie = user.watchList.find((o) => o._id === movie._id);
   const watchListDisabled = storiedMovie ? true : false;
-
+  const [changed, setChanged] = useState(currentUser.watchList);
   const getActorName = () => {
     return movie.listActor.map((item, index) => {
       return (
@@ -30,6 +32,16 @@ export default function Detail() {
         </div>
       );
     });
+  };
+
+  const addToWatchList = (movie) => {
+    changed.push(movie);
+    setChanged((prev) => {
+      return { ...prev, prev: changed };
+    });
+    if (changed.length > 0) {
+      addMovieItemToWatchList(changed, dispatch);
+    }
   };
 
   const settings = {
@@ -109,7 +121,7 @@ export default function Detail() {
 
                 <button
                   disabled={watchListDisabled}
-                  onClick={() => addMovieToWatchList(movie)}
+                  onClick={() => addToWatchList(movie)}
                   className="btnAddToWatchList"
                 >
                   {watchListDisabled ? (

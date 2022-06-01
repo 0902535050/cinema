@@ -9,6 +9,9 @@
 .widgetSmTitle {
   font-size: 22px;
   font-weight: 600;
+  color: coral;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 .widgetSmImg {
@@ -16,6 +19,7 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  margin-left: 5px;
 }
 
 .widgetSmList {
@@ -27,8 +31,7 @@
 .widgetSmListItem {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 20px 0px;
+  margin: 20px 0;
 }
 
 .widgetSmUser {
@@ -38,6 +41,8 @@
 
 .widgetSmUsername {
   font-weight: 600;
+  margin-left: 10px;
+  color: blueviolet;
 }
 
 .widgetSmUserTitle {

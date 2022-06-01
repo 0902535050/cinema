@@ -218,6 +218,10 @@
         }
         .watchListAria {
           text-align: center;
+          .myWatchListAria {
+            display: flex;
+            flex-wrap: wrap;
+          }
           h1 {
             font-weight: bold;
             color: white;

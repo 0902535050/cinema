@@ -5,16 +5,19 @@ import {
   PlayArrow,
   Star,
 } from "@material-ui/icons";
+import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { GlobalContext } from "../../context/GlobalState";
-
+import { addMovieItemToWatchList } from "../../authContext/apiCalls";
+import { AuthContext } from "../../authContext/AuthContext";
 function Modal({ movie, setOpenModal }) {
-  const { addMovieToWatchList, watchList } = useContext(GlobalContext);
-  let storiedMovie = watchList.find((o) => o._id === movie._id);
-  const watchListDisabled = storiedMovie ? true : false;
-
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   const ref = useRef();
+  const { dispatch, user } = useContext(AuthContext);
+  const [changed, setChanged] = useState(currentUser.watchList);
+
+  let storiedMovie = user.watchList.find((o) => o._id === movie._id);
+  const watchListDisabled = storiedMovie ? true : false;
   useEffect(() => {
     const checkIfClickOutSide = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpenModal(false);
@@ -28,17 +31,20 @@ function Modal({ movie, setOpenModal }) {
     localStorage.setItem("movies", JSON.stringify(movie));
   };
 
+  const addToWatchList = (movie) => {
+    changed.push(movie);
+    setChanged((prev) => {
+      return { ...prev, prev: changed };
+    });
+
+    if (changed.length > 0) {
+      addMovieItemToWatchList(changed, dispatch);
+    }
+  };
+
   return (
     <div className="modalBackground">
-      <div
-        className="modalContainer"
-        ref={ref}
-        // onMouseLeave={() =>
-        //   setTimeout(() => {
-        //     setOpenModal(false);
-        //   }, 2000)
-        // }
-      >
+      <div className="modalContainer" ref={ref}>
         <div>
           <iframe
             className="modalTrailer"
@@ -75,7 +81,7 @@ function Modal({ movie, setOpenModal }) {
             title="Lưu xem sau"
             className="btnAddFromListItem"
             disabled={watchListDisabled}
-            onClick={() => addMovieToWatchList(movie)}
+            onClick={() => addToWatchList(movie)}
           >
             {watchListDisabled ? (
               <>

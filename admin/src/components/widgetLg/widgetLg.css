@@ -1,5 +1,5 @@
 .widgetLg {
-  flex: 4;
+  flex: 6;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   padding: 20px;
@@ -9,6 +9,8 @@
   font-size: 22px;
   font-weight: 600;
   color: coral;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 .widgetLgTable {
@@ -23,6 +25,9 @@
 .widgetLgContent {
   font-size: 16px;
   width: 300px;
+  background-color: rgb(220, 238, 241);
+  border-radius: 8px;
+  padding: 5px;
 }
 
 .widgetLgUser {

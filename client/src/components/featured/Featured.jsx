@@ -24,7 +24,7 @@ export default function Featured() {
     };
     getRandom();
   }, []);
-  console.log(movie);
+
   useEffect(() => {
     var count = 1;
     setInterval(() => {
@@ -49,13 +49,13 @@ export default function Featured() {
           <input type="radio" name="radio-btn" id="radio4" />
 
           <div className="slide first">
-            <img src={movie.img} alt="" />
+            <img src={movie.img !== null ? movie.img : ""} alt="" />
           </div>
           <div className="slide">
-            <img src={movie.imgTitle} alt="" />
+            <img src={movie.imgTitle !== null ? movie.imgTitle : ""} alt="" />
           </div>
           <div className="slide">
-            <img src={movie.imgSm} alt="" />
+            <img src={movie.imgSm !== null ? movie.imgSm : ""} alt="" />
           </div>
           <div className="slide">
             <img src="https://picsum.photos/2048/1024" alt="" />

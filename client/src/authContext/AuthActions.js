@@ -20,6 +20,15 @@ export const updateUserAva = (user) => ({
   payload: user,
 });
 
+export const addToWatchList = (movie) => ({
+  type: "ADD_TO_WATCH_LIST",
+  payload: movie,
+});
+
+export const removeFromWatchList = (movie) => ({
+  type: "REMOVE_MOVIE_FROM_WATCH_LIST",
+  payload: movie,
+});
 //logout
 
 export const logout = () => ({
