@@ -59,17 +59,38 @@ export const createMovies = async (movie, dispatch) => {
   }
 };
 
-export const updateMovies = async (movie, dispatch) => {
-  dispatch(updateMoviesStart());
+export const updateMovies = async (item, dispatch) => {
+  let newArray = [];
   try {
-    const res = await axios.put("/movies", movie, {
+    const resComment = await axios.get("/movies/find/" + item.movieId, {
       headers: {
         token:
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
       },
     });
-    dispatch(updateMoviesSuccess(res.data));
+    newArray = resComment.data.listComment.filter((m) => m !== item._id);
   } catch (e) {
-    dispatch(updateMoviesFailure(e));
+    console.log(e);
+  }
+
+  if (newArray.length > 0) {
+    dispatch(updateMoviesStart());
+    try {
+      const res = await axios.put(
+        "/movies/" + item.movieId,
+        {
+          watchList: newArray,
+        },
+        {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+          },
+        }
+      );
+      dispatch(updateMoviesSuccess(res.data));
+    } catch (e) {
+      dispatch(updateMoviesFailure(e));
+    }
   }
 };

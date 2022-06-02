@@ -1,8 +1,10 @@
 .userCommentListAria {
-  .userCommentAria {
+  .userComment-Aria {
     display: flex;
     align-items: center;
-
+    .itemNull {
+      display: none;
+    }
     .commentListAria {
       width: auto;
 

@@ -14,11 +14,31 @@ import axios from "axios";
 import { SearchBar } from "../search/SearchBar";
 
 const Navbar = () => {
-  const user = JSON.parse(localStorage.getItem("user")).username;
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
   const avatar = JSON.parse(localStorage.getItem("user")).profilePic;
   const [isScrolled, setIsScrolled] = useState(false);
   const { dispatch } = useContext(AuthContext);
   const [allMovie, setAllMovie] = useState([]);
+  const [users, setUsers] = useState({});
+  const [flag, setFlag] = useState(false);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get("/users/find/" + currentUser._id, {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+          },
+        });
+        setUsers(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getUser();
+  }, [currentUser.watchList.length]);
 
   useEffect(() => {
     const getAll = async () => {
@@ -85,8 +105,13 @@ const Navbar = () => {
             </div>
           </div>
           <div className="endProfileAria">
-            <span>Xin chào, {user}</span>
-            <Notifications className="icon" />
+            <span>Xin chào, {currentUser.username}</span>
+            <div className="quantityWatchList">
+              <Tv className="iconNoti" />
+              <span className="watchListQuantity">
+                {users.watchList !== undefined ? users.watchList.length : ""}
+              </span>
+            </div>
             <Link to="/userpage" className="link">
               <img
                 className="avatarProfile"

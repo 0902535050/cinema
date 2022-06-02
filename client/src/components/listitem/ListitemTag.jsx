@@ -1,7 +1,6 @@
 import { Star } from "@material-ui/icons";
 import React from "react";
 import { Link } from "react-router-dom";
-import { GlobalContext } from "../../context/GlobalState";
 export default function ListitemTag({ movie }) {
   return (
     <section className="py-4 container">

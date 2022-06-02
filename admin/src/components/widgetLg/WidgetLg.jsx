@@ -30,6 +30,7 @@ export default function WidgetLg() {
   const handleDelete = (id) => {
     setLoading(!loading);
     deleteComments(id, dispatch);
+    setLoading(!loading);
   };
 
   return (

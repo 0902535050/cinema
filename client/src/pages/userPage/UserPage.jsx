@@ -3,7 +3,6 @@ import { AuthContext } from "../../authContext/AuthContext";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
-import { GlobalContext } from "../../context/GlobalState";
 import { editUser, editUserAvatar } from "../../authContext/apiCalls";
 import { useHistory } from "react-router-dom";
 import { Form, Formik } from "formik";
@@ -30,6 +29,9 @@ export default function UserPage() {
   const [movie, setMovie] = useState(null);
   const [flag, setFlag] = useState(1000);
   const [users, setUsers] = useState({});
+
+  let checked = avatar === null || avatar === undefined ? true : false;
+
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -121,6 +123,8 @@ export default function UserPage() {
   const showEditAvatar = () => {
     setIsShowEdit(!isShowEdit);
   };
+
+  console.log(avatar);
 
   return (
     <div className="userpagearia">
@@ -217,10 +221,13 @@ export default function UserPage() {
                                 </button>
                               ) : isLoading ? (
                                 <Skeleton type="circle" />
+                              ) : checked ? (
+                                ""
                               ) : (
                                 <button
                                   className="addProductButton"
                                   onClick={handleUpload}
+                                  disabled={checked}
                                 >
                                   Tải ảnh
                                 </button>

@@ -33,7 +33,7 @@ export default function CommentList({ commentId }) {
 
   return (
     <div className="container userCommentListAria">
-      <div className="userCommentAria">
+      <div className="userComment-Aria">
         {comment !== null ? (
           <>
             <User userId={comment.creator} />
@@ -47,7 +47,7 @@ export default function CommentList({ commentId }) {
             </div>
           </>
         ) : (
-          ""
+          <div className="itemNull">null</div>
         )}
       </div>
     </div>

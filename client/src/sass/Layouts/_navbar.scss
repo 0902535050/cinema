@@ -116,6 +116,21 @@
         display: flex;
         top: 20px;
         right: 300px;
+        .quantityWatchList {
+          margin-right: 15px;
+          margin-left: 20px;
+          .iconNoti {
+            font-size: 40px;
+          }
+          .watchListQuantity {
+            position: absolute;
+            color: red;
+            left: 132px;
+            top: 5px;
+            font-size: 18px;
+          }
+        }
+
         .icon {
           margin: 0px 15px;
           cursor: pointer;

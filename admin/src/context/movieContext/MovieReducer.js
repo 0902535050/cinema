@@ -49,9 +49,7 @@ const MovieReducer = (state, action) => {
       };
     case "UPDATE_MOVIES_SUCCESS":
       return {
-        movies: state.movies.map(
-          (movie) => movie._id === action.payload._id && action.payload
-        ),
+        movies: action.payload,
         isFetching: false,
         error: false,
       };

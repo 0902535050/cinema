@@ -34,6 +34,7 @@ export default function Watch() {
   const [changedV2, setChangedV2] = useState(movie.listLiked);
   const [changedV3, setChangedV3] = useState(movie.listDisLiked);
   const [flag, setFlag] = useState(1);
+  const [getComments, setGetComments] = useState([]);
   let userLiked =
     getMovies.listLiked !== undefined
       ? getMovies.listLiked.find((o) => o === userNow._id)
@@ -45,7 +46,23 @@ export default function Watch() {
       ? getMovies.listDisLiked.find((o) => o === userNow._id)
       : movie.listDisLiked.find((o) => o === userNow._id);
   const userDisLikedDisabled = userDisLiked ? true : false;
-  console.log(movie);
+
+  useEffect(() => {
+    const getAllComment = async () => {
+      try {
+        const res = await axios.get("/comments?new=true", {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+          },
+        });
+        setGetComments(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getAllComment();
+  }, [loading]);
   useEffect(() => {
     const getRandomLists = async () => {
       try {
@@ -63,7 +80,7 @@ export default function Watch() {
     };
     getRandomLists();
 
-    const getMovies = async () => {
+    const getMoviess = async () => {
       try {
         const res = await axios.get("/movies/find/" + movie._id, {
           headers: {
@@ -77,7 +94,22 @@ export default function Watch() {
         console.log(err);
       }
     };
-    getMovies();
+    getMoviess();
+
+    const getAllComment = async () => {
+      try {
+        const res = await axios.get("/comments?new=true", {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+          },
+        });
+        setGetComments(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getAllComment();
   }, [loading, flag, movie._id]);
 
   const onViewCommentClick = () => {
@@ -110,6 +142,7 @@ export default function Watch() {
           content: commentContent,
           creator: userNow._id,
           location: movie.title,
+          movieId: movie._id,
         },
         {
           headers: {
