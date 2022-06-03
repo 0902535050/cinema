@@ -105,20 +105,22 @@ const Navbar = () => {
             </div>
           </div>
           <div className="endProfileAria">
-            <span>Xin chào, {currentUser.username}</span>
+            <span className="helloUser">Xin chào, {currentUser.username}</span>
             <div className="quantityWatchList">
               <Tv className="iconNoti" />
               <span className="watchListQuantity">
                 {users.watchList !== undefined ? users.watchList.length : ""}
               </span>
             </div>
-            <Link to="/userpage" className="link">
-              <img
-                className="avatarProfile"
-                src={avatar !== "" ? avatar : "https://picsum.photos/50/50"}
-                alt=""
-              />
-            </Link>
+            <div className="avatarAria">
+              <Link to="/userpage" className="link">
+                <img
+                  className="avatarProfile"
+                  src={avatar !== "" ? avatar : "https://picsum.photos/50/50"}
+                  alt=""
+                />
+              </Link>
+            </div>
             <div className="profile">
               <ArrowDropDown className="icon" />
               <div className="options">

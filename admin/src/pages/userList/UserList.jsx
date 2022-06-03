@@ -14,8 +14,12 @@ export default function UserList() {
     getUsers(dispatch);
   }, [dispatch]);
 
+  const setLocalUser = (user) => {
+    localStorage.setItem("users", JSON.stringify(user));
+  };
+
   const columns = [
-    { field: "_id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 200 },
     {
       field: "user",
       headerName: "User",
@@ -33,17 +37,24 @@ export default function UserList() {
         );
       },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    { field: "email", headerName: "Email", width: 300 },
     { field: "isAdmin", headerName: "IsAdmin", width: 200 },
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 200,
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row.id}>
-              <button className="userListEdit">Edit</button>
+            <Link
+              to={{ pathname: "/user/" + params.row._id, user: params.row }}
+            >
+              <button
+                className="userListEdit"
+                onClick={() => setLocalUser(params.row)}
+              >
+                Edit
+              </button>
             </Link>
             <DeleteOutline
               className="userListDelete"

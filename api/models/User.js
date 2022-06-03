@@ -9,6 +9,10 @@ const UserSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false },
     avatar: { type: String, default: "" },
     watchList: { type: Array },
+    nation: { type: String },
+    phone: { type: String },
+    date: { type: String },
+    desc: { type: String, default: "" },
   },
   { timestamps: true }
 );

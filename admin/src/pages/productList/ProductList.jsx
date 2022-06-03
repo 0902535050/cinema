@@ -38,7 +38,15 @@ export default function ProductList() {
 
     { field: "limit", headerName: "Limit", width: 120 },
 
-    { field: "isSeries", headerName: "IsSeries", width: 120 },
+    { field: "isSup", headerName: "Support", width: 120 },
+
+    { field: "nation", headerName: "Nation", width: 120 },
+
+    { field: "duration", headerName: "Duration", width: 120 },
+
+    { field: "imdb", headerName: "IMDb", width: 120 },
+
+    { field: "isSeries", headerName: "IsSeries", width: 150 },
 
     {
       field: "action",

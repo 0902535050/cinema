@@ -116,16 +116,24 @@
         display: flex;
         top: 20px;
         right: 300px;
+        .helloUser {
+          position: absolute;
+          right: 100px;
+          width: 150px;
+          height: auto;
+          text-align: center;
+        }
         .quantityWatchList {
-          margin-right: 15px;
-          margin-left: 20px;
+          position: absolute;
+          right: 40px;
+          width: 50px;
           .iconNoti {
             font-size: 40px;
           }
           .watchListQuantity {
             position: absolute;
             color: red;
-            left: 132px;
+            left: 15px;
             top: 5px;
             font-size: 18px;
           }
@@ -135,18 +143,29 @@
           margin: 0px 15px;
           cursor: pointer;
         }
-        img {
-          width: 40px;
-          height: 40px;
-          border-radius: 5px;
-          object-fit: cover;
+        .avatarAria {
           cursor: pointer;
-          transition: all 0.3s;
+          .avatarProfile {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            object-fit: cover;
+          }
           &:hover {
-            transform: scale(1.4);
+            .avatarProfile {
+              transition: all 0.3s;
+              transform: scale(1.4);
+            }
           }
         }
+
         .profile {
+          position: absolute;
+          right: -50px;
+          &:hover {
+            transform: scale(1.1);
+            transition: all 0.5s;
+          }
           .options {
             display: none;
             background-color: var(--main-color);

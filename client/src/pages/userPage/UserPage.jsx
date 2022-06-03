@@ -3,12 +3,22 @@ import { AuthContext } from "../../authContext/AuthContext";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
-import { editUser, editUserAvatar } from "../../authContext/apiCalls";
+import {
+  editUser,
+  changePassword,
+  editUserAvatar,
+} from "../../authContext/apiCalls";
 import { useHistory } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { TextField } from "../../components/textfield/TextField";
 import * as Yup from "yup";
-import { AccountCircle, Bookmark, CameraAlt, Edit } from "@material-ui/icons";
+import {
+  AccountCircle,
+  Bookmark,
+  CameraAlt,
+  Edit,
+  LockSharp,
+} from "@material-ui/icons";
 import ListitemWatchList from "../../components/listitem/ListitemWatctList";
 import storage from "../../firebase";
 
@@ -52,14 +62,8 @@ export default function UserPage() {
   const toggleTab = (index) => {
     setToggleState(index);
   };
-  const validate = Yup.object().shape({
-    username: Yup.string().required("Không được bỏ trống !").max(30),
-    email: Yup.string()
-      .required("Không được bỏ trống !")
-      .matches(
-        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-        "Email bạn nhập chưa đúng vui lòng điền lại !"
-      ),
+
+  const validatePass = Yup.object().shape({
     password: Yup.string()
       .max(255)
       .required("Không được bỏ trống !")
@@ -73,6 +77,20 @@ export default function UserPage() {
         "Mật khẩu chưa khớp vui lòng nhập lại !"
       )
       .required("Không được bỏ trống !"),
+  });
+
+  const validate = Yup.object().shape({
+    username: Yup.string().required("Không được bỏ trống !").max(30),
+    email: Yup.string()
+      .required("Không được bỏ trống !")
+      .matches(
+        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+        "Email bạn nhập chưa đúng vui lòng điền lại !"
+      ),
+    nation: Yup.string().required("Không được bỏ trống !"),
+    phone: Yup.string(),
+    date: Yup.string(),
+    desc: Yup.string(),
   });
 
   const upload = (items) => {
@@ -120,11 +138,14 @@ export default function UserPage() {
     history.push("/");
   };
 
+  const handleSubmitPassword = (values) => {
+    changePassword(values, dispatch);
+    history.push("/");
+  };
+
   const showEditAvatar = () => {
     setIsShowEdit(!isShowEdit);
   };
-
-  console.log(avatar);
 
   return (
     <div className="userpagearia">
@@ -164,6 +185,15 @@ export default function UserPage() {
                       title="Danh sách phim đã lưu"
                     >
                       <Bookmark className="bookmarkMovie" />
+                    </button>
+                    <button
+                      className={
+                        toggleState === 4 ? "tabs active-tabs" : "tabs"
+                      }
+                      onClick={() => toggleTab(4)}
+                      title="Đổi mật khẩu"
+                    >
+                      <LockSharp className="changePassMovie" />
                     </button>
                     <button className="closeTab" onClick={() => toggleTab(1)}>
                       x
@@ -243,26 +273,16 @@ export default function UserPage() {
                         {currentUser.username}
                       </span>
                       <br />
+                      <small>Ngày sinh: {currentUser.date}</small>
+                      <br />
                       <small>Địa chỉ email: {currentUser.email}</small>
                       <br />
+                      <small>Số điện thoại: {currentUser.phone}</small>
+                      <br />
+                      <small>Quốc tịch: {currentUser.nation}</small>
+                      <br />
                       <small>Ngày lập tài khoản: {createdAt}</small>
-                      <p>
-                        First impressions can play a major role in how an
-                        employer perceives you as a candidate. What you say
-                        during the first phase of the interview can make a
-                        difference in the outcome—in a good way or in a bad way.
-                        You don't want to come across as awkward and lacking in
-                        social skills. Rather, you'll want to show that you have
-                        the professionalism and communication skills to be an
-                        asset to the company if hired. Some hiring managers may
-                        even make a decision to reject a candidate based on a
-                        poor first impression. For instance, showing up late or
-                        checking the phone throughout the interview, can lead
-                        the hiring manager to perceive a candidate as having an
-                        inability to make a commitment, meet deadlines, focus,
-                        and follow-through, which are not qualities that will
-                        impress an employer.
-                      </p>
+                      <p className="userDesc">Mô tả: {currentUser.desc}</p>
                     </div>
 
                     <div
@@ -274,10 +294,14 @@ export default function UserPage() {
                     >
                       <Formik
                         initialValues={{
-                          username: "",
-                          email: "",
-                          password: "",
-                          confirmPassword: "",
+                          username: currentUser.username,
+                          email: currentUser.email,
+                          nation: currentUser.nation || "",
+                          phone: currentUser.phone || "",
+                          date: currentUser.date || "",
+                          desc: currentUser.desc || "",
+                          // password: "",
+                          // confirmPassword: "",
                         }}
                         validationSchema={validate}
                         onSubmit={handleSubmit}
@@ -292,30 +316,59 @@ export default function UserPage() {
                             </h2>
                             <Form className="formRegister">
                               <TextField
+                                label="Email"
+                                name="email"
+                                type="email"
+                                disabled
+                                onChange={formikProps.handleChange}
+                              />
+                              <TextField
                                 label="Tên hiển thị"
                                 name="username"
                                 type="text"
                                 onChange={formikProps.handleChange}
                               />
+
                               <TextField
-                                label="Email"
-                                name="email"
-                                type="email"
+                                label="Quốc tịch"
+                                name="nation"
+                                type="text"
                                 onChange={formikProps.handleChange}
                               />
 
                               <TextField
+                                label="Số điện thoại"
+                                name="phone"
+                                type="phone"
+                                onChange={formikProps.handleChange}
+                              />
+
+                              <TextField
+                                label="Ngày sinh"
+                                name="date"
+                                type="date"
+                                onChange={formikProps.handleChange}
+                              />
+
+                              <TextField
+                                label="Mô tả bản thân"
+                                name="desc"
+                                type="text"
+                                onChange={formikProps.handleChange}
+                              />
+
+                              {/* <TextField
                                 label="Mật khẩu mới"
                                 name="password"
                                 type="password"
                                 onChange={formikProps.handleChange}
                               />
                               <TextField
-                                label="Xác nhận mật khẩu mớ1"
+                                label="Xác nhận mật khẩu mới"
                                 name="confirmPassword"
                                 type="password"
                                 onChange={formikProps.handleChange}
-                              />
+                              /> */}
 
                               <button type="submit" className="updateButton">
                                 Cập nhật
@@ -357,6 +410,52 @@ export default function UserPage() {
                           </h2>
                         )}
                       </div>
+                    </div>
+
+                    <div
+                      className={
+                        toggleState === 4
+                          ? "content  active-content"
+                          : "content"
+                      }
+                    >
+                      <Formik
+                        initialValues={{
+                          password: "",
+                          confirmPassword: "",
+                        }}
+                        validationSchema={validatePass}
+                        onSubmit={handleSubmitPassword}
+                      >
+                        {(formikProps) => (
+                          <div>
+                            <h2
+                              className="text-center"
+                              style={{ color: "orange", letterSpacing: "1px" }}
+                            >
+                              Đổi mật khẩu
+                            </h2>
+                            <Form>
+                              <TextField
+                                label="Mật khẩu mới"
+                                name="password"
+                                type="password"
+                                onChange={formikProps.handleChange}
+                              />
+                              <TextField
+                                label="Xác nhận mật khẩu mới"
+                                name="confirmPassword"
+                                type="password"
+                                onChange={formikProps.handleChange}
+                              />
+
+                              <button type="submit" className="updateButton">
+                                Cập nhật
+                              </button>
+                            </Form>
+                          </div>
+                        )}
+                      </Formik>
                     </div>
                   </div>
                 </div>

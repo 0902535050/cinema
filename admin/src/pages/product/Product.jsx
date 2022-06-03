@@ -1,12 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import "./product.css";
 import { Publish } from "@material-ui/icons";
-import { updateMovies } from "../../context/movieContext/apiCalls";
-import { useContext } from "react";
-import { MovieContext } from "../../context/movieContext/MovieContext";
 
 export default function Product() {
-  const { dispatch } = useContext(MovieContext);
   const location = useLocation();
   const movie = location.movie;
 

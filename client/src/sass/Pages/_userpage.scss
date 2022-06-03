@@ -67,6 +67,14 @@
                       color: aqua;
                     }
                   }
+                  .changePassMovie {
+                    font-size: 30px;
+                    &:hover {
+                      transform: scale(1.4);
+                      transition: all 0.5s;
+                      color: yellowgreen;
+                    }
+                  }
                 }
                 .closeTab {
                   color: #fff;
@@ -205,6 +213,14 @@
                   font-weight: bold;
                   font-size: 35px;
                   letter-spacing: 2px;
+                }
+                small {
+                  color: cornflowerblue;
+                }
+                .userDesc {
+                  font-size: 16px;
+                  letter-spacing: 2px;
+                  color: lightgray;
                 }
                 .active-content {
                   display: block;

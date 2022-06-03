@@ -27,6 +27,32 @@ export const editUser = async (values, dispatch) => {
       {
         username: values.username,
         email: values.email,
+        // password: values.password,
+        date: values.date,
+        phone: values.phone,
+        nation: values.nation,
+        desc: values.desc,
+      },
+      {
+        headers: {
+          token:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+        },
+      }
+    );
+    dispatch(updateUser(res.data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const changePassword = async (values, dispatch) => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  try {
+    const res = await axios.put(
+      "/users/" + currentUser._id,
+      {
         password: values.password,
       },
       {

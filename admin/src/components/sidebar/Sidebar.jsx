@@ -1,19 +1,10 @@
 import "./sidebar.css";
 import {
   LineStyle,
-  Timeline,
-  TrendingUp,
   PermIdentity,
-  Storefront,
-  AttachMoney,
-  BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
-  WorkOutline,
-  Report,
   PlayCircleOutline,
   List,
+  AccountCircleOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -37,8 +28,14 @@ export default function Sidebar() {
           <ul className="sidebarList">
             <Link to="/users" className="link">
               <li className="sidebarListItem">
-                <PermIdentity className="sidebarIcon" />
+                <AccountCircleOutlined className="sidebarIcon" />
                 Users
+              </li>
+            </Link>
+            <Link to="/actors" className="link">
+              <li className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                Actors
               </li>
             </Link>
             <Link to="/movies" className="link">
