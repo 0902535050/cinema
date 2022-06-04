@@ -5,7 +5,7 @@ import { Formik, Form } from "formik";
 import { TextField } from "../../components/textfield/TextField";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
-
+import Swal from "sweetalert2";
 export default function Register() {
   const history = useHistory();
 
@@ -24,6 +24,10 @@ export default function Register() {
         "Email bạn nhập chưa đúng vui lòng điền lại !"
       ),
     username: Yup.string().required("Không được bỏ trống !").max(30),
+    // .matches(
+    //   /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
+    //   "Username có độ dài từ 8-20 kí tự và không có khoảng trắng !"
+    // ),
     password: Yup.string()
       .max(255)
       .required("Không được bỏ trống !")
@@ -36,6 +40,11 @@ export default function Register() {
   const handleSubmit = async (values) => {
     try {
       await axios.post("auth/register", values);
+      Swal.fire({
+        title: "Đăng ký thành công!",
+        icon: "success",
+        confirmButtonText: "Đóng",
+      });
       history.push("/login");
     } catch (err) {
       console.log(err);

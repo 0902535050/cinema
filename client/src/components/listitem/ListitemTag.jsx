@@ -2,6 +2,10 @@ import { Star } from "@material-ui/icons";
 import React from "react";
 import { Link } from "react-router-dom";
 export default function ListitemTag({ movie }) {
+  const setMovieOnLocalStorage = (item) => {
+    localStorage.setItem("movies", JSON.stringify(item));
+  };
+
   return (
     <section className="py-4 container">
       <div className="row justify-content-center">
@@ -33,7 +37,12 @@ export default function ListitemTag({ movie }) {
                     to={{ pathname: "/detail", movie: item }}
                     className="link"
                   >
-                    <span className="btn-more-info">Xem chi tiết</span>
+                    <button
+                      className="btn-more-info"
+                      onClick={() => setMovieOnLocalStorage(item)}
+                    >
+                      <span>Xem chi tiết</span>
+                    </button>
                   </Link>
                 </div>
               </div>

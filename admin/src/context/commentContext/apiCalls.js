@@ -5,16 +5,16 @@ import {
 } from "./CommentActions";
 import axios from "axios";
 
-export const deleteComments = async (id, dispatch) => {
+export const deleteComments = async (item, dispatch) => {
   dispatch(deleteCommentsStart());
   try {
-    await axios.delete("/comments/" + id, {
+    await axios.delete("/comments/" + item._id, {
       headers: {
         token:
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
       },
     });
-    dispatch(deleteCommentsSuccess(id));
+    dispatch(deleteCommentsSuccess(item._id));
   } catch (e) {
     dispatch(deleteCommentsFailure(e));
   }

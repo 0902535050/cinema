@@ -34,6 +34,8 @@ export default function MovieSeries() {
     getAll();
   }, [type]);
 
+  console.log(allMovie);
+
   //Get current movies
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;

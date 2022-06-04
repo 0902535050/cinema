@@ -11,6 +11,7 @@ import Modal from "../../components/modal/Modal";
 export default function ActorPage() {
   const location = useLocation();
   const actor = location.actor || JSON.parse(localStorage.getItem("actors"));
+  const movie = location.movie || JSON.parse(localStorage.getItem("movies"));
   const [actors, setActors] = useState([]);
 
   const [openModal, setOpenModal] = useState(false);
@@ -45,48 +46,83 @@ export default function ActorPage() {
       <input type="radio" name="radio-btn" id="radio4" style={{ opacity: 0 }} />
       <Navbar />
       {openModal ? <Modal movie={viaMovie} setOpenModal={setOpenModal} /> : ""}
-      <div className="actor-aria">
-        <div className="actorSide">
-          <div className="leftSide">
-            <div className="actorDetail">
-              <Avatar className="actorImg" src={actor.profilePic} />
-              <span className="actorName">{actor.name}</span>
-              <span className="actorNation">Quốc tịch: {actor.nation}</span>
-              <span className="actorDesc">
-                {String(actor.desc).substring(0, 40) + "..."}
-              </span>
+      {actor !== null ? (
+        <div className="actor-aria">
+          <div className="actorSide">
+            <div className="leftSide">
+              <div className="actorDetail">
+                <Avatar className="actorImg" src={actor.profilePic} />
+                <span className="actorName">{actor.name}</span>
+                <span className="actorNation">Quốc tịch: {actor.nation}</span>
+                <span className="actorDesc">
+                  {String(actor.desc).substring(0, 40) + "..."}
+                </span>
+              </div>
+              <div className="someActor container">
+                <h3>Nghệ sĩ tương tự</h3>
+                {actors.map((item, index) => {
+                  return (
+                    <div className="someActorPlace">
+                      <ActorSome item={item._id} />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div className="someActor container">
-              <h3>Nghệ sĩ tương tự</h3>
-              {actors.map((item, index) => {
+            <div className="rightSide">
+              <div className="titleMovieActorJoin">
+                <h1>Danh sách phim tham gia</h1>
+              </div>
+              {actor.nameMovie !== ""
+                ? actor.nameMovie.map((item, index) => {
+                    return (
+                      <div className="movieActor">
+                        <Listitem
+                          item={item}
+                          setOpenModal={setOpenModal}
+                          setViaMovie={setViaMovie}
+                        />
+                      </div>
+                    );
+                  })
+                : ""}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="actor-aria">
+          <div className="actorSide">
+            <div className="leftSide">
+              <div className="actorDetail">
+                <Avatar className="actorImg" src={movie.director.directorAva} />
+                <span className="actorName">{movie.director.directorName}</span>
+                <span className="actorNation">
+                  Quốc tịch: {movie.director.directorNations}
+                </span>
+                <span className="actorDesc">
+                  {String(movie.director.directorDesc).substring(0, 40) + "..."}
+                </span>
+              </div>
+            </div>
+            <div className="rightSide">
+              <div className="titleMovieActorJoin">
+                <h1>Danh sách phim biên kịch</h1>
+              </div>
+              {movie.director.movieJoin.map((item, index) => {
                 return (
-                  <div className="someActorPlace">
-                    <ActorSome item={item._id} />
+                  <div className="movieActor">
+                    <Listitem
+                      item={item}
+                      setOpenModal={setOpenModal}
+                      setViaMovie={setViaMovie}
+                    />
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className="rightSide">
-            <div className="titleMovieActorJoin">
-              <h1>Danh sách phim tham gia</h1>
-            </div>
-            {actor.nameMovie !== ""
-              ? actor.nameMovie.map((item, index) => {
-                  return (
-                    <div className="movieActor">
-                      <Listitem
-                        item={item}
-                        setOpenModal={setOpenModal}
-                        setViaMovie={setViaMovie}
-                      />
-                    </div>
-                  );
-                })
-              : ""}
-          </div>
         </div>
-      </div>
+      )}
 
       <div className="footer">
         <Footer />

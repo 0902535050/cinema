@@ -8,7 +8,7 @@ const initial_state = {
 
 export const CommentContext = createContext(initial_state);
 export const CommentContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(CommentReducer, initial_state);
+  const [state, dispatchComment] = useReducer(CommentReducer, initial_state);
 
   return (
     <CommentContext.Provider
@@ -16,7 +16,7 @@ export const CommentContextProvider = ({ children }) => {
         comments: state.comments,
         isFetching: state.isFetching,
         error: state.error,
-        dispatch,
+        dispatchComment,
       }}
     >
       {children}

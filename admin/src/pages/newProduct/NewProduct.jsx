@@ -149,6 +149,7 @@ export default function NewProduct() {
         <div className="addProductItem">
           <label>Is Series ?</label>
           <select name="isSeries" id="isSeries" onChange={handleChange}>
+            <option>Chọn</option>
             <option value="false">No</option>
             <option value="true">Yes</option>
           </select>

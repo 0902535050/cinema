@@ -8,13 +8,26 @@ import {
   updateUserAva,
   removeFromWatchList,
 } from "./AuthActions";
+import Swal from "sweetalert2";
 
 export const login = async (user, dispatch) => {
   dispatch(loginStart());
   try {
     const res = await axios.post("auth/login", user);
+    Swal.fire({
+      title: "Đăng nhập thành công!",
+      text: `Xin chào ${user.email}`,
+      icon: "success",
+      confirmButtonText: "Đóng",
+    });
     dispatch(loginSuccess(res.data));
   } catch (err) {
+    Swal.fire({
+      title: "Đăng nhập thất bại!",
+      text: "Email hoặc mật khẩu nhập chưa đúng vui lòng nhập lại !!",
+      icon: "error",
+      confirmButtonText: "Đóng",
+    });
     dispatch(loginFailure());
   }
 };
@@ -25,13 +38,14 @@ export const editUser = async (values, dispatch) => {
     const res = await axios.put(
       "/users/" + currentUser._id,
       {
-        username: values.username,
         email: values.email,
-        // password: values.password,
-        date: values.date,
-        phone: values.phone,
+        username: values.username,
+        fullName: values.fullName,
         nation: values.nation,
+        phone: values.phone,
+        date: values.date,
         desc: values.desc,
+        address: values.address,
       },
       {
         headers: {
@@ -40,8 +54,18 @@ export const editUser = async (values, dispatch) => {
         },
       }
     );
+    Swal.fire({
+      title: `Thay đổi thông tin cá nhân thành công !`,
+      icon: "success",
+      confirmButtonText: "Đóng",
+    });
     dispatch(updateUser(res.data));
   } catch (err) {
+    Swal.fire({
+      title: `Thay đổi thông tin cá nhân thất bại !`,
+      icon: "error",
+      confirmButtonText: "Đóng",
+    });
     console.log(err);
   }
 };
@@ -62,6 +86,11 @@ export const changePassword = async (values, dispatch) => {
         },
       }
     );
+    Swal.fire({
+      title: `Thay đổi mật khẩu thành công !`,
+      icon: "success",
+      confirmButtonText: "Đóng",
+    });
     dispatch(updateUser(res.data));
   } catch (err) {
     console.log(err);
@@ -83,6 +112,7 @@ export const removeMovieFromWatchList = async (movieList, dispatch) => {
         },
       }
     );
+
     dispatch(removeFromWatchList(res.data));
   } catch (err) {
     console.log(err);
@@ -128,6 +158,11 @@ export const editUserAvatar = async (img, dispatch) => {
         },
       }
     );
+    Swal.fire({
+      title: "Thay đổi hình ảnh thành công !",
+      icon: "success",
+      confirmButtonText: "Đóng",
+    });
     dispatch(updateUserAva(res.data));
   } catch (err) {
     console.log(err);

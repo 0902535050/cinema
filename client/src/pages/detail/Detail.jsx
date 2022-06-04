@@ -25,13 +25,15 @@ export default function Detail() {
   const watchListDisabled = storiedMovie ? true : false;
   const [changed, setChanged] = useState(currentUser.watchList);
   const getActorName = () => {
-    return movie.listActor.map((item, index) => {
-      return (
-        <div>
-          <Actor key={index} item={item} type="name" />
-        </div>
-      );
-    });
+    if (movie.listActor !== undefined) {
+      return movie.listActor.map((item, index) => {
+        return (
+          <div>
+            <Actor key={index} item={item} type="name" />
+          </div>
+        );
+      });
+    } else return "";
   };
 
   const addToWatchList = (movie) => {
@@ -151,15 +153,21 @@ export default function Detail() {
               <br />
               Thời lượng: <span>{movie.duration} phút</span>
               <br />
-              Nhà sản xuất: <span>{movie.producer + " "}</span>
+              Nhà sản xuất:{" "}
+              <span>
+                {movie.producer !== undefined ? movie.producer + " " : ""}
+              </span>
               <br />
               Phim trường: <span>{movie.filmLocations}</span>
               <br />
-              Nhà viết sách: <span>{movie.writer + " "}</span>
+              Nhà viết sách:{" "}
+              <span>
+                {movie.writer !== undefined ? movie.writer + " " : ""}
+              </span>
               <br />
               Diễn viên chính:{" "}
               <span className="actorShowName">
-                {getActorName().splice(0, 4)}
+                {getActorName() === "" ? "" : getActorName().splice(0, 4)}
               </span>
               <br />
               {isShowDetail ? (
@@ -169,7 +177,9 @@ export default function Detail() {
                     onClick={onViewDetailClick}
                     style={{ cursor: "pointer", color: "blue" }}
                   >
-                    {movie.director.directorName}
+                    {movie.director !== undefined
+                      ? movie.director.directorName
+                      : ""}
                   </span>
                 </div>
               ) : (
@@ -178,24 +188,29 @@ export default function Detail() {
                     onClick={onViewDetailClick}
                     style={{ cursor: "pointer" }}
                   >
-                    {String(movie.director.directorDesc).substring(0, 250) +
-                      "... "}
+                    {movie.director !== undefined
+                      ? movie.director.directorDesc
+                      : ""}
                   </span>
-                  <span
-                    className="directorMoreDetail"
-                    style={{ cursor: "pointer", color: "blue" }}
-                  >
-                    Xem chi tiết hơn
-                  </span>
+                  <Link to={{ pathname: "/actorpage", movie: movie }}>
+                    <span
+                      className="directorMoreDetail"
+                      style={{ cursor: "pointer", color: "blue" }}
+                    >
+                      Xem chi tiết hơn
+                    </span>
+                  </Link>
                 </>
               )}
               <br />
-              <div className="directorAvatar">
-                {movie.director.directorAva ? (
-                  <img src={movie.director.directorAva} alt="" />
-                ) : (
-                  ""
-                )}
+              <div className="directorAvatar mt-4">
+                <Link to={{ pathname: "/actorpage", movie: movie }}>
+                  {movie.director !== undefined ? (
+                    <img src={movie.director.directorAva} alt="" />
+                  ) : (
+                    ""
+                  )}
+                </Link>
               </div>
             </div>
           </div>
@@ -216,11 +231,13 @@ export default function Detail() {
             <div className="actor-detail-aria-v2">
               <h3>DANH SÁCH DIỄN VIÊN THAM GIA</h3>
               <Slider {...settings}>
-                {movie.listActor.map((item, index) => (
-                  <div key={index} className="singleActorPlace">
-                    <Actor item={item} />
-                  </div>
-                ))}
+                {movie.listActor !== undefined
+                  ? movie.listActor.map((item, index) => (
+                      <div key={index} className="singleActorPlace">
+                        <Actor item={item} />
+                      </div>
+                    ))
+                  : ""}
               </Slider>
             </div>
           </div>

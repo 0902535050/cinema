@@ -92,7 +92,7 @@ const Navbar = () => {
                 <span className="itemGenre">PHIM THEO QUỐC GIA</span>
               </Link>
               <Link to="/type" className="linkSelect">
-                <span className="itemGenre">TV SHOWS</span>
+                <span className="itemGenre">PHIM CHIẾU RẠP</span>
               </Link>
             </div>
           </div>

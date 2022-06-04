@@ -31,6 +31,8 @@
     "sass": "^1.49.7",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.4.17",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
   },

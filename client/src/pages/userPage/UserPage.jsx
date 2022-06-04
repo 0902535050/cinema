@@ -81,6 +81,7 @@ export default function UserPage() {
 
   const validate = Yup.object().shape({
     username: Yup.string().required("Không được bỏ trống !").max(30),
+    fullName: Yup.string().required("Không được bỏ trống !").max(30),
     email: Yup.string()
       .required("Không được bỏ trống !")
       .matches(
@@ -134,6 +135,7 @@ export default function UserPage() {
   };
 
   const handleSubmit = (values) => {
+    console.log(values);
     editUser(values, dispatch);
     history.push("/");
   };
@@ -273,6 +275,8 @@ export default function UserPage() {
                         {currentUser.username}
                       </span>
                       <br />
+                      <small>Tên đầy đủ: {currentUser.fullName}</small>
+                      <br />
                       <small>Ngày sinh: {currentUser.date}</small>
                       <br />
                       <small>Địa chỉ email: {currentUser.email}</small>
@@ -280,6 +284,8 @@ export default function UserPage() {
                       <small>Số điện thoại: {currentUser.phone}</small>
                       <br />
                       <small>Quốc tịch: {currentUser.nation}</small>
+                      <br />
+                      <small>Địa chỉ: {currentUser.address}</small>
                       <br />
                       <small>Ngày lập tài khoản: {createdAt}</small>
                       <p className="userDesc">Mô tả: {currentUser.desc}</p>
@@ -295,13 +301,13 @@ export default function UserPage() {
                       <Formik
                         initialValues={{
                           username: currentUser.username,
+                          fullName: currentUser.fullName || "",
                           email: currentUser.email,
                           nation: currentUser.nation || "",
                           phone: currentUser.phone || "",
                           date: currentUser.date || "",
                           desc: currentUser.desc || "",
-                          // password: "",
-                          // confirmPassword: "",
+                          desc: currentUser.address || "",
                         }}
                         validationSchema={validate}
                         onSubmit={handleSubmit}
@@ -328,7 +334,12 @@ export default function UserPage() {
                                 type="text"
                                 onChange={formikProps.handleChange}
                               />
-
+                              <TextField
+                                label="Tên đầy đủ"
+                                name="fullName"
+                                type="text"
+                                onChange={formikProps.handleChange}
+                              />
                               <TextField
                                 label="Quốc tịch"
                                 name="nation"
@@ -357,18 +368,12 @@ export default function UserPage() {
                                 onChange={formikProps.handleChange}
                               />
 
-                              {/* <TextField
-                                label="Mật khẩu mới"
-                                name="password"
-                                type="password"
+                              <TextField
+                                label="Địa chỉ"
+                                name="address"
+                                type="text"
                                 onChange={formikProps.handleChange}
                               />
-                              <TextField
-                                label="Xác nhận mật khẩu mới"
-                                name="confirmPassword"
-                                type="password"
-                                onChange={formikProps.handleChange}
-                              /> */}
 
                               <button type="submit" className="updateButton">
                                 Cập nhật

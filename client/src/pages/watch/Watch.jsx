@@ -36,13 +36,13 @@ export default function Watch() {
   const [flag, setFlag] = useState(1);
   const [getComments, setGetComments] = useState([]);
   let userLiked =
-    getMovies.listLiked !== undefined
+    getMovies.listLiked !== undefined && movie.listLiked !== undefined
       ? getMovies.listLiked.find((o) => o === userNow._id)
       : movie.listLiked.find((o) => o === userNow._id);
   const userLikedDisabled = userLiked ? true : false;
 
   let userDisLiked =
-    getMovies.listDisLiked !== undefined
+    getMovies.listDisLiked !== undefined && movie.listDisLiked !== undefined
       ? getMovies.listDisLiked.find((o) => o === userNow._id)
       : movie.listDisLiked.find((o) => o === userNow._id);
   const userDisLikedDisabled = userDisLiked ? true : false;
@@ -178,13 +178,15 @@ export default function Watch() {
   };
 
   const ShowCommentList = () => {
-    return movie.listComment.map((comment, index) => {
-      return (
-        <div className="">
-          <CommentList key={index} commentId={comment} />
-        </div>
-      );
-    });
+    if (movie.listComment !== undefined) {
+      return movie.listComment.map((comment, index) => {
+        return (
+          <div className="">
+            <CommentList key={index} commentId={comment} />
+          </div>
+        );
+      });
+    } else return "";
   };
 
   const addUserDisLikeMovie = async (userId) => {
@@ -331,15 +333,23 @@ export default function Watch() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 src={
                   isSub
-                    ? movie.listVideoSub[newIndex - 1]
-                    : movie.listVideoTM[newIndexTM - 1]
+                    ? movie.listVideoSub[newIndex - 1] || movie.video
+                    : movie.listVideoTM[newIndexTM - 1] || movie.video
                 }
                 frameborder="0"
                 scrolling="0"
                 allowFullScreen={true}
               />
             ) : (
-              <img className="videoPlace" src={movie.imgPost} alt="none" />
+              <img
+                className="videoPlace"
+                src={
+                  movie.imgPost !== undefined
+                    ? movie.imgPost
+                    : "https://picsum.photos/1130/600"
+                }
+                alt="none"
+              />
             )}
           </div>
           <div className="watch-right">
@@ -347,20 +357,26 @@ export default function Watch() {
               <div className="itemPost">
                 <img src={movie.img} alt="" />
                 <span>
-                  {String(movie.listPost[0]).substring(0, 150) + "..."}
+                  {movie.listPost !== undefined
+                    ? String(movie.listPost[0]).substring(0, 150) + "..."
+                    : ""}
                 </span>
               </div>
               <div className="itemPost">
                 <img src={movie.imgTitle} alt="" />
                 <span>
-                  {String(movie.listPost[1]).substring(0, 150) + "..."}
+                  {movie.listPost !== undefined
+                    ? String(movie.listPost[1]).substring(0, 150) + "..."
+                    : ""}
                 </span>
               </div>
               <div className="itemPost">
                 <img src={movie.imgSm} alt="" />
 
                 <span>
-                  {String(movie.listPost[2]).substring(0, 150) + "..."}
+                  {movie.listPost !== undefined
+                    ? String(movie.listPost[2]).substring(0, 150) + "..."
+                    : ""}
                 </span>
               </div>
             </div>
@@ -445,37 +461,49 @@ export default function Watch() {
           <div className="vidSub">
             <span>Việt Sub</span>
           </div>
-          {movie.listVideoSub.map((item, index) => {
-            return (
-              <div className="changeMovieAria">
-                <button key={index} onClick={() => handleChangeMovieSub(index)}>
-                  {movie.isSeries ? <> Tập {index + 1}</> : <> Tập Full</>}
-                </button>
-              </div>
-            );
-          })}
+          {movie.listVideoSub !== undefined
+            ? movie.listVideoSub.map((item, index) => {
+                return (
+                  <div className="changeMovieAria">
+                    <button
+                      key={index}
+                      onClick={() => handleChangeMovieSub(index)}
+                    >
+                      {movie.isSeries ? <> Tập {index + 1}</> : <> Tập Full</>}
+                    </button>
+                  </div>
+                );
+              })
+            : ""}
           <div className="vidTM">
             <span>Thuyết Minh</span>
           </div>
-          {movie.listVideoTM.map((item, index) => {
-            return (
-              <div className="changeMovieAria">
-                <button key={index} onClick={() => handleChangeMovieTM(index)}>
-                  {movie.isSeries ? <> Tập {index + 1}</> : <> Tập Full</>}
-                </button>
-              </div>
-            );
-          })}
+          {movie.listVideoTM !== undefined
+            ? movie.listVideoTM.map((item, index) => {
+                return (
+                  <div className="changeMovieAria">
+                    <button
+                      key={index}
+                      onClick={() => handleChangeMovieTM(index)}
+                    >
+                      {movie.isSeries ? <> Tập {index + 1}</> : <> Tập Full</>}
+                    </button>
+                  </div>
+                );
+              })
+            : ""}
           <div className="tagMovieAria">
             <span>Tag</span>
           </div>
-          {movie.movieTag.map((item, index) => {
-            return (
-              <span key={index} className="tagMovie">
-                {item}
-              </span>
-            );
-          })}
+          {movie.movieTag !== undefined
+            ? movie.movieTag.map((item, index) => {
+                return (
+                  <span key={index} className="tagMovie">
+                    {item}
+                  </span>
+                );
+              })
+            : ""}
         </div>
       </div>
       <div className="userCommentAria mt-5 container">
@@ -495,7 +523,8 @@ export default function Watch() {
 
             <br />
             <span style={{ fontWeight: "bold" }}>
-              {movie.listComment.length} bình luận
+              {movie.listComment !== undefined ? movie.listComment.length : ""}{" "}
+              bình luận
             </span>
             <input
               className="form-control"
@@ -521,7 +550,7 @@ export default function Watch() {
             ? ShowCommentList().sort().reverse()
             : ShowCommentList().slice(-4).sort().reverse()}
           <div className="showMoreComment">
-            {movie.listComment === "" ? (
+            {movie.listComment === "" && movie.listComment === undefined ? (
               ""
             ) : (
               <div className="showMoreCommentAria">

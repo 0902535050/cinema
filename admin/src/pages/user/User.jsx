@@ -1,18 +1,79 @@
 import {
+  AccountCircle,
   CalendarToday,
+  Home,
   LocationSearching,
   MailOutline,
   PermIdentity,
   PhoneAndroid,
   Publish,
 } from "@material-ui/icons";
-import { Link, useLocation } from "react-router-dom";
+import storage from "../../firebase";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import "./user.css";
 import moment from "moment";
+import { useContext, useState } from "react";
+import { updateUsers } from "../../context/userContext/apiCalls";
+import { UserContext } from "../../context/userContext/UserContext";
+import Skeleton from "../../components/skeleton/Skeleton";
 export default function User() {
   const location = useLocation();
   const user = location.user || JSON.parse(localStorage.getItem("users"));
   const createdAtDate = new Date(user.createdAt).toLocaleDateString();
+  const history = useHistory();
+  const [uploaded, setUploaded] = useState(0);
+  const [users, setUsers] = useState(null);
+  const [profilePic, setProfilePic] = useState(null);
+  const { dispatch } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+
+  let checked = profilePic === null || profilePic === undefined ? true : false;
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUsers({ ...users, [e.target.name]: value });
+  };
+
+  const upload = (items) => {
+    items.forEach((item) => {
+      const fileName = new Date().getTime() + item.label + item.file.name;
+      const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is" + progress + " %done.");
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+            setUsers((prev) => {
+              return { ...prev, [item.label]: url };
+            });
+            setUploaded((pre) => pre + 1);
+          });
+        }
+      );
+    });
+  };
+
+  const handleUpload = (e) => {
+    if (uploaded === 0) {
+      setLoading(true);
+      e.preventDefault();
+      upload([{ file: profilePic, label: "profilePic" }]);
+    } else setLoading(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateUsers(users, user, dispatch);
+    history.push("/users");
+  };
+
   return (
     <div className="user">
       <div className="userTitleContainer">
@@ -41,6 +102,10 @@ export default function User() {
               </span>
             </div>
             <div className="userShowInfo">
+              <AccountCircle className="userShowIcon" />
+              <span className="userShowInfoTitle">{user.fullName}</span>
+            </div>
+            <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
               <span className="userShowInfoTitle">{user.date}</span>
             </div>
@@ -57,6 +122,10 @@ export default function User() {
               <LocationSearching className="userShowIcon" />
               <span className="userShowInfoTitle">{user.nation}</span>
             </div>
+            <div className="userShowInfo">
+              <Home className="userShowIcon" />
+              <span className="userShowInfoTitle">{user.address}</span>
+            </div>
           </div>
         </div>
         <div className="userUpdate">
@@ -64,59 +133,89 @@ export default function User() {
           <form className="userUpdateForm">
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
-                <label>Username</label>
+                <label>Full name</label>
                 <input
                   type="text"
-                  placeholder="annabeck99"
+                  name="fullName"
+                  placeholder={user.fullName}
                   className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Full Name</label>
-                <input
-                  type="text"
-                  placeholder="Anna Becker"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Email</label>
-                <input
-                  type="text"
-                  placeholder="annabeck99@gmail.com"
-                  className="userUpdateInput"
+                  onChange={handleChange}
                 />
               </div>
               <div className="userUpdateItem">
                 <label>Phone</label>
                 <input
                   type="text"
-                  placeholder="+1 123 456 67"
+                  name="phone"
+                  placeholder={user.phone}
                   className="userUpdateInput"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="userUpdateItem">
+                <label>Nation</label>
+                <input
+                  type="text"
+                  name="nation"
+                  placeholder={user.nation}
+                  className="userUpdateInput"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="userUpdateItem">
+                <label>Ngày sinh</label>
+                <input
+                  type="date"
+                  name="date"
+                  className="userUpdateInput"
+                  onChange={handleChange}
                 />
               </div>
               <div className="userUpdateItem">
                 <label>Address</label>
                 <input
                   type="text"
-                  placeholder="New York | USA"
+                  name="address"
+                  placeholder={user.address}
                   className="userUpdateInput"
+                  onChange={handleChange}
                 />
+              </div>
+              <div className="userUpdateItem">
+                <label>Is Admin ?</label>
+                <select name="isAdmin" id="isAdmin" onChange={handleChange}>
+                  <option>Chọn</option>
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
               </div>
             </div>
             <div className="userUpdateRight">
               <div className="userUpdateUpload">
-                <img
-                  className="userUpdateImg"
-                  src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                  alt=""
-                />
-                <label htmlFor="file">
+                <img className="userUpdateImg" src={user.profilePic} alt="" />
+                <label htmlFor="avatar">
                   <Publish className="userUpdateIcon" />
                 </label>
-                <input type="file" id="file" style={{ display: "none" }} />
+                <input
+                  type="file"
+                  id="profilePic"
+                  name="profilePic"
+                  onChange={(e) => setProfilePic(e.target.files[0])}
+                />
               </div>
-              <button className="userUpdateButton">Update</button>
+              {uploaded === 1 ? (
+                <button className="userUpdateButton" onClick={handleSubmit}>
+                  Cập nhật
+                </button>
+              ) : loading ? (
+                <Skeleton type="circle" />
+              ) : checked ? (
+                ""
+              ) : (
+                <button className="userUpdateButton" onClick={handleUpload}>
+                  Tải ảnh
+                </button>
+              )}
             </div>
           </form>
         </div>

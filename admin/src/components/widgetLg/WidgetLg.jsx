@@ -6,10 +6,14 @@ import { DeleteOutline } from "@material-ui/icons";
 import User from "../user/User";
 import { deleteComments } from "../../context/commentContext/apiCalls";
 import { CommentContext } from "../../context/commentContext/CommentContext";
+import { updateMovies } from "../../context/movieContext/apiCalls";
+import { MovieContext } from "../../context/movieContext/MovieContext";
 export default function WidgetLg() {
   const [comment, setComment] = useState([]);
-  const { dispatch } = useContext(CommentContext);
+  const { dispatchComment } = useContext(CommentContext);
+  const { dispatch } = useContext(MovieContext);
   const [loading, setLoading] = useState(false);
+  const [flag, setFlag] = useState(1000);
   useEffect(() => {
     const getAllComment = async () => {
       try {
@@ -25,11 +29,26 @@ export default function WidgetLg() {
       }
     };
     getAllComment();
-  }, [loading]);
-
-  const handleDelete = (id) => {
+  }, [loading, flag]);
+  console.log(comment);
+  const handleDelete = async (item) => {
     setLoading(!loading);
-    deleteComments(id, dispatch);
+    let array;
+    try {
+      const res = await axios.get("/movies/find/" + item.movieId, {
+        headers: {
+          token:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+        },
+      });
+
+      array = res.data.listComment.filter((id) => id !== item._id);
+      setFlag(array.length);
+      updateMovies(array, item, dispatch);
+    } catch (e) {
+      console.log(e);
+    }
+    deleteComments(item, dispatchComment);
     setLoading(!loading);
   };
 
@@ -70,7 +89,7 @@ export default function WidgetLg() {
 
                   <DeleteOutline
                     className="widgetLgButton"
-                    onClick={() => handleDelete(item._id)}
+                    onClick={() => handleDelete(item)}
                   />
                 </td>
               </tr>
