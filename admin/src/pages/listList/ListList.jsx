@@ -1,21 +1,50 @@
 import "./listList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ListContext } from "../../context/listContext/ListContext";
 import { getLists, deleteLists } from "../../context/listContext/apiCalls";
+import Dialog from "../../components/dialog/dialog";
 
 export default function ListList() {
   const { lists, dispatch } = useContext(ListContext);
+
+  const [dialog, setDialog] = useState({
+    message: "",
+    isLoading: false,
+  });
+
+  const idUseRef = useRef();
+
+  const handleDialog = (message, isLoading) => {
+    setDialog({
+      message,
+      isLoading,
+    });
+  };
 
   useEffect(() => {
     getLists(dispatch);
   }, [dispatch]);
 
+  const setLocalStorage = (item) => {
+    localStorage.setItem("lists", JSON.stringify(item));
+  };
+
   const handleDelete = (id) => {
-    deleteLists(id, dispatch);
+    handleDialog("Are you sure you want to delete?", true);
+    idUseRef.current = id;
+  };
+
+  const areUSureDelete = (choose) => {
+    console.log(idUseRef);
+    if (choose) {
+      deleteLists(idUseRef.current, dispatch);
+      handleDialog("", false);
+    } else {
+      handleDialog("", false);
+    }
   };
 
   const columns = [
@@ -40,10 +69,15 @@ export default function ListList() {
                 list: params.row,
               }}
             >
-              <button className="productListEdit">Edit</button>
+              <button
+                className="listListEdit"
+                onClick={setLocalStorage(params.row)}
+              >
+                Edit
+              </button>
             </Link>
             <DeleteOutline
-              className="productListDelete"
+              className="listListDelete"
               onClick={() => handleDelete(params.row._id)}
             />
           </>
@@ -53,7 +87,7 @@ export default function ListList() {
   ];
 
   return (
-    <div className="productList">
+    <div className="listList">
       <DataGrid
         rows={lists}
         disableSelectionOnClick
@@ -62,6 +96,10 @@ export default function ListList() {
         checkboxSelection
         getRowId={(row) => row._id}
       />
+
+      {dialog.isLoading && (
+        <Dialog message={dialog.message} onDialog={areUSureDelete} />
+      )}
     </div>
   );
 }

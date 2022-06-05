@@ -9,7 +9,6 @@ const MovieSchema = new mongoose.Schema(
     imgSm: { type: String },
     imgPost: { type: String },
     trailer: { type: String },
-    video: { type: String },
     year: { type: String },
     limit: { type: Number },
     genre: { type: String },

@@ -19,7 +19,7 @@ export default function ListitemWatchList({ item, type, setFlag }) {
           <div className="boxItemTag card p-0 overflow-hidden shadow">
             <img src={item.img} className="" alt="" />
             <div className="movie-Title-Item-Tag">
-              <span>{item.title}</span>
+              <span className="movieName">{item.title}</span>
             </div>
             <span className="supportSubItemTag">{item.isSup}</span>
             <div className="itemInfoMovieItemTag">

@@ -1,15 +1,15 @@
-.product {
+.list {
   flex: 4;
   padding: 20px;
 }
 
-.productTitleContainer {
+.listTitleContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.productAddButton {
+.listAddButton {
   width: 80px;
   border: none;
   padding: 5px;
@@ -20,23 +20,23 @@
   cursor: pointer;
 }
 
-.productTop {
+.listTop {
   display: flex;
 }
 
-.productTopLeft,
-.productTopRight {
+.listTopLeft,
+.listTopRight {
   flex: 1;
 }
 
-.productTopRight {
+.listTopRight {
   padding: 20px;
   margin: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.productInfoImg {
+.listInfoImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -44,67 +44,77 @@
   margin-right: 20px;
 }
 
-.productInfoTop {
+.listInfoTop {
   display: flex;
   align-items: center;
 }
 
-.productName {
+.listName {
   font-weight: 600;
+  font-size: 30px;
+  color: purple;
 }
 
-.productInfoBottom {
+.listInfoBottom {
   margin-top: 10px;
 }
 
-.productInfoItem {
-  width: 150px;
+.listInfoItem {
+  width: 300px;
   display: flex;
   justify-content: space-between;
 }
 
-.productInfoKey {
+.listInfoKey {
   margin-right: 10px;
+  color: purple;
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.productInfoValue {
-  font-weight: 300;
+.listInfoValue {
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.productBottom {
+.listBottom {
   padding: 20px;
   margin: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.productForm {
+.listForm {
   display: flex;
   justify-content: space-between;
 }
 
-.productFormLeft {
+.listFormLeft {
   display: flex;
   flex-direction: column;
 }
 
-.productFormLeft > label {
+.listFormLeft > label {
   margin-bottom: 10px;
-  color: gray;
+  font-size: 20;
+  font-weight: bold;
+  color: purple;
 }
 
-.productFormLeft > input {
+.listFormLeft > input {
   margin-bottom: 10px;
   border: none;
   padding: 5px;
-  border-bottom: 1px solid gray;
+  border-bottom: 2px solid gray;
+  font-weight: bold;
+  font-size: 16px;
 }
 
-.productFormLeft > select {
+.listFormLeft > select {
   margin-bottom: 10px;
 }
 
-.productUploadImg {
+.listUploadImg {
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -112,18 +122,18 @@
   margin-right: 20px;
 }
 
-.productFormRight {
+.listFormRight {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.productUpload {
+.listUpload {
   display: flex;
   align-items: center;
 }
 
-.productButton {
+.listButton {
   border: none;
   padding: 5px;
   border-radius: 5px;

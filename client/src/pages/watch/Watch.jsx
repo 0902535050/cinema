@@ -333,8 +333,8 @@ export default function Watch() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 src={
                   isSub
-                    ? movie.listVideoSub[newIndex - 1] || movie.video
-                    : movie.listVideoTM[newIndexTM - 1] || movie.video
+                    ? movie.listVideoSub[newIndex - 1]
+                    : movie.listVideoTM[newIndexTM - 1]
                 }
                 frameborder="0"
                 scrolling="0"

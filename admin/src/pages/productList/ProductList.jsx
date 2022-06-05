@@ -2,19 +2,48 @@ import "./productList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 import { deleteMovies, getMovies } from "../../context/movieContext/apiCalls";
+import Dialog from "../../components/dialog/dialog";
 
 export default function ProductList() {
   const { movies, dispatch } = useContext(MovieContext);
+  const [dialog, setDialog] = useState({
+    message: "",
+    isLoading: false,
+  });
+
+  const idUseRef = useRef();
+
+  const handleDialog = (message, isLoading) => {
+    setDialog({
+      message,
+      isLoading,
+    });
+  };
 
   useEffect(() => {
     getMovies(dispatch);
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    deleteMovies(id, dispatch);
+    handleDialog("Are you sure you want to delete?", true);
+    idUseRef.current = id;
+  };
+
+  const areUSureDelete = (choose) => {
+    console.log(idUseRef);
+    if (choose) {
+      deleteMovies(idUseRef.current, dispatch);
+      handleDialog("", false);
+    } else {
+      handleDialog("", false);
+    }
+  };
+
+  const setLocalMovie = (item) => {
+    localStorage.setItem("movie", JSON.stringify(item));
   };
 
   const columns = [
@@ -61,7 +90,12 @@ export default function ProductList() {
                 movie: params.row,
               }}
             >
-              <button className="productListEdit">Edit</button>
+              <button
+                className="productListEdit"
+                onClick={() => setLocalMovie(params.row)}
+              >
+                Edit
+              </button>
             </Link>
             <DeleteOutline
               className="productListDelete"
@@ -83,6 +117,10 @@ export default function ProductList() {
         checkboxSelection
         getRowId={(row) => row._id}
       />
+
+      {dialog.isLoading && (
+        <Dialog message={dialog.message} onDialog={areUSureDelete} />
+      )}
     </div>
   );
 }

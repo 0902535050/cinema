@@ -10,7 +10,7 @@ import { updateMovies } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 export default function WidgetLg() {
   const [comment, setComment] = useState([]);
-  const { dispatchComment } = useContext(CommentContext);
+  const { dispatch: dispatchComment } = useContext(CommentContext);
   const { dispatch } = useContext(MovieContext);
   const [loading, setLoading] = useState(false);
   const [flag, setFlag] = useState(1000);

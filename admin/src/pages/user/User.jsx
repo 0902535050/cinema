@@ -11,7 +11,6 @@ import {
 import storage from "../../firebase";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import "./user.css";
-import moment from "moment";
 import { useContext, useState } from "react";
 import { updateUsers } from "../../context/userContext/apiCalls";
 import { UserContext } from "../../context/userContext/UserContext";
@@ -182,11 +181,11 @@ export default function User() {
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Is Admin ?</label>
+                <label>Account Type</label>
                 <select name="isAdmin" id="isAdmin" onChange={handleChange}>
-                  <option>Chọn</option>
-                  <option value="false">No</option>
-                  <option value="true">Yes</option>
+                  <option>Select</option>
+                  <option value="false">User</option>
+                  <option value="true">Admin</option>
                 </select>
               </div>
             </div>

@@ -27,37 +27,37 @@ export default function NewList() {
     createLists(list, dispatch);
     history.push("/lists");
   };
+
+  //Array.from được dùng để convert giá trị về kiểu Array, cú pháp như sau
   const handleSelect = (e) => {
     let value = Array.from(e.target.selectedOptions, (option) => option.value);
     setList({ ...list, [e.target.name]: value });
   };
-
-  console.log(list);
   return (
-    <div className="newProduct">
-      <h1 className="addProductTitle">New List</h1>
-      <form className="addProductForm">
+    <div className="newList">
+      <h1 className="addListTitle">New List</h1>
+      <form className="addListForm">
         <div className="formLeft">
-          <div className="addProductItem">
+          <div className="addListItem">
             <label>Title</label>
 
             <input
               type="text"
-              placeholder="Popular Movies"
+              placeholder="Tiêu đề của danh sách phim"
               name="title"
               onChange={handleChange}
             />
           </div>
-          <div className="addProductItem">
+          <div className="addListItem">
             <label>Genre</label>
             <input
               type="text"
-              placeholder="action"
+              placeholder="action, horror, romance, toon, dc, marvel, science, zombie, crime"
               name="genre"
               onChange={handleChange}
             />
           </div>
-          <div className="addProductItem">
+          <div className="addListItem">
             <label>Type</label>
             <select name="type" onChange={handleChange}>
               <option>Type</option>
@@ -66,27 +66,50 @@ export default function NewList() {
             </select>
           </div>
         </div>
-        <div className="formRight">
-          <div className="addProductItem">
-            <label>Content</label>
+        <div className="formMiddle">
+          <div className="addListItem">
+            <label>Phim nhiều tập</label>
             <select
               multiple
               name="content"
               onChange={handleSelect}
               style={{ height: "285px" }}
             >
-              {movies.map((movie) => {
-                return (
-                  <option key={movie._id} value={movie._id}>
-                    {movie.title}
-                  </option>
-                );
-              })}
+              {movies
+                .filter((movie) => movie.isSeries === true)
+                .map((movie) => {
+                  return (
+                    <option key={movie._id} value={movie._id}>
+                      {movie.title}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
+        </div>
+        <div className="formRight">
+          <div className="addListItem">
+            <label>Phim lẻ</label>
+            <select
+              multiple
+              name="content"
+              onChange={handleSelect}
+              style={{ height: "285px" }}
+            >
+              {movies
+                .filter((movie) => movie.isSeries === false)
+                .map((movie) => {
+                  return (
+                    <option key={movie._id} value={movie._id}>
+                      {movie.title}
+                    </option>
+                  );
+                })}
             </select>
           </div>
         </div>
 
-        <button className="addProductButton" onClick={handleSubmit}>
+        <button className="addListButton" onClick={handleSubmit}>
           Create
         </button>
       </form>

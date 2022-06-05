@@ -49,9 +49,7 @@ const ListReducer = (state, action) => {
       };
     case "UPDATE_LISTS_SUCCESS":
       return {
-        lists: state.lists.map(
-          (list) => list._id === action.payload._id && action.payload
-        ),
+        lists: action.payload,
         isFetching: false,
         error: false,
       };

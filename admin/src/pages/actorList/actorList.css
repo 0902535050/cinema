@@ -24,8 +24,17 @@
   cursor: pointer;
   margin-right: 20px;
 }
+.actorListEdit:hover {
+  transform: scale(1.3);
+  transition: all 0.5s;
+}
 
 .actorListDelete {
   color: red;
   cursor: pointer;
+}
+
+.actorListDelete:hover {
+  transform: scale(1.7);
+  transition: all 0.5s;
 }

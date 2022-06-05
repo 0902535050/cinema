@@ -6,7 +6,6 @@ const ListSchema = new mongoose.Schema(
     type: { type: String },
     content: { type: Array },
     genre: { type: String },
-    nation: { type: String },
   },
   { timestamps: true }
 );

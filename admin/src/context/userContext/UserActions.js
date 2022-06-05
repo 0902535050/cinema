@@ -25,3 +25,31 @@ export const updateUsersSuccess = (user) => ({
 export const updateUsersFailure = () => ({
   type: "UPDATE_USERS_FAILURE",
 });
+
+//DELETE
+export const deleteUsersStart = () => ({
+  type: "DELETE_USERS_START",
+});
+
+export const deleteUsersSuccess = (id) => ({
+  type: "DELETE_USERS_SUCCESS",
+  payload: id,
+});
+
+export const deleteUsersFailure = () => ({
+  type: "DELETE_USERS_FAILURE",
+});
+
+//CREATE
+export const createUsersStart = () => ({
+  type: "CREATE_USERS_START",
+});
+
+export const createUsersSuccess = (user) => ({
+  type: "CREATE_USERS_SUCCESS",
+  payload: user,
+});
+
+export const createUsersFailure = () => ({
+  type: "CREATE_USERS_FAILURE",
+});

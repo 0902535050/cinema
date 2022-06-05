@@ -2,12 +2,12 @@ import {
   getUsersFailure,
   getUsersStart,
   getUsersSuccess,
-  // deleteMoviesStart,
-  // deleteMoviesSuccess,
-  // deleteMoviesFailure,
-  // createMoviesStart,
-  // createMoviesSuccess,
-  // createMoviesFailure,
+  deleteUsersStart,
+  deleteUsersSuccess,
+  deleteUsersFailure,
+  createUsersStart,
+  createUsersSuccess,
+  createUsersFailure,
   updateUsersStart,
   updateUsersSuccess,
   updateUsersFailure,
@@ -30,7 +30,6 @@ export const getUsers = async (dispatch) => {
 };
 
 export const updateUsers = async (users, user, dispatch) => {
-  console.log(user);
   dispatch(updateUsersStart());
   try {
     const res = await axios.put(
@@ -54,5 +53,35 @@ export const updateUsers = async (users, user, dispatch) => {
     dispatch(updateUsersSuccess(res.data));
   } catch (e) {
     dispatch(updateUsersFailure(e));
+  }
+};
+
+export const deleteUsers = async (id, dispatch) => {
+  dispatch(deleteUsersStart());
+  try {
+    await axios.delete("/users/" + id, {
+      headers: {
+        token:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+      },
+    });
+    dispatch(deleteUsersSuccess(id));
+  } catch (e) {
+    dispatch(deleteUsersFailure(e));
+  }
+};
+
+export const createUsers = async (user, dispatch) => {
+  dispatch(createUsersStart());
+  try {
+    const res = await axios.post("/auth/register", user, {
+      headers: {
+        token:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+      },
+    });
+    dispatch(createUsersSuccess(res.data));
+  } catch (e) {
+    dispatch(createUsersFailure(e));
   }
 };
