@@ -7,7 +7,7 @@ export default function List() {
   const location = useLocation();
   const list = location.list || JSON.parse(localStorage.getItem("lists"));
   const createdAt = new Date(list.createdAt).toLocaleDateString();
-  const histoty = useHistory();
+  const history = useHistory();
   const [lists, setLists] = useState(null);
   const { dispatch } = useContext(ListContext);
 
@@ -19,7 +19,7 @@ export default function List() {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateLists(lists, list, dispatch);
-    histoty.push("/lists");
+    history.push("/lists");
   };
   return (
     <div className="list">

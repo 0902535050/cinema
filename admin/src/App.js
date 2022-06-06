@@ -23,6 +23,8 @@ import List from "./pages/list/List";
 import NewList from "./pages/newList/NewList";
 
 import ActorList from "./pages/actorList/ActorList";
+import Actor from "./pages/actor/Actor";
+import NewActor from "./pages/newActor/NewActor";
 function App() {
   const { user } = useContext(AuthContext);
 
@@ -72,12 +74,12 @@ function App() {
               <Route path="/actors">
                 <ActorList />
               </Route>
-              {/* <Route path="/actor/:actorId">
-                <List />
+              <Route path="/actor/:actorId">
+                <Actor />
               </Route>
               <Route path="/newactor">
-                <NewList />
-              </Route> */}
+                <NewActor />
+              </Route>
             </div>
           </>
         )}

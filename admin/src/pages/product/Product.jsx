@@ -72,13 +72,13 @@ export default function Product() {
       setLoading(true);
       e.preventDefault();
       upload([
-        // { file: img, label: "img" },
-        // { file: imgTitle, label: "imgTitle" },
-        // { file: imgSm, label: "imgSm" },
+        { file: img, label: "img" },
+        { file: imgTitle, label: "imgTitle" },
+        { file: imgSm, label: "imgSm" },
         { file: imgPost, label: "imgPost" },
-        // { file: listVideoSub, label: "listVideoSub" },
-        // { file: listVideoTM, label: "listVideoTM" },
-        // { file: trailer, label: "trailer" },
+        { file: listVideoSub, label: "listVideoSub" },
+        { file: listVideoTM, label: "listVideoTM" },
+        { file: trailer, label: "trailer" },
       ]);
     } else setLoading(false);
   };
@@ -303,7 +303,6 @@ export default function Product() {
                 type="file"
                 name="img"
                 id="file"
-                name="img"
                 onChange={(e) => setImg(e.target.files[0])}
               />
             </div>
@@ -315,7 +314,6 @@ export default function Product() {
                 type="file"
                 name="imgTitle"
                 id="file"
-                name="imgTitle"
                 onChange={(e) => setImgTitle(e.target.files[0])}
               />
             </div>
@@ -327,7 +325,6 @@ export default function Product() {
                 type="file"
                 name="imgSm"
                 id="file"
-                name="imgSm"
                 onChange={(e) => setImgSm(e.target.files[0])}
               />
             </div>
@@ -339,7 +336,6 @@ export default function Product() {
                 type="file"
                 name="imgPost"
                 id="file"
-                name="imgPost"
                 onChange={(e) => setImgPost(e.target.files[0])}
               />
             </div>
@@ -389,7 +385,7 @@ export default function Product() {
               />
             </div>
 
-            {uploaded === 1 ? (
+            {uploaded === 7 ? (
               <button className="productButton" onClick={handleSubmit}>
                 Cập nhật
               </button>

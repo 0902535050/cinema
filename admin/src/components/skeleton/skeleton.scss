@@ -6,8 +6,8 @@
   justify-content: center;
   img {
     position: absolute;
-    top: 400px;
-    right: 180px;
+    bottom: 330px;
+    right: 400px;
     height: 100px;
     width: 100px;
     border-radius: 50%;
@@ -22,9 +22,6 @@
   align-items: center;
   justify-content: center;
   img {
-    position: absolute;
-    bottom: -330px;
-    right: 330px;
     height: 100px;
     width: 100px;
     border-radius: 50%;
@@ -42,6 +39,19 @@
     position: absolute;
     bottom: -1050px;
     right: 600px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+.actorSkeleton {
+  background-color: transparent;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
     height: 100px;
     width: 100px;
     border-radius: 50%;

@@ -307,7 +307,7 @@ export default function UserPage() {
                           phone: currentUser.phone || "",
                           date: currentUser.date || "",
                           desc: currentUser.desc || "",
-                          desc: currentUser.address || "",
+                          address: currentUser.address || "",
                         }}
                         validationSchema={validate}
                         onSubmit={handleSubmit}

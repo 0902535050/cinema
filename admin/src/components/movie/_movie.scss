@@ -1,0 +1,40 @@
+.moviePage {
+  position: relative;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    width: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    &:hover {
+      -webkit-box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.7);
+      box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.7);
+      transform: scale(1.1);
+      transition: transform 0.5s;
+      .card-bot {
+        .movieName {
+          color: rgb(62, 199, 151);
+          font-weight: bold;
+        }
+      }
+    }
+    .card-top {
+      img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        transform: translate(-1px, -3px);
+        border-radius: 10px;
+      }
+    }
+    .card-bot {
+      text-align: center;
+      .movieName {
+        color: #000;
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -33,14 +33,7 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
-        <img
-          src={
-            user.profilePic !== ""
-              ? user.profilePic
-              : "https://picsum.photos/200/300"
-          }
-          alt=""
-        />
+        <img src="https://picsum.photos/200/300" alt="" />
         <p>My silence is just another world for pain.</p>
       </div>
       <div className="sidebarItem">

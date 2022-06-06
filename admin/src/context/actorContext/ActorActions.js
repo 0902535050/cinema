@@ -31,11 +31,25 @@ export const createActorsStart = () => ({
   type: "CREATE_ACTORS_START",
 });
 
-export const createActorsSuccess = (movie) => ({
+export const createActorsSuccess = (actor) => ({
   type: "CREATE_ACTORS_SUCCESS",
-  payload: movie,
+  payload: actor,
 });
 
 export const createActorsFailure = () => ({
   type: "CREATE_ACTORS_FAILURE",
+});
+
+//UPDATE
+export const updateActorsStart = () => ({
+  type: "UPDATE_ACTORS_START",
+});
+
+export const updateActorsSuccess = (actor) => ({
+  type: "UPDATE_ACTORS_SUCCESS",
+  payload: actor,
+});
+
+export const updateActorsFailure = () => ({
+  type: "UPDATE_ACTORS_FAILURE",
 });

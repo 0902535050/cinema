@@ -157,9 +157,7 @@
 }
 
 .userUpdateButton {
-  position: absolute;
-  top: 400px;
-  right: 170px;
+  margin-left: 100px;
   border-radius: 10px;
   border: none;
   padding: 10px 30px;

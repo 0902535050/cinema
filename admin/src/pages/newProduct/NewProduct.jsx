@@ -307,67 +307,65 @@ export default function NewProduct() {
               onChange={(e) => setDirectorAva(e.target.files[0])}
             />
           </div>
-          <div className="formLeft">
-            <div className="addProductItem">
-              <label>Danh sách diễn viên</label>
-              <select
-                multiple
-                name="listActor"
-                onChange={handleSelect}
-                style={{ height: "285px" }}
-              >
-                {actors.map((actor) => {
+
+          <div className="addProductItem">
+            <label>Danh sách diễn viên</label>
+            <select
+              multiple
+              name="listActor"
+              onChange={handleSelect}
+              style={{ height: "285px" }}
+            >
+              {actors.map((actor) => {
+                return (
+                  <option key={actor._id} value={actor._id}>
+                    {actor.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          <div className="addProductItem">
+            <label>Phim nhiều tập</label>
+            <select
+              multiple
+              name="director.movieJoin"
+              onChange={handleSelect}
+              style={{ height: "285px" }}
+            >
+              {movies
+                .filter((movie) => movie.isSeries === true)
+                .map((movie) => {
                   return (
-                    <option key={actor._id} value={actor._id}>
-                      {actor.name}
+                    <option key={movie._id} value={movie._id}>
+                      {movie.title}
                     </option>
                   );
                 })}
-              </select>
-            </div>
+            </select>
           </div>
-          <div className="formMiddle">
-            <div className="addProductItem">
-              <label>Phim nhiều tập</label>
-              <select
-                multiple
-                name="director.movieJoin"
-                onChange={handleSelect}
-                style={{ height: "285px" }}
-              >
-                {movies
-                  .filter((movie) => movie.isSeries === true)
-                  .map((movie) => {
-                    return (
-                      <option key={movie._id} value={movie._id}>
-                        {movie.title}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div>
+
+          <div className="addProductItem">
+            <label>Phim lẻ</label>
+            <select
+              multiple
+              name="director.movieJoin"
+              onChange={handleSelect}
+              style={{ height: "285px" }}
+            >
+              {movies
+                .filter((movie) => movie.isSeries === false)
+                .map((movie) => {
+                  return (
+                    <option key={movie._id} value={movie._id}>
+                      {movie.title}
+                    </option>
+                  );
+                })}
+            </select>
           </div>
-          <div className="formRight">
-            <div className="addProductItem">
-              <label>Phim lẻ</label>
-              <select
-                multiple
-                name="director.movieJoin"
-                onChange={handleSelect}
-                style={{ height: "285px" }}
-              >
-                {movies
-                  .filter((movie) => movie.isSeries === false)
-                  .map((movie) => {
-                    return (
-                      <option key={movie._id} value={movie._id}>
-                        {movie.title}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div>
-          </div>
+
           <div className="addProductItem">
             {uploaded === 8 ? (
               <button className="addProductButton" onClick={handleSubmit}>

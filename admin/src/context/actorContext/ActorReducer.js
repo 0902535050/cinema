@@ -40,6 +40,26 @@ const ActorReducer = (state, action) => {
         error: true,
       };
 
+    //update actor
+    case "UPDATE_ACTORS_START":
+      return {
+        ...state,
+        isFetching: true,
+        error: false,
+      };
+    case "UPDATE_ACTORS_SUCCESS":
+      return {
+        actors: action.payload,
+        isFetching: false,
+        error: false,
+      };
+    case "UPDATE_ACTORS_FAILURE":
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
+      };
+
     //delete actor
     case "DELETE_ACTORS_START":
       return {

@@ -1,0 +1,57 @@
+.newActor {
+  flex: 4;
+}
+
+.addActorForm {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.addActorItem {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 9px;
+  padding: 20px;
+}
+
+.addActorItem > label {
+  color: gray;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.addActorItem > input {
+  padding: 10px;
+}
+
+.addActorItem > select {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.addActorButton {
+  height: 40px;
+  margin-top: 250px;
+  margin-left: 150px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 1px solid rgb(153, 153, 185);
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  position: absolute;
+  left: 420px;
+  top: 455px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.addActorButton:hover {
+  background-color: rgb(153, 153, 185);
+  transition: all 0.5s;
+}

@@ -202,19 +202,21 @@ export default function User() {
                   onChange={(e) => setProfilePic(e.target.files[0])}
                 />
               </div>
-              {uploaded === 1 ? (
-                <button className="userUpdateButton" onClick={handleSubmit}>
-                  Cập nhật
-                </button>
-              ) : loading ? (
-                <Skeleton type="circle" />
-              ) : checked ? (
-                ""
-              ) : (
-                <button className="userUpdateButton" onClick={handleUpload}>
-                  Tải ảnh
-                </button>
-              )}
+              <div className="userUpdateUpload">
+                {uploaded === 1 ? (
+                  <button className="userUpdateButton" onClick={handleSubmit}>
+                    Cập nhật
+                  </button>
+                ) : loading ? (
+                  <Skeleton type="circle" />
+                ) : checked ? (
+                  ""
+                ) : (
+                  <button className="userUpdateButton" onClick={handleUpload}>
+                    Tải ảnh
+                  </button>
+                )}
+              </div>
             </div>
           </form>
         </div>

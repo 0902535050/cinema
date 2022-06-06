@@ -58,7 +58,7 @@ export default function Featured() {
             <img src={movie.imgSm !== null ? movie.imgSm : ""} alt="" />
           </div>
           <div className="slide">
-            <img src="https://picsum.photos/2048/1024" alt="" />
+            <img src={movie.imgPost !== null ? movie.imgPost : ""} alt="" />
           </div>
 
           <div className="navigation-auto">

@@ -1,0 +1,183 @@
+.actor {
+  flex: 4;
+  padding: 20px;
+}
+
+.actorTitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actorAddButton {
+  width: 80px;
+  border: none;
+  padding: 5px;
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.actorTop {
+  display: flex;
+}
+
+.actorTopLeft {
+  flex: 1;
+  padding: 20px;
+  margin: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+}
+.actorTopRight {
+  flex: 6;
+  padding: 20px;
+  margin: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+}
+
+.actorTopRight .actorMovie {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.actorMovie .actorAria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.actorTopRight .actorMovie > label {
+  font-weight: bold;
+  font-size: 30px;
+  color: orange;
+  margin-bottom: 10px;
+}
+
+.actorInfoImg {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.actorInfoTop {
+  display: flex;
+  align-items: center;
+}
+
+.actorName {
+  font-weight: bold;
+  font-size: 30px;
+  color: purple;
+  letter-spacing: 2px;
+}
+
+.actorInfoBottom {
+  margin-top: 20px;
+}
+
+.actorInfoItem {
+  width: 400px;
+  display: flex;
+}
+
+.actorInfoKey {
+  width: 90px;
+  margin-right: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  color: coral;
+}
+
+.actorInfoValue {
+  font-weight: bold;
+}
+
+.actorBottom {
+  padding: 20px;
+  margin: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.actorForm {
+  display: flex;
+}
+
+.actorFormLeft {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  margin-right: 100px;
+}
+
+.actorFormLeft > label {
+  margin-bottom: 10px;
+  color: coral;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.actorFormLeft > input {
+  margin-bottom: 10px;
+  border: none;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
+
+.actorFormLeft > select {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.actorFormLeft > select > option {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.actorUploadImg {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.actorFormRight {
+  flex: 3;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.actorUpload > input {
+  margin-top: 10px;
+}
+
+.actorUpload > label {
+  margin-top: 10px;
+}
+
+.actorUpload {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 33%;
+}
+
+.actorButton {
+  width: 120px;
+  height: 50px;
+  margin-left: 30px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: darkblue;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
