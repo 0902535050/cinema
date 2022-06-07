@@ -6,9 +6,10 @@ import { TextField } from "../../components/textfield/TextField";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+
 export default function Register() {
   const history = useHistory();
-
+  const [error, setError] = useState(false);
   const [height, setHeight] = useState(window.innerHeight);
   useEffect(() => {
     window.onresize = function () {
@@ -39,6 +40,7 @@ export default function Register() {
 
   const handleSubmit = async (values) => {
     try {
+      setError(false);
       await axios.post("auth/register", values);
       Swal.fire({
         title: "Đăng ký thành công!",
@@ -47,6 +49,7 @@ export default function Register() {
       });
       history.push("/login");
     } catch (err) {
+      setError(true);
       console.log(err);
     }
   };
@@ -102,6 +105,19 @@ export default function Register() {
                     <span>Đăng nhập ngay!</span>
                   </Link>
                 </span>
+                {error && (
+                  <span
+                    style={{
+                      color: "red",
+                      marginTop: "10px",
+                      fontStyle: "italic",
+                      fontSize: "16px",
+                      textAlign: "center",
+                    }}
+                  >
+                    Email hoặc Username đã có người dùng !!!
+                  </span>
+                )}
               </Form>
             </div>
           )}

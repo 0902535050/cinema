@@ -85,6 +85,7 @@ export default function Detail() {
     localStorage.setItem("movies", JSON.stringify(movie));
     localStorage.setItem("index", JSON.stringify(null));
     localStorage.setItem("indexTM", JSON.stringify(null));
+    localStorage.setItem("actors", JSON.stringify(null));
   }, [movie]);
 
   const onViewDetailClick = () => {

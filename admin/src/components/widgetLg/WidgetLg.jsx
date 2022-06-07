@@ -13,7 +13,7 @@ export default function WidgetLg() {
   const { dispatch: dispatchComment } = useContext(CommentContext);
   const { dispatch } = useContext(MovieContext);
   const [loading, setLoading] = useState(false);
-  const [flag, setFlag] = useState(1000);
+
   useEffect(() => {
     const getAllComment = async () => {
       try {
@@ -29,10 +29,9 @@ export default function WidgetLg() {
       }
     };
     getAllComment();
-  }, [loading, flag]);
-  console.log(comment);
+  }, [loading]);
+
   const handleDelete = async (item) => {
-    setLoading(!loading);
     let array;
     try {
       const res = await axios.get("/movies/find/" + item.movieId, {
@@ -43,13 +42,11 @@ export default function WidgetLg() {
       });
 
       array = res.data.listComment.filter((id) => id !== item._id);
-      setFlag(array.length);
       updateMovies(array, item, dispatch);
     } catch (e) {
       console.log(e);
     }
-    deleteComments(item, dispatchComment);
-    setLoading(!loading);
+    deleteComments(item, setLoading, dispatchComment);
   };
 
   return (

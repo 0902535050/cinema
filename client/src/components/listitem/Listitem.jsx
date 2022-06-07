@@ -7,7 +7,7 @@ import axios from "axios";
 export default function Listitem({ item, setOpenModal, setViaMovie }) {
   const [isHovered, setIsHovered] = useState(false);
   const [movie, setMovie] = useState({});
-  console.log(item);
+
   useEffect(() => {
     const getMovie = async () => {
       try {
@@ -33,8 +33,6 @@ export default function Listitem({ item, setOpenModal, setViaMovie }) {
     setOpenModal(true);
     setViaMovie(movie);
   };
-
-  console.log(movie);
 
   return (
     <div className="singleItemPlace text-align-center">
