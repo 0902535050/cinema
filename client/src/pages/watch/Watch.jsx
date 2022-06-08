@@ -28,41 +28,19 @@ export default function Watch() {
   const [isShow, setIsShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [commentContent, setCommentContent] = useState(null);
-  const [getMovies, setGetMovies] = useState({});
   //LAST CONST
-  const [isChange, setIsChange] = useState(movie.listComment);
-  const [changedV2, setChangedV2] = useState(movie.listLiked);
-  const [changedV3, setChangedV3] = useState(movie.listDisLiked);
+  const [isChange, setIsChange] = useState([]);
+  const [changedV2, setChangedV2] = useState([]);
+  const [changedV3, setChangedV3] = useState([]);
   const [flag, setFlag] = useState(1);
-  const [getComments, setGetComments] = useState([]);
-  let userLiked =
-    getMovies.listLiked !== undefined && movie.listLiked !== undefined
-      ? getMovies.listLiked.find((o) => o === userNow._id)
-      : movie.listLiked.find((o) => o === userNow._id);
+
+  let userLiked = changedV2.find((o) => o === userNow._id);
+
   const userLikedDisabled = userLiked ? true : false;
 
-  let userDisLiked =
-    getMovies.listDisLiked !== undefined && movie.listDisLiked !== undefined
-      ? getMovies.listDisLiked.find((o) => o === userNow._id)
-      : movie.listDisLiked.find((o) => o === userNow._id);
+  let userDisLiked = changedV3.find((o) => o === userNow._id);
   const userDisLikedDisabled = userDisLiked ? true : false;
 
-  useEffect(() => {
-    const getAllComment = async () => {
-      try {
-        const res = await axios.get("/comments?new=true", {
-          headers: {
-            token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
-          },
-        });
-        setGetComments(res.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getAllComment();
-  }, [loading]);
   useEffect(() => {
     const getRandomLists = async () => {
       try {
@@ -80,7 +58,7 @@ export default function Watch() {
     };
     getRandomLists();
 
-    const getMoviess = async () => {
+    const getMovie = async () => {
       try {
         const res = await axios.get("/movies/find/" + movie._id, {
           headers: {
@@ -89,27 +67,14 @@ export default function Watch() {
           },
         });
 
-        setGetMovies(res.data);
+        setIsChange(res.data.listComment);
+        setChangedV2(res.data.listLiked);
+        setChangedV3(res.data.listDisLiked);
       } catch (err) {
         console.log(err);
       }
     };
-    getMoviess();
-
-    const getAllComment = async () => {
-      try {
-        const res = await axios.get("/comments?new=true", {
-          headers: {
-            token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
-          },
-        });
-        setGetComments(res.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getAllComment();
+    getMovie();
   }, [loading, flag, movie._id]);
 
   const onViewCommentClick = () => {
@@ -170,23 +135,21 @@ export default function Watch() {
       } catch (err) {
         console.log(err);
       }
-
-      setLoading(!loading);
     } catch (err) {
       console.log(err);
     }
+    setLoading(!loading);
   };
 
   const ShowCommentList = () => {
-    if (movie.listComment !== undefined) {
-      return movie.listComment.map((comment, index) => {
-        return (
-          <div className="">
-            <CommentList key={index} commentId={comment} />
-          </div>
-        );
-      });
-    } else return "";
+    let newArray = isChange.sort().reverse();
+    return newArray.map((comment, index) => {
+      return (
+        <div className="">
+          <CommentList key={index} commentId={comment} />
+        </div>
+      );
+    });
   };
 
   const addUserDisLikeMovie = async (userId) => {
@@ -205,7 +168,6 @@ export default function Watch() {
           },
         }
       );
-      setLoading(!loading);
     } catch (err) {
       console.log(err);
     }
@@ -251,7 +213,6 @@ export default function Watch() {
     } catch (err) {
       console.log(err);
     }
-
     setLoading(!loading);
   };
 
@@ -294,7 +255,6 @@ export default function Watch() {
     } catch (err) {
       console.log(err);
     }
-
     setLoading(!loading);
   };
 
@@ -401,10 +361,7 @@ export default function Watch() {
               onClick={() => removeUserUnlikeMovie(userNow._id)}
             >
               <span className="likeQuantity">
-                {getMovies.listLiked === undefined ||
-                getMovies.listLiked.length === 0
-                  ? "0"
-                  : getMovies.listLiked.length}
+                {changedV2.length === 0 ? "0" : changedV2.length}
               </span>
               <ThumbUpAltRounded className="iconLikeQuantity" />
             </button>
@@ -414,10 +371,7 @@ export default function Watch() {
               onClick={() => addUserLikeMovie(userNow._id)}
             >
               <span className="likeQuantity">
-                {getMovies.listLiked === undefined ||
-                getMovies.listLiked.length === 0
-                  ? "0"
-                  : getMovies.listLiked.length}
+                {changedV2.length === 0 ? "0" : changedV2.length}
               </span>
               <ThumbUpAltOutlined className="iconLikeQuantity" />
             </button>
@@ -429,10 +383,7 @@ export default function Watch() {
               onClick={() => removeUserDisLikeMovie(userNow._id)}
             >
               <span className="disLikeQuantity">
-                {getMovies.listDisLiked === undefined ||
-                getMovies.listDisLiked.length === 0
-                  ? "0"
-                  : getMovies.listDisLiked.length}
+                {changedV3.length === 0 ? "0" : changedV3.length}
               </span>
               <ThumbDownRounded className="iconDisLikeQuantity" />
             </button>
@@ -442,10 +393,7 @@ export default function Watch() {
               onClick={() => addUserDisLikeMovie(userNow._id)}
             >
               <span className="likeQuantityDislike">
-                {getMovies.listDisLiked === undefined ||
-                getMovies.listDisLiked.length === 0
-                  ? "0"
-                  : getMovies.listDisLiked.length}
+                {changedV3.length === 0 ? "0" : changedV3.length}
               </span>
               <ThumbDownOutlined className="iconLikeQuantityDislike" />
             </button>
@@ -523,8 +471,7 @@ export default function Watch() {
 
             <br />
             <span style={{ fontWeight: "bold" }}>
-              {movie.listComment !== undefined ? movie.listComment.length : ""}{" "}
-              bình luận
+              {isChange.length !== 0 ? isChange.length : "0"} bình luận
             </span>
             <input
               className="form-control"
@@ -546,9 +493,7 @@ export default function Watch() {
         </form>
 
         <div className="listCommentMovie">
-          {isShowComment
-            ? ShowCommentList().sort().reverse()
-            : ShowCommentList().slice(-4).sort().reverse()}
+          {isShowComment ? ShowCommentList() : ShowCommentList()}
           <div className="showMoreComment">
             {movie.listComment === "" && movie.listComment === undefined ? (
               ""
