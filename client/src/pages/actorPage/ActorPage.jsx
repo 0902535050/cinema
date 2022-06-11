@@ -39,6 +39,9 @@ export default function ActorPage() {
 
   return (
     <div className="actorPages ">
+      <div className="blank" style={{ opacity: 1 }}>
+        THIS IS BLANK
+      </div>
       <Navbar />
       {openModal ? <Modal movie={viaMovie} setOpenModal={setOpenModal} /> : ""}
       {actor !== null ? (
