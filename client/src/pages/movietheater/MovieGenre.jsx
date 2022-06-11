@@ -6,12 +6,38 @@ import Footer from "../../components/footer/Footer";
 import Pagination from "../../components/pagination/Pagination";
 import ListitemTag from "../../components/listitem/ListitemTag";
 import Skeleton from "../../components/skeleton/Skeleton";
+import { FaArrowAltCircleUp } from "react-icons/fa";
+import styled from "styled-components";
+import { animateScroll as scroll } from "react-scroll";
+import ModalDetail from "../../components/modal/ModalDetail";
+
+const GoToTop = styled.div`
+  position: fixed;
+  z-index: 10;
+  right: 90px;
+  bottom: 70px;
+  font-size: 50px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3 linear;
+  cursor: pointer;
+  &:hover {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  @media screen and (max-width: 768px) {
+    right: 40px;
+  }
+`;
+
 export default function MovieGenre() {
   const [allMovie, setAllMovie] = useState([]);
   const [genre, setGenre] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage] = useState(8);
+  const [moviesPerPage] = useState(12);
   const [loading, setLoading] = useState(true);
+  const [top, setTop] = useState("");
+  const [scrolled, SetScrolled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [viaMovie, setViaMovie] = useState({});
   useEffect(() => {
     const getAll = async () => {
       try {
@@ -42,6 +68,18 @@ export default function MovieGenre() {
     setCurrentPage(pageNumber);
   };
 
+  const ScrollToTop = () => {
+    SetScrolled(true);
+    scroll.scrollToTop();
+  };
+  useEffect(() => {
+    if (scrolled === true) {
+      setTop("d-none");
+    } else {
+      setTop("");
+    }
+  }, [scrolled]);
+
   return (
     <>
       {/* LIST */}
@@ -52,33 +90,52 @@ export default function MovieGenre() {
           {/* NAVBAR */}
           <Navbar />
           {/* FEATURE */}
-          <Featured />
-
-          <div className="categoryGenreMovie container mt-5 mb-5">
-            <img src="img/cinema.jpg" className="cinemaPngMovie" alt="none" />
-            <select
-              name="genre"
-              id="genre"
-              className="genreSelect"
-              onChange={(e) => setGenre(e.target.value)}
-            >
-              <option>Chọn thể loại</option>
-
-              <option value="dc">DC Commic</option>
-              <option value="marvel">Marvel</option>
-              <option value="romance">Tình Cảm</option>
-              <option value="action">Hành Động</option>
-              <option value="horror">Kinh Dị</option>
-              <option value="science">Khoa Học Viễn Tưởng</option>
-              <option value="zombie">Xác Sống</option>
-              <option value="toon">Hoạt Hình</option>
-              <option value="adventure">Phiêu Lưu</option>
-              <option value="crime">Tội Phạm Hình Sự</option>
-            </select>
+          <div
+            className="featured-aria"
+            onMouseLeave={() => SetScrolled(false)}
+            onMouseEnter={() => SetScrolled(true)}
+          >
+            <Featured />
           </div>
 
-          <ListitemTag movie={currentAllMovies} />
+          <div className="categoryGenreMovie container">
+            <div className="genreMovieAria">
+              <img src="img/cinema.jpg" className="cinemaPngMovie" alt="none" />
+              <select
+                name="genre"
+                id="genre"
+                className="genreSelect"
+                onChange={(e) => setGenre(e.target.value)}
+              >
+                <option>Chọn thể loại</option>
 
+                <option value="dc">DC Commic</option>
+                <option value="marvel">Marvel</option>
+                <option value="romance">Tình Cảm</option>
+                <option value="action">Hành Động</option>
+                <option value="horror">Kinh Dị</option>
+                <option value="science">Khoa Học Viễn Tưởng</option>
+                <option value="zombie">Xác Sống</option>
+                <option value="toon">Hoạt Hình</option>
+                <option value="adventure">Phiêu Lưu</option>
+                <option value="crime">Tội Phạm Hình Sự</option>
+              </select>
+            </div>
+          </div>
+
+          <ListitemTag
+            movie={currentAllMovies}
+            setShowModal={setShowModal}
+            setViaMovie={setViaMovie}
+          />
+          <ModalDetail
+            showModal={showModal}
+            viaMovie={viaMovie}
+            setShowModal={setShowModal}
+          />
+          <GoToTop className={`${top}`} onClick={() => ScrollToTop()}>
+            <FaArrowAltCircleUp />
+          </GoToTop>
           <div>
             <Pagination
               moviesPerPage={moviesPerPage}
@@ -86,30 +143,7 @@ export default function MovieGenre() {
               paginate={paginate}
             />
           </div>
-          <input
-            type="radio"
-            name="radio-btn"
-            id="radio1"
-            style={{ opacity: 0 }}
-          />
-          <input
-            type="radio"
-            name="radio-btn"
-            id="radio2"
-            style={{ opacity: 0 }}
-          />
-          <input
-            type="radio"
-            name="radio-btn"
-            id="radio3"
-            style={{ opacity: 0 }}
-          />
-          <input
-            type="radio"
-            name="radio-btn"
-            id="radio4"
-            style={{ opacity: 0 }}
-          />
+
           <div className="footerAria container">
             <Footer />
           </div>

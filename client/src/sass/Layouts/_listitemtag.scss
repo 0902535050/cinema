@@ -5,7 +5,7 @@
 
   .boxItemTag {
     width: 250px;
-    margin: 0 10px;
+    margin: 2px;
     box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
     transition: all 0.5s;
     background-color: var(--main-color);
@@ -45,12 +45,12 @@
       display: none;
     }
     &:hover {
-      transform: scale(1.1);
-      z-index: 10;
       align-items: center;
       justify-content: center;
       img {
         opacity: 0.3;
+        transform: scale(1.2);
+        transition: 0.5s ease-in-out;
       }
       .controlAria {
         display: flex;
@@ -74,6 +74,7 @@
         margin-top: 60px;
         font-size: 15px;
         font-weight: bold;
+        justify-content: center;
         .limit {
           border: 1px solid red;
           padding: 1px 3px;
@@ -108,7 +109,7 @@
         .movieName {
           color: orange;
           font-weight: bold;
-          margin-bottom: 5px;
+          margin-bottom: 15px;
         }
       }
 

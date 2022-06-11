@@ -3,8 +3,9 @@ import ListItem from "../listitem/Listitem";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useEffect } from "react";
 
-export default function List({ list, setOpenModal, setViaMovie }) {
+export default function List({ list, setOpenModal, setViaMovie, setScrolled }) {
   const settings = {
     dots: true,
     infinite: false,
@@ -42,7 +43,7 @@ export default function List({ list, setOpenModal, setViaMovie }) {
 
   return (
     <>
-      <div className="list">
+      <div className="list" id={list.title}>
         <span className="listTitle">
           <img src="img/cinema.jpg" className="cinemaPng" alt="none" />
           {list.title}
@@ -56,6 +57,7 @@ export default function List({ list, setOpenModal, setViaMovie }) {
                     item={item}
                     setOpenModal={setOpenModal}
                     setViaMovie={setViaMovie}
+                    setScrolled={setScrolled}
                   />
                 </div>
               ))}

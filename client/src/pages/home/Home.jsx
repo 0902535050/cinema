@@ -6,6 +6,27 @@ import axios from "axios";
 import Footer from "../../components/footer/Footer";
 import Skeleton from "../../components/skeleton/Skeleton";
 import Modal from "../../components/modal/Modal";
+import { FaArrowAltCircleUp } from "react-icons/fa";
+import styled from "styled-components";
+import { animateScroll as scroll } from "react-scroll";
+import Menu from "../../components/menu/Menu";
+const GoToTop = styled.div`
+  position: fixed;
+  z-index: 10;
+  right: 80px;
+  bottom: 50px;
+  font-size: 50px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3 linear;
+  cursor: pointer;
+  &:hover {
+    transition: 0.5s;
+    color: rgba(255, 255, 255, 1);
+  }
+  @media screen and (max-width: 768px) {
+    right: 40px;
+  }
+`;
 
 const Home = ({ type }) => {
   const [lists, setLists] = useState([]);
@@ -13,6 +34,9 @@ const Home = ({ type }) => {
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [viaMovie, setViaMovie] = useState({});
+  const [top, setTop] = useState("");
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     const getRandomLists = async () => {
       setLoading(true);
@@ -40,6 +64,18 @@ const Home = ({ type }) => {
     localStorage.setItem("movies", JSON.stringify(null));
   }, []);
 
+  const ScrollToTop = () => {
+    setScrolled(true);
+    scroll.scrollToTop();
+  };
+  useEffect(() => {
+    if (scrolled === true) {
+      setTop("d-none");
+    } else {
+      setTop("");
+    }
+  }, [scrolled]);
+
   return (
     <>
       {/* LIST */}
@@ -50,12 +86,27 @@ const Home = ({ type }) => {
           {/* NAVBAR */}
           <Navbar />
           {/* FEATURE */}
-          <Featured />
+          <div
+            className="featured-aria"
+            onMouseLeave={() => setScrolled(false)}
+            onMouseEnter={() => setScrolled(true)}
+          >
+            <Featured />
+          </div>
+          <Menu />
           {openModal ? (
             <Modal movie={viaMovie} setOpenModal={setOpenModal} />
           ) : (
             ""
           )}
+
+          {/* SCROLL */}
+          <GoToTop>
+            <FaArrowAltCircleUp
+              className={`${top}`}
+              onClick={() => ScrollToTop()}
+            />
+          </GoToTop>
 
           {/* LIST */}
           <div className="showList">
@@ -66,6 +117,7 @@ const Home = ({ type }) => {
                     list={list}
                     setOpenModal={setOpenModal}
                     setViaMovie={setViaMovie}
+                    setScrolled={setScrolled}
                   />
                   ;
                 </div>

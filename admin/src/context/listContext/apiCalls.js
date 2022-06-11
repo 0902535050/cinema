@@ -66,6 +66,7 @@ export const updateLists = async (lists, list, dispatch) => {
         title: lists.title,
         genre: lists.genre,
         type: lists.type,
+        content: lists.content,
       },
       {
         headers: {

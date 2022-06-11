@@ -6,12 +6,37 @@ import Footer from "../../components/footer/Footer";
 import Pagination from "../../components/pagination/Pagination";
 import ListitemTag from "../../components/listitem/ListitemTag";
 import Skeleton from "../../components/skeleton/Skeleton";
+import { FaArrowAltCircleUp } from "react-icons/fa";
+import styled from "styled-components";
+import { animateScroll as scroll } from "react-scroll";
+import ModalDetail from "../../components/modal/ModalDetail";
+
+const GoToTop = styled.div`
+  position: fixed;
+  z-index: 10;
+  right: 90px;
+  bottom: 70px;
+  font-size: 50px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3 linear;
+  cursor: pointer;
+  &:hover {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  @media screen and (max-width: 768px) {
+    right: 40px;
+  }
+`;
 export default function MovieNation() {
   const [allMovie, setAllMovie] = useState([]);
   const [nation, setNation] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage] = useState(8);
+  const [moviesPerPage] = useState(12);
   const [loading, setLoading] = useState(true);
+  const [top, setTop] = useState("");
+  const [scrolled, SetScrolled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [viaMovie, setViaMovie] = useState({});
   useEffect(() => {
     const getAll = async () => {
       try {
@@ -41,7 +66,17 @@ export default function MovieNation() {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  const ScrollToTop = () => {
+    SetScrolled(true);
+    scroll.scrollToTop();
+  };
+  useEffect(() => {
+    if (scrolled === true) {
+      setTop("d-none");
+    } else {
+      setTop("");
+    }
+  }, [scrolled]);
   return (
     <>
       {/* LIST */}
@@ -52,30 +87,49 @@ export default function MovieNation() {
           {/* NAVBAR */}
           <Navbar />
           {/* FEATURE */}
-          <Featured />
-
-          <div className="categoryNationMovie container mt-5 mb-5">
-            <img src="img/cinema.jpg" className="cinemaPngMovie" alt="none" />
-            <select
-              name="nation"
-              id="nation"
-              className="nationSelect"
-              onChange={(e) => setNation(e.target.value)}
-            >
-              <option>Chọn quốc gia</option>
-              <option value="USA">Hoa Kỳ</option>
-              <option value="Paris">Pháp</option>
-              <option value="Anh">Anh</option>
-              <option value="Canada">Canada</option>
-              <option value="Korea">Hàn Quốc</option>
-              <option value="Mexico">Mê-xi-cô</option>
-              <option value="Chinese">Trung Quốc</option>
-              <option value="Japanese">Nhật Bản</option>
-            </select>
+          <div
+            className="featured-aria"
+            onMouseLeave={() => SetScrolled(false)}
+            onMouseEnter={() => SetScrolled(true)}
+          >
+            <Featured />
           </div>
 
-          <ListitemTag movie={currentAllMovies} />
+          <div className="categoryNationMovie container">
+            <div className="nationMovieAria">
+              <img src="img/cinema.jpg" className="cinemaPngMovie" alt="none" />
+              <select
+                name="nation"
+                id="nation"
+                className="nationSelect"
+                onChange={(e) => setNation(e.target.value)}
+              >
+                <option>Chọn quốc gia</option>
+                <option value="USA">Hoa Kỳ</option>
+                <option value="Paris">Pháp</option>
+                <option value="Anh">Anh</option>
+                <option value="Canada">Canada</option>
+                <option value="Korea">Hàn Quốc</option>
+                <option value="Mexico">Mê-xi-cô</option>
+                <option value="Chinese">Trung Quốc</option>
+                <option value="Japanese">Nhật Bản</option>
+              </select>
+            </div>
+          </div>
 
+          <ListitemTag
+            movie={currentAllMovies}
+            setShowModal={setShowModal}
+            setViaMovie={setViaMovie}
+          />
+          <ModalDetail
+            showModal={showModal}
+            viaMovie={viaMovie}
+            setShowModal={setShowModal}
+          />
+          <GoToTop className={`${top}`} onClick={() => ScrollToTop()}>
+            <FaArrowAltCircleUp />
+          </GoToTop>
           <div>
             <Pagination
               moviesPerPage={moviesPerPage}
@@ -83,30 +137,7 @@ export default function MovieNation() {
               paginate={paginate}
             />
           </div>
-          <input
-            type="radio"
-            name="radio-btn"
-            id="radio1"
-            style={{ opacity: 0 }}
-          />
-          <input
-            type="radio"
-            name="radio-btn"
-            id="radio2"
-            style={{ opacity: 0 }}
-          />
-          <input
-            type="radio"
-            name="radio-btn"
-            id="radio3"
-            style={{ opacity: 0 }}
-          />
-          <input
-            type="radio"
-            name="radio-btn"
-            id="radio4"
-            style={{ opacity: 0 }}
-          />
+
           <div className="footerAria container">
             <Footer />
           </div>

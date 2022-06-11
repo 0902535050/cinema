@@ -1,9 +1,11 @@
-import { InfoOutlined, PlayArrow, Star } from "@material-ui/icons";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import ReactPlayer from "react-player";
+import { VscMute, VscUnmute } from "react-icons/vsc";
+import axios from "axios";
 
 export default function Featured() {
+  const [isMuted, setIsMuted] = useState(false);
+
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
@@ -24,85 +26,23 @@ export default function Featured() {
     };
     getRandom();
   }, []);
-
-  useEffect(() => {
-    var count = 1;
-    setInterval(() => {
-      document.getElementById("radio" + count).checked = true;
-      count++;
-      if (count > 4) {
-        count = 1;
-      }
-    }, 6000);
-  }, []);
-
-  const setMovieOnLocalStorage = () => {
-    localStorage.setItem("movies", JSON.stringify(movie));
-  };
   return (
     <div className="featured">
       <div className="slider">
-        <div className="slides">
-          <input type="radio" name="radio-btn" id="radio1" />
-          <input type="radio" name="radio-btn" id="radio2" />
-          <input type="radio" name="radio-btn" id="radio3" />
-          <input type="radio" name="radio-btn" id="radio4" />
-
-          <div className="slide first">
-            <img src={movie.img !== null ? movie.img : ""} alt="" />
-          </div>
-          <div className="slide">
-            <img src={movie.imgTitle !== null ? movie.imgTitle : ""} alt="" />
-          </div>
-          <div className="slide">
-            <img src={movie.imgSm !== null ? movie.imgSm : ""} alt="" />
-          </div>
-          <div className="slide">
-            <img src={movie.imgPost !== null ? movie.imgPost : ""} alt="" />
-          </div>
-
-          <div className="navigation-auto">
-            <div className="auto-btn1"></div>
-            <div className="auto-btn2"></div>
-            <div className="auto-btn3"></div>
-            <div className="auto-btn4"></div>
-          </div>
-        </div>
-        <div className="navigation-manual">
-          <label for="radio1" className="manual-btn"></label>
-          <label for="radio2" className="manual-btn"></label>
-          <label for="radio3" className="manual-btn"></label>
-          <label for="radio4" className="manual-btn"></label>
-        </div>
-      </div>
-
-      <div className="info">
-        <img className="imgTitle" src={movie.imgTitle} alt="" />
-        <span className="featuredTitle">{movie.title}</span>
-        <div className="itemInfoTop container">
-          <span className="limit">{movie.limit}+</span>
-          <span className="year">{movie.year}</span>
-          <span className="genre">{movie.genre}</span>
-          <span className="duration">{movie.duration}min</span>
-          <span className="imdb">
-            {movie.imdb}
-            <Star style={{ color: "orange", fontSize: "19px" }} />
-          </span>
-        </div>
-        <div className="buttons">
-          <Link to={{ pathname: "/watch", movie: movie }}>
-            <button className="play" onClick={setMovieOnLocalStorage}>
-              <PlayArrow />
-              <span>Xem ngay</span>
-            </button>
-          </Link>
-          <Link to={{ pathname: "/detail", movie: movie }}>
-            <button className="play" onClick={setMovieOnLocalStorage}>
-              <InfoOutlined />
-              <span>Chi tiết</span>
-            </button>
-          </Link>
-        </div>
+        <ReactPlayer
+          width="100%"
+          height="1080px"
+          playing={true}
+          loop={true}
+          url="video/trailer/trailer.mp4"
+          muted={isMuted}
+          className="movieIntro"
+        ></ReactPlayer>
+        {isMuted ? (
+          <VscMute className="btnVolume" onClick={() => setIsMuted(false)} />
+        ) : (
+          <VscUnmute className="btnVolume" onClick={() => setIsMuted(true)} />
+        )}
       </div>
     </div>
   );

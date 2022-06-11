@@ -471,30 +471,7 @@ export default function UserPage() {
             </div>
 
             {/* CHẮP VÁ */}
-            <input
-              type="radio"
-              name="radio-btn"
-              id="radio1"
-              style={{ opacity: 0 }}
-            />
-            <input
-              type="radio"
-              name="radio-btn"
-              id="radio2"
-              style={{ opacity: 0 }}
-            />
-            <input
-              type="radio"
-              name="radio-btn"
-              id="radio3"
-              style={{ opacity: 0 }}
-            />
-            <input
-              type="radio"
-              name="radio-btn"
-              id="radio4"
-              style={{ opacity: 0 }}
-            />
+
             <div className="footerAria">
               <Footer />
             </div>

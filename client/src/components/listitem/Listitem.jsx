@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 import { PlayArrow, Star, Visibility } from "@material-ui/icons";
 import axios from "axios";
 
-export default function Listitem({ item, setOpenModal, setViaMovie }) {
+export default function Listitem({
+  item,
+  setOpenModal,
+  setViaMovie,
+  setScrolled,
+}) {
   const [isHovered, setIsHovered] = useState(false);
   const [movie, setMovie] = useState({});
 
@@ -25,7 +30,8 @@ export default function Listitem({ item, setOpenModal, setViaMovie }) {
     getMovie();
   }, [item]);
 
-  const setMovieOnLocalStorage = () => {
+  const handleMovie = () => {
+    setScrolled(true);
     localStorage.setItem("movies", JSON.stringify(movie));
   };
 
@@ -53,7 +59,7 @@ export default function Listitem({ item, setOpenModal, setViaMovie }) {
               <button
                 className="btnPlayFromListItem"
                 title="Xem phim ngay"
-                onClick={setMovieOnLocalStorage}
+                onClick={() => handleMovie()}
               >
                 <Link
                   to={{ pathname: "/watch", movie: movie }}

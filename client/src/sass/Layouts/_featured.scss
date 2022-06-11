@@ -1,217 +1,24 @@
 .featured {
-  height: 90vh;
+  height: 100vh;
   position: relative;
   .slider {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    opacity: 0.7;
-  }
-  .navigation-manual {
-    position: absolute;
-    width: 100%;
-    margin-top: -40px;
-    display: flex;
-    justify-content: center;
-
-    .manual-btn {
-      border: 2px solid #40d3dc;
-      padding: 5px;
-      border-radius: 10px;
+    .btnVolume {
+      z-index: 30;
+      position: absolute;
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      right: 10%;
+      top: 50%;
       cursor: pointer;
-      transition: 1s;
-      z-index: 2;
-      &:not(:last-child) {
-        margin-right: 40px;
-      }
+      padding: 6px;
+      color: #bbbbbb;
+      border: #fff solid 1px;
       &:hover {
-        background: #40d3dc;
-      }
-    }
-  }
-
-  .navigation-auto {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    top: 828px;
-    z-index: 2;
-    div {
-      border: 2px solid #40d3dc;
-      padding: 5px;
-      border-radius: 10px;
-      transition: 1s;
-
-      &:not(:last-child) {
-        margin-right: 40px;
-      }
-    }
-  }
-
-  #radio1:checked ~ .first {
-    margin-left: 0;
-  }
-  #radio2:checked ~ .first {
-    margin-left: -20%;
-  }
-  #radio3:checked ~ .first {
-    margin-left: -40%;
-  }
-  #radio4:checked ~ .first {
-    margin-left: -60%;
-  }
-
-  #radio1:checked ~ .navigation-auto .auto-btn1 {
-    background: #40d3dc;
-  }
-  #radio2:checked ~ .navigation-auto .auto-btn2 {
-    background: #40d3dc;
-  }
-  #radio3:checked ~ .navigation-auto .auto-btn3 {
-    background: #40d3dc;
-  }
-  #radio4:checked ~ .navigation-auto .auto-btn4 {
-    background: #40d3dc;
-  }
-
-  .slides {
-    width: 500%;
-    height: 100%;
-    display: flex;
-
-    input {
-      display: none;
-    }
-    .slide {
-      width: 20%;
-      transition: 2s;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-  }
-
-  .category {
-    position: absolute;
-    top: 80px;
-    left: 50px;
-    font-size: 15px;
-    font-weight: 500;
-    color: white;
-    display: flex;
-    align-items: center;
-    z-index: 99;
-
-    select {
-      cursor: pointer;
-      background-color: white;
-      border: 1px solid black;
-      margin-left: 20px;
-      padding: 5px;
-    }
-  }
-
-  .info {
-    width: 20%;
-    position: absolute;
-    left: 50px;
-    bottom: 100px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-    background-color: rgba(11, 11, 11, 0.7);
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    .itemInfoTop {
-      display: flex;
-      font-size: 14px;
-      font-weight: 600;
-      color: gray;
-      justify-content: space-around;
-      margin-top: 10px;
-      .limit {
-        border: 1px solid red;
-        padding: 1px 3px;
-
-        color: red;
-      }
-      .year {
-        color: white;
-      }
-      .duration {
-        color: white;
-      }
-      .imdb {
-        display: flex;
-        color: yellow;
-      }
-      .genre {
-        color: white;
-      }
-    }
-    .imgTitle {
-      width: 250px;
-      height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-    .featuredTitle {
-      margin: 5px 0;
-      font-weight: bold;
-      color: orange;
-    }
-
-    .desc {
-      margin: 5px 0;
-      font-size: 16px;
-      color: #fff;
-    }
-
-    .buttons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-      button {
-        padding: 8px 20px;
-        border: 1px solid #000;
-        border-radius: 10px;
-        display: flex;
-        font-size: 18px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.5s ease;
-        &.play {
-          background-color: transparent;
-          color: lightgray;
-          border: none;
-          margin-left: 5px;
-          font-weight: bold;
-        }
-
-        &.more {
-          background-color: transparent;
-          color: lightgray;
-          border: none;
-          font-weight: bold;
-        }
-
-        &:hover {
-          background-color: rgb(180, 172, 172);
-        }
-        span {
-          margin-left: 5px;
-        }
+        transition: all 0.5s ease-in-out;
+        transform: scale(1.2);
+        color: #fff;
+        background-color: rgba(211, 211, 211, 0.18);
       }
     }
   }

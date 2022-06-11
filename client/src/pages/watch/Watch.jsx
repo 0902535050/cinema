@@ -14,6 +14,10 @@ import {
   ThumbUpAltOutlined,
   ThumbUpAltRounded,
 } from "@material-ui/icons";
+import Modal from "../../components/modal/Modal";
+
+import styled from "styled-components";
+import { animateScroll as scroll } from "react-scroll";
 
 export default function Watch() {
   const location = useLocation();
@@ -21,6 +25,8 @@ export default function Watch() {
   const movie = location.movie || JSON.parse(localStorage.getItem("movies"));
   var newIndex = localStorage.getItem("index");
   var newIndexTM = localStorage.getItem("indexTM");
+
+  const [viaMovie, setViaMovie] = useState({});
   const [isShowComment, setIsShowComment] = useState(false);
   const [indexMovie, setIndexMovie] = useState("");
   const [isSub, setIsSub] = useState(false);
@@ -28,18 +34,24 @@ export default function Watch() {
   const [isShow, setIsShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [commentContent, setCommentContent] = useState(null);
-  //LAST CONST
+  const [openModal, setOpenModal] = useState(false);
   const [isChange, setIsChange] = useState([]);
   const [changedV2, setChangedV2] = useState([]);
   const [changedV3, setChangedV3] = useState([]);
   const [flag, setFlag] = useState(1);
 
+  const [scrolled, setScrolled] = useState(false);
   let userLiked = changedV2.find((o) => o === userNow._id);
 
   const userLikedDisabled = userLiked ? true : false;
 
   let userDisLiked = changedV3.find((o) => o === userNow._id);
   const userDisLikedDisabled = userDisLiked ? true : false;
+
+  useEffect(() => {
+    scroll.scrollToTop();
+    setScrolled(false);
+  }, [scrolled]);
 
   useEffect(() => {
     const getRandomLists = async () => {
@@ -284,6 +296,8 @@ export default function Watch() {
   return (
     <div className="watchPage">
       <Navbar />
+
+      {openModal && <Modal movie={viaMovie} setOpenModal={setOpenModal} />}
       <div className="watch-page-left">
         <div className="watch">
           <div className="watch-left">
@@ -517,16 +531,18 @@ export default function Watch() {
           {lists.slice(0, 2).map((list, index) => {
             return (
               <div key={index}>
-                <List list={list} />;
+                <List
+                  list={list}
+                  setOpenModal={setOpenModal}
+                  setViaMovie={setViaMovie}
+                  setScrolled={setScrolled}
+                />
+                ;
               </div>
             );
           })}
         </div>
       </div>
-      <input type="radio" name="radio-btn" id="radio1" style={{ opacity: 0 }} />
-      <input type="radio" name="radio-btn" id="radio2" style={{ opacity: 0 }} />
-      <input type="radio" name="radio-btn" id="radio3" style={{ opacity: 0 }} />
-      <input type="radio" name="radio-btn" id="radio4" style={{ opacity: 0 }} />
       <div className="footerAria">
         <Footer />
       </div>

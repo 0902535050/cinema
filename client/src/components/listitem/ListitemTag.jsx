@@ -1,17 +1,19 @@
 import { Star } from "@material-ui/icons";
 import React from "react";
 import { Link } from "react-router-dom";
-export default function ListitemTag({ movie }) {
+export default function ListitemTag({ movie, setShowModal, setViaMovie }) {
   const setMovieOnLocalStorage = (item) => {
+    setShowModal(true);
+    setViaMovie(item);
     localStorage.setItem("movies", JSON.stringify(item));
   };
 
   return (
     <section className="py-4 container">
-      <div className="row justify-content-center">
+      <div className="d-flex flex-direction-row flex-wrap justify-content-center">
         {movie.map((item, index) => {
           return (
-            <div className="cardBoxItemTag col-lg-3 mx-0 mb-4">
+            <div className="cardBoxItemTag mx-0 mb-4">
               <div className="boxItemTag card p-0 overflow-hidden shadow">
                 <img src={item.img} className="" alt="" />
                 <div className="movie-Title-Item-Tag">
@@ -33,17 +35,12 @@ export default function ListitemTag({ movie }) {
                 </div>
 
                 <div className="moreInfoItemTag">
-                  <Link
-                    to={{ pathname: "/detail", movie: item }}
-                    className="link"
+                  <button
+                    className="btn-more-info"
+                    onClick={() => setMovieOnLocalStorage(item)}
                   >
-                    <button
-                      className="btn-more-info"
-                      onClick={() => setMovieOnLocalStorage(item)}
-                    >
-                      <span>Xem chi tiết</span>
-                    </button>
-                  </Link>
+                    <span>Xem chi tiết</span>
+                  </button>
                 </div>
               </div>
             </div>

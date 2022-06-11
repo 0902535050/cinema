@@ -1,6 +1,8 @@
 .homeGenreMovie {
   background: linear-gradient(to bottom, black 0%, black 100%);
+
   .categoryGenreMovie {
+    margin-top: 150px;
     .cinemaPngMovie {
       width: 100px;
       object-fit: cover;
@@ -21,7 +23,6 @@
       cursor: pointer;
     }
   }
-
   .pagination {
     align-items: center;
     justify-content: center;
