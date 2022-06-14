@@ -111,14 +111,18 @@ router.get("/taggenre", verify, async (req, res) => {
   if (req.user.isAdmin) {
     try {
       if (genreQuery) {
-        movies = await Movie.aggregate([
-          { $sample: { size: 100 } },
-          {
-            $match: {
-              genre: genreQuery,
+        if (genreQuery === "all") {
+          movies = await Movie.aggregate([{ $sample: { size: 100 } }]);
+        } else {
+          movies = await Movie.aggregate([
+            { $sample: { size: 100 } },
+            {
+              $match: {
+                genre: genreQuery,
+              },
             },
-          },
-        ]);
+          ]);
+        }
       } else {
         movies = await Movie.aggregate([{ $sample: { size: 100 } }]);
       }
@@ -136,14 +140,18 @@ router.get("/tagyear", verify, async (req, res) => {
   if (req.user.isAdmin) {
     try {
       if (yearQuery) {
-        movies = await Movie.aggregate([
-          { $sample: { size: 100 } },
-          {
-            $match: {
-              year: yearQuery,
+        if (yearQuery === "all") {
+          movies = await Movie.aggregate([{ $sample: { size: 100 } }]);
+        } else {
+          movies = await Movie.aggregate([
+            { $sample: { size: 100 } },
+            {
+              $match: {
+                year: yearQuery,
+              },
             },
-          },
-        ]);
+          ]);
+        }
       } else {
         movies = await Movie.aggregate([{ $sample: { size: 100 } }]);
       }
@@ -161,14 +169,18 @@ router.get("/tagnation", verify, async (req, res) => {
   if (req.user.isAdmin) {
     try {
       if (nationQuery) {
-        movies = await Movie.aggregate([
-          { $sample: { size: 100 } },
-          {
-            $match: {
-              nation: nationQuery,
+        if (nationQuery === "all") {
+          movies = await Movie.aggregate([{ $sample: { size: 100 } }]);
+        } else {
+          movies = await Movie.aggregate([
+            { $sample: { size: 100 } },
+            {
+              $match: {
+                nation: nationQuery,
+              },
             },
-          },
-        ]);
+          ]);
+        }
       } else {
         movies = await Movie.aggregate([{ $sample: { size: 100 } }]);
       }

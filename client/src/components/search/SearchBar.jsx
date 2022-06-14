@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IoClose, IoSearch } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickOutside } from "react-click-outside-hook";
-import MoonLoader from "react-spinners/MoonLoader";
+import DotLoader from "react-spinners/DotLoader";
 import { useDebounce } from "../../hooks/debounceHook";
 import { TvShow } from "../tvShow/TvShow";
 
@@ -20,9 +20,9 @@ const SearchBarContainer = styled(motion.div)`
 
 const SearchInputContainer = styled.div`
   width: 100%;
-  min-height: 1em;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   padding: 2px 15px;
 `;
@@ -36,6 +36,9 @@ const SearchInput = styled.input`
   color: white;
   font-weight: 500;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   &:focus {
     outline: none;
@@ -57,6 +60,9 @@ const SearchIcon = styled.span`
   margin-right: 10px;
   margin-top: 6px;
   vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const CloseIcon = styled(motion.span)`
@@ -166,13 +172,12 @@ export function SearchBar({ data }) {
     });
 
     if (response) {
-      console.log("Response: ", response);
       if (response && response.length === 0) setNoTvShows(true);
       setTvShows(response);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
   };
 
   useDebounce(searchQuery, 500, searchTvShow);
@@ -215,7 +220,7 @@ export function SearchBar({ data }) {
         <SearchContent>
           {isLoading && (
             <LoadingWrapper>
-              <MoonLoader loading color="orange" size={35} />
+              <DotLoader loading color={"#D0021B"} size={35} />
             </LoadingWrapper>
           )}
           {!isLoading && isEmpty && !noTvShows && (

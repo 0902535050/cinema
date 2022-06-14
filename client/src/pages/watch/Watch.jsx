@@ -15,8 +15,6 @@ import {
   ThumbUpAltRounded,
 } from "@material-ui/icons";
 import Modal from "../../components/modal/Modal";
-
-import styled from "styled-components";
 import { animateScroll as scroll } from "react-scroll";
 
 export default function Watch() {

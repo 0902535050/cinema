@@ -107,7 +107,7 @@ export default function MovieGenre() {
                 className="genreSelect"
                 onChange={(e) => setGenre(e.target.value)}
               >
-                <option>Chọn thể loại</option>
+                <option value="all">Chọn thể loại</option>
 
                 <option value="dc">DC Commic</option>
                 <option value="marvel">Marvel</option>

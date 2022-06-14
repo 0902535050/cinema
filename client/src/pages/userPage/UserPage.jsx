@@ -57,7 +57,7 @@ export default function UserPage() {
       }
     };
     getUser();
-  }, [flag]);
+  }, [flag, currentUser._id]);
 
   const toggleTab = (index) => {
     setToggleState(index);

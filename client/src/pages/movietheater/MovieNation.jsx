@@ -104,7 +104,7 @@ export default function MovieNation() {
                 className="nationSelect"
                 onChange={(e) => setNation(e.target.value)}
               >
-                <option>Chọn quốc gia</option>
+                <option value="all">Chọn quốc gia</option>
                 <option value="USA">Hoa Kỳ</option>
                 <option value="Paris">Pháp</option>
                 <option value="Anh">Anh</option>

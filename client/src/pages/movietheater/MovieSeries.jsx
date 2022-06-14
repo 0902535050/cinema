@@ -108,7 +108,7 @@ export default function MovieSeries() {
                 className="seriesSelect"
                 onChange={(e) => setType(e.target.value)}
               >
-                <option>Chọn</option>
+                <option value="all">Chọn</option>
                 <option value="series">Phim nhiều tập</option>
                 <option value="movie">Phim lẻ</option>
               </select>

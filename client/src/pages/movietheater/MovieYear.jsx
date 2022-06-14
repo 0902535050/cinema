@@ -107,7 +107,7 @@ export default function MovieYear() {
                 className="yearSelect"
                 onChange={(e) => setYear(e.target.value)}
               >
-                <option>Chọn năm</option>
+                <option value="all">Chọn năm</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>

@@ -84,7 +84,7 @@ export default function User() {
       <div className="userContainer">
         <div className="userShow">
           <div className="userShowTop">
-            <img src={user.profilePic} className="userShowTopImg" />
+            <img src={user.profilePic} className="userShowTopImg" alt="" />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{user.username}</span>
               <span className="userShowUserTitle">
