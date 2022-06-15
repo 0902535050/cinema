@@ -110,6 +110,12 @@ export default function Footer(props) {
                   <a href="#">
                     <i className="fa fa-instagram" aria-hidden="true"></i>
                   </a>
+                  <a href="#">
+                    <i className="fa fa-twitter" aria-hidden="true"></i>
+                  </a>
+                  <a href="#">
+                    <i className="fa fa-pinterest" aria-hidden="true"></i>
+                  </a>
                 </div>
                 <form className="form-footer my-3">
                   <input

@@ -29,7 +29,7 @@ const Navbar = () => {
         const res = await axios.get("/users/find/" + currentUser._id, {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk2NDM0NiwiZXhwIjoxOTEzMTY0MzQ2fQ.sGCG3ise2mHJKyGzmSKOmv-LMAv1hRw9fkqYU9avIJg",
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
         setUsers(res.data);
@@ -46,7 +46,7 @@ const Navbar = () => {
         const res = await axios.get("/movies/", {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MjMyNzgyMCwiZXhwIjoxOTExNTI3ODIwfQ.Plo5eyi6GO6CsvX1k7qeIJIi2h2PK8OTqdyxyJOKkYo",
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
         setAllMovie(res.data);
