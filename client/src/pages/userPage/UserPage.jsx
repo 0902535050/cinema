@@ -48,7 +48,7 @@ export default function UserPage() {
         const res = await axios.get("/users/find/" + currentUser._id, {
           headers: {
             token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
           },
         });
         setUsers(res.data);
@@ -315,8 +315,12 @@ export default function UserPage() {
                         {(formikProps) => (
                           <div>
                             <h2
-                              className="text-center"
-                              style={{ color: "orange", letterSpacing: "1px" }}
+                              className="editInfoUserTitle"
+                              style={{
+                                color: "orange",
+                                letterSpacing: "1px",
+                                marginLeft: "100px",
+                              }}
                             >
                               Chỉnh sửa thông tin cá nhân
                             </h2>
@@ -327,24 +331,28 @@ export default function UserPage() {
                                 type="email"
                                 disabled
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
                               <TextField
                                 label="Tên hiển thị"
                                 name="username"
                                 type="text"
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
                               <TextField
                                 label="Tên đầy đủ"
                                 name="fullName"
                                 type="text"
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
                               <TextField
                                 label="Quốc tịch"
                                 name="nation"
                                 type="text"
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
 
                               <TextField
@@ -352,6 +360,7 @@ export default function UserPage() {
                                 name="phone"
                                 type="phone"
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
 
                               <TextField
@@ -359,6 +368,7 @@ export default function UserPage() {
                                 name="date"
                                 type="date"
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
 
                               <TextField
@@ -366,6 +376,7 @@ export default function UserPage() {
                                 name="desc"
                                 type="text"
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
 
                               <TextField
@@ -373,6 +384,7 @@ export default function UserPage() {
                                 name="address"
                                 type="text"
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
 
                               <button type="submit" className="updateButton">
@@ -435,8 +447,12 @@ export default function UserPage() {
                         {(formikProps) => (
                           <div>
                             <h2
-                              className="text-center"
-                              style={{ color: "orange", letterSpacing: "1px" }}
+                              className="editInfoUserPassword"
+                              style={{
+                                color: "orange",
+                                letterSpacing: "1px",
+                                marginLeft: "210px",
+                              }}
                             >
                               Đổi mật khẩu
                             </h2>
@@ -446,12 +462,14 @@ export default function UserPage() {
                                 name="password"
                                 type="password"
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
                               <TextField
                                 label="Xác nhận mật khẩu mới"
                                 name="confirmPassword"
                                 type="password"
                                 onChange={formikProps.handleChange}
+                                style={{ width: "80%" }}
                               />
 
                               <button type="submit" className="updateButton">

@@ -20,7 +20,7 @@ export default function WidgetLg() {
         const res = await axios.get("/comments?new=true", {
           headers: {
             token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
           },
         });
         setComment(res.data);
@@ -37,7 +37,7 @@ export default function WidgetLg() {
       const res = await axios.get("/movies/find/" + item.movieId, {
         headers: {
           token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
         },
       });
 
