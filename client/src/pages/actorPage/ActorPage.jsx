@@ -13,7 +13,7 @@ export default function ActorPage() {
   const actor = location.actor || JSON.parse(localStorage.getItem("actors"));
   const movie = location.movie || JSON.parse(localStorage.getItem("movies"));
   const [actors, setActors] = useState([]);
-
+  const [scrolled, setScrolled] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [viaMovie, setViaMovie] = useState({});
   useEffect(() => {
@@ -79,6 +79,7 @@ export default function ActorPage() {
                           item={item}
                           setOpenModal={setOpenModal}
                           setViaMovie={setViaMovie}
+                          setScrolled={setScrolled}
                         />
                       </div>
                     );
@@ -113,6 +114,7 @@ export default function ActorPage() {
                       item={item}
                       setOpenModal={setOpenModal}
                       setViaMovie={setViaMovie}
+                      setScrolled={setScrolled}
                     />
                   </div>
                 );
