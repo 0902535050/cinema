@@ -47,9 +47,10 @@ const Rating = styled.span`
   justify-content: center;
 `;
 
-export function TvShow({ item }) {
+export function TvShow({ item, setIsShow }) {
   const setMovieOnLocalStorage = () => {
     localStorage.setItem("movies", JSON.stringify(item));
+    setIsShow(false);
   };
   return (
     <TvShowContainer>

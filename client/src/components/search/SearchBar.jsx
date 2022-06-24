@@ -121,7 +121,7 @@ const containerVariants = {
 
 const containerTransition = { type: "spring", damping: 22, stiffness: 150 };
 
-export function SearchBar({ data }) {
+export function SearchBar({ data, setIsShow }) {
   const [isExpanded, setExpanded] = useState(false);
   const [parentRef, isClickedOutside] = useClickOutside();
   const inputRef = useRef();
@@ -238,7 +238,7 @@ export function SearchBar({ data }) {
           {!isLoading && !isEmpty && (
             <>
               {tvShows.map((show, index) => (
-                <TvShow key={index} item={show} />
+                <TvShow setIsShow={setIsShow} key={index} item={show} />
               ))}
             </>
           )}

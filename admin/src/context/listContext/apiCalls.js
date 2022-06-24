@@ -18,7 +18,7 @@ export const getLists = async (dispatch) => {
     const res = await axios.get("/lists", {
       headers: {
         token:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
       },
     });
     dispatch(getListsSuccess(res.data));
@@ -33,7 +33,7 @@ export const deleteLists = async (id, dispatch) => {
     await axios.delete("/lists/" + id, {
       headers: {
         token:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
       },
     });
     dispatch(deleteListsSuccess(id));
@@ -48,7 +48,7 @@ export const createLists = async (list, dispatch) => {
     const res = await axios.post("/lists", list, {
       headers: {
         token:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
       },
     });
     dispatch(createListsSuccess(res.data));
@@ -71,7 +71,7 @@ export const updateLists = async (lists, list, dispatch) => {
       {
         headers: {
           token:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
         },
       }
     );

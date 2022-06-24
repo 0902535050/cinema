@@ -5,7 +5,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect } from "react";
 
-export default function List({ list, setOpenModal, setViaMovie, setScrolled }) {
+export default function List({
+  list,
+  setOpenModal,
+  setViaMovie,
+  setScrolled,
+  setIsShow,
+}) {
   const settings = {
     dots: true,
     infinite: false,
@@ -58,6 +64,7 @@ export default function List({ list, setOpenModal, setViaMovie, setScrolled }) {
                     setOpenModal={setOpenModal}
                     setViaMovie={setViaMovie}
                     setScrolled={setScrolled}
+                    setIsShow={setIsShow}
                   />
                 </div>
               ))}

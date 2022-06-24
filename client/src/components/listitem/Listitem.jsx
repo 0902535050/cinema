@@ -9,6 +9,7 @@ export default function Listitem({
   setOpenModal,
   setViaMovie,
   setScrolled,
+  setIsShow,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [movie, setMovie] = useState({});
@@ -19,7 +20,7 @@ export default function Listitem({
         const res = await axios.get("/movies/find/" + item, {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
           },
         });
         setMovie(res.data);
@@ -32,6 +33,7 @@ export default function Listitem({
 
   const handleMovie = () => {
     setScrolled(true);
+    setIsShow(false);
     localStorage.setItem("movies", JSON.stringify(movie));
   };
 

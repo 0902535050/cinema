@@ -13,7 +13,7 @@ import { logout } from "../../authContext/AuthActions";
 import axios from "axios";
 import { SearchBar } from "../search/SearchBar";
 
-const Navbar = () => {
+const Navbar = ({ setIsShow }) => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   const avatar = JSON.parse(localStorage.getItem("user")).profilePic;
@@ -29,7 +29,7 @@ const Navbar = () => {
         const res = await axios.get("/users/find/" + currentUser._id, {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
           },
         });
         setUsers(res.data);
@@ -46,7 +46,7 @@ const Navbar = () => {
         const res = await axios.get("/movies/", {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
           },
         });
         setAllMovie(res.data);
@@ -101,7 +101,7 @@ const Navbar = () => {
         <div className="right">
           <div className="endSearchBarAria">
             <div className="searchBarAria">
-              <SearchBar data={allMovie} />
+              <SearchBar data={allMovie} setIsShow={setIsShow} />
             </div>
           </div>
           <div className="endProfileAria">

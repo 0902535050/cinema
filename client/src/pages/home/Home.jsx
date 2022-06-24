@@ -36,7 +36,7 @@ const Home = ({ type }) => {
   const [viaMovie, setViaMovie] = useState({});
   const [top, setTop] = useState("");
   const [scrolled, setScrolled] = useState(false);
-
+  const [isShow, setIsShow] = useState(false);
   useEffect(() => {
     const getRandomLists = async () => {
       setLoading(true);
@@ -48,7 +48,7 @@ const Home = ({ type }) => {
           {
             headers: {
               token:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTQzODg4NCwiZXhwIjoxNjU1ODcwODg0fQ.Y3JHobMnDB87qUNUPylFgz6Laic4WLVHQ5iLaixDt9Y",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
             },
           }
         );
@@ -84,7 +84,7 @@ const Home = ({ type }) => {
       ) : (
         <div className="home">
           {/* NAVBAR */}
-          <Navbar />
+          <Navbar setIsShow={setIsShow} />
           {/* FEATURE */}
           <div
             className="featured-aria"
@@ -118,6 +118,7 @@ const Home = ({ type }) => {
                     setOpenModal={setOpenModal}
                     setViaMovie={setViaMovie}
                     setScrolled={setScrolled}
+                    setIsShow={setIsShow}
                   />
                   ;
                 </div>
