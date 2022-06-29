@@ -162,10 +162,13 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 33%;
+  width: 25%;
 }
 
 .productButton {
+  position: absolute;
+  bottom: -250px;
+  right: 500px;
   width: 120px;
   height: 50px;
   margin-left: 30px;

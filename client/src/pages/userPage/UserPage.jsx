@@ -39,6 +39,7 @@ export default function UserPage() {
   const [movie, setMovie] = useState(null);
   const [flag, setFlag] = useState(1000);
   const [users, setUsers] = useState({});
+  const [isShow, setIsShow] = useState(false);
 
   let checked = avatar === null || avatar === undefined ? true : false;
 
@@ -48,7 +49,7 @@ export default function UserPage() {
         const res = await axios.get("/users/find/" + currentUser._id, {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjQ4Mzk1MCwiZXhwIjoxNjU2OTE1OTUwfQ.SxBB9PgKJG9DlhGcF_FF-TLgkVKdRaRS09a8e4qJRYk",
           },
         });
         setUsers(res.data);
@@ -152,7 +153,7 @@ export default function UserPage() {
   return (
     <div className="userpagearia">
       <div className="navbarUSer">
-        <Navbar />
+        <Navbar setIsShow={setIsShow} />
       </div>
       <div className="userPage container">
         <div className="user-page">

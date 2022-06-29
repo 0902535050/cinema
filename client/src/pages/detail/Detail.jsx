@@ -18,6 +18,7 @@ import { AuthContext } from "../../authContext/AuthContext";
 export default function Detail() {
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const location = useLocation();
+  const [isShow, setIsShow] = useState(false);
   const movie = location.movie || JSON.parse(localStorage.getItem("movies"));
   const [isShowDetail, setIsShowDetail] = useState(true);
   const { dispatch, user } = useContext(AuthContext);
@@ -95,7 +96,7 @@ export default function Detail() {
 
   return (
     <div className="detailPage">
-      <Navbar />
+      <Navbar setIsShow={setIsShow} />
       <div className="detail-page">
         {/* CAROSEL */}
 

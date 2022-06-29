@@ -15,7 +15,9 @@ export default function ActorPage() {
   const [actors, setActors] = useState([]);
   const [scrolled, setScrolled] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isShow, setIsShow] = useState(false);
   const [viaMovie, setViaMovie] = useState({});
+  const [loadActor, setLoadActor] = useState(false);
   useEffect(() => {
     localStorage.setItem("actors", JSON.stringify(actor));
   }, [actor]);
@@ -26,51 +28,59 @@ export default function ActorPage() {
         const res = await axios.get("/actors/random/", {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjQ4Mzk1MCwiZXhwIjoxNjU2OTE1OTUwfQ.SxBB9PgKJG9DlhGcF_FF-TLgkVKdRaRS09a8e4qJRYk",
           },
         });
+        let array = actors.filter((id) => id !== actor._id);
+        console.log(array);
         setActors(res.data);
       } catch (e) {
         console.log(e);
       }
     };
     getActor();
-  }, [openModal]);
+  }, [openModal, actor._id]);
 
   return (
     <div className="actorPages ">
       <div className="blank" style={{ opacity: 1 }}>
         THIS IS BLANK
       </div>
-      <Navbar />
+      <Navbar setIsShow={setIsShow} />
       {openModal ? <Modal movie={viaMovie} setOpenModal={setOpenModal} /> : ""}
       {actor !== null ? (
         <div className="actor-aria">
           <div className="actorSide">
             <div className="leftSide">
               <div className="actorDetail">
-                <Avatar className="actorImg" src={actor.profilePic} />
+                <div className="actorImgAria">
+                  <Avatar className="actorImg" src={actor.profilePic} />
+                </div>
                 <span className="actorName">{actor.name}</span>
+                <span className="actorNation">Nghề nghiệp: diễn viên</span>
                 <span className="actorNation">Quốc tịch: {actor.nation}</span>
                 <span className="actorDesc">
-                  {String(actor.desc).substring(0, 40) + "..."}
+                  {String(actor.desc).substring(0, 38) + "..."}
                 </span>
               </div>
               <div className="someActor container">
-                <h3>Nghệ sĩ tương tự</h3>
-                {actors.map((item, index) => {
-                  return (
-                    <div className="someActorPlace">
-                      <ActorSome item={item._id} />
-                    </div>
-                  );
-                })}
+                <h3>Nghệ sĩ cùng tham gia</h3>
+                {actors
+                  .filter((item) => item._id !== actor._id)
+                  .map((item, index) => {
+                    return (
+                      <div className="someActorPlace">
+                        <ActorSome item={item._id} />
+                      </div>
+                    );
+                  })}
               </div>
             </div>
             <div className="rightSide">
               <div className="titleMovieActorJoin">
-                <h1>Danh sách phim tham gia</h1>
+                <span>Danh sách phim tham gia</span>
               </div>
+
               {actor.nameMovie !== ""
                 ? actor.nameMovie.map((item, index) => {
                     return (
@@ -80,6 +90,7 @@ export default function ActorPage() {
                           setOpenModal={setOpenModal}
                           setViaMovie={setViaMovie}
                           setScrolled={setScrolled}
+                          setIsShow={setIsShow}
                         />
                       </div>
                     );

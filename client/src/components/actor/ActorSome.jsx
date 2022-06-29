@@ -10,7 +10,7 @@ export default function Actor({ item }) {
         const res = await axios.get("/actors/find/" + item, {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjA0Njc2NywiZXhwIjoxNjU2NDc4NzY3fQ.i3wEGQ_t9P9adkTVpdpMwpMN4vV_Z_yVh8qe6TY-S-8",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzU4YjZjOTUwMDJlYTJmZjFjYjMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjQ4Mzk1MCwiZXhwIjoxNjU2OTE1OTUwfQ.SxBB9PgKJG9DlhGcF_FF-TLgkVKdRaRS09a8e4qJRYk",
           },
         });
         setActor(res.data);
@@ -21,10 +21,13 @@ export default function Actor({ item }) {
 
     getActor();
   }, [item]);
+
   return (
     <div className="actorPageSome">
       <Link to={{ pathname: "/actorpage", actor: actor }}>
-        <img className="actorImg" src={actor.profilePic} alt="" />
+        <div className="actorImgAria">
+          <img className="actorImg" src={actor.profilePic} alt="" />
+        </div>
       </Link>
       <span className="actorName">{actor.name}</span>
     </div>

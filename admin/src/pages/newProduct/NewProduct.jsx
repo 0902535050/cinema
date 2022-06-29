@@ -16,9 +16,6 @@ export default function NewProduct() {
   const [imgPost, setImgPost] = useState(null);
   const [imgTitle, setImgTitle] = useState(null);
   const [imgSm, setImgSm] = useState(null);
-  const [trailer, setTrailer] = useState(null);
-  const [listVideoSub, setListVideoSub] = useState(null);
-  const [listVideoTM, setListVideoTM] = useState(null);
   const [directorAva, setDirectorAva] = useState(null);
   const [uploaded, setUploaded] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -75,9 +72,6 @@ export default function NewProduct() {
         { file: imgPost, label: "imgPost" },
         { file: imgTitle, label: "imgTitle" },
         { file: imgSm, label: "imgSm" },
-        { file: trailer, label: "trailer" },
-        { file: listVideoSub, label: "listVideoSub" },
-        { file: listVideoTM, label: "listVideoTM" },
         { file: directorAva, label: "director.directorAva" },
       ]);
     } else setLoading(false);
@@ -235,6 +229,36 @@ export default function NewProduct() {
               onChange={handleChange}
             />
           </div>
+
+          <div className="addProductItem">
+            <label>Link trailer</label>
+            <input
+              type="text"
+              placeholder="Link trailer"
+              name="trailer"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="addProductItem">
+            <label>Link video vietsub</label>
+            <input
+              type="text"
+              placeholder="Link video vietsub"
+              name="listVideoSub"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="addProductItem">
+            <label>Link video thuyết minh</label>
+            <input
+              type="text"
+              placeholder="Link video thuyết minh"
+              name="listVideoTM"
+              onChange={handleChange}
+            />
+          </div>
           <div className="addProductItem">
             <label>Is Series ?</label>
             <select name="isSeries" id="isSeries" onChange={handleChange}>
@@ -276,30 +300,6 @@ export default function NewProduct() {
           </div>
 
           <div className="addProductItem">
-            <label>Trailer</label>
-            <input
-              type="file"
-              name="trailer"
-              onChange={(e) => setTrailer(e.target.files[0])}
-            />
-          </div>
-          <div className="addProductItem">
-            <label>Video Sub</label>
-            <input
-              type="file"
-              name="listVideoSub"
-              onChange={(e) => setListVideoSub(e.target.files[0])}
-            />
-          </div>
-          <div className="addProductItem">
-            <label>Video Thuyết Minh</label>
-            <input
-              type="file"
-              name="listVideoTM"
-              onChange={(e) => setListVideoTM(e.target.files[0])}
-            />
-          </div>
-          <div className="addProductItem">
             <label>Director Avatar</label>
             <input
               type="file"
@@ -327,7 +327,7 @@ export default function NewProduct() {
           </div>
 
           <div className="addProductItem">
-            <label>Phim nhiều tập</label>
+            <label>Phim nhiều tập đạo diễn tham gia</label>
             <select
               multiple
               name="director.movieJoin"
@@ -347,7 +347,7 @@ export default function NewProduct() {
           </div>
 
           <div className="addProductItem">
-            <label>Phim lẻ</label>
+            <label>Phim lẻ đạo diễn tham gia</label>
             <select
               multiple
               name="director.movieJoin"
@@ -367,7 +367,7 @@ export default function NewProduct() {
           </div>
 
           <div className="addProductItem">
-            {uploaded === 8 ? (
+            {uploaded === 5 ? (
               <button className="addProductButton" onClick={handleSubmit}>
                 Create
               </button>

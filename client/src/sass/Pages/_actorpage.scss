@@ -11,7 +11,7 @@
         flex: 1.4;
         background-color: #1b1b1b;
         margin-left: 30px;
-        height: 600px;
+        height: 1000px;
 
         .actorDetail {
           position: absolute;
@@ -27,11 +27,17 @@
             font-size: 30px;
             font-weight: bold;
           }
-          .actorImg {
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
+          .actorImgAria {
+            border-radius: 50%;
+            border: 2px solid yellow;
+            padding: 5px;
+            .actorImg {
+              width: 300px;
+              height: 300px;
+              object-fit: cover;
+            }
           }
+
           .actorNation {
             font-size: 16px;
             font-weight: bold;
@@ -39,34 +45,42 @@
           .actorDesc {
             letter-spacing: 1px;
             color: lightgray;
+            font-weight: bold;
           }
         }
         .someActor {
           border-top: 1px solid #fff;
           display: flex;
-          margin-top: 350px;
+          margin-top: 310px;
           justify-content: center;
+          flex-direction: row;
+          flex-wrap: wrap;
           h3 {
             position: absolute;
             color: chocolate;
+            font-weight: bold;
           }
           .someActorPlace {
-            margin: 60px 3px 0 3px;
+            margin: 50px 3px 0 3px;
           }
         }
       }
       .rightSide {
-        margin: 200px 0 0 30px;
+        margin: 150px 0 0 30px;
         flex: 4;
         display: flex;
         flex-wrap: wrap;
+        flex-direction: row;
         .movieActor {
           padding: 5px 5px;
+          height: 200px;
         }
+
         .titleMovieActorJoin {
           position: absolute;
           font-weight: bold;
           color: #fff;
+          font-size: 40px;
           top: 300px;
         }
       }

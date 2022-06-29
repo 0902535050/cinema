@@ -24,9 +24,7 @@ export default function Product() {
   const [imgPost, setImgPost] = useState(null);
   const [imgTitle, setImgTitle] = useState(null);
   const [imgSm, setImgSm] = useState(null);
-  const [listVideoSub, setListVideoSub] = useState(null);
-  const [listVideoTM, setListVideoTM] = useState(null);
-  const [trailer, setTrailer] = useState(null);
+
   useEffect(() => {
     getActors(dispatchActors);
   }, [dispatchActors]);
@@ -76,9 +74,6 @@ export default function Product() {
         { file: imgTitle, label: "imgTitle" },
         { file: imgSm, label: "imgSm" },
         { file: imgPost, label: "imgPost" },
-        { file: listVideoSub, label: "listVideoSub" },
-        { file: listVideoTM, label: "listVideoTM" },
-        { file: trailer, label: "trailer" },
       ]);
     } else setLoading(false);
   };
@@ -271,6 +266,28 @@ export default function Product() {
               placeholder={movie.movieTag}
               onChange={handleChange}
             />
+            <label>Link video trailer</label>
+            <input
+              type="text"
+              name="trailer"
+              placeholder={movie.trailer}
+              onChange={handleChange}
+            />
+            <label>Link video vietsub</label>
+            <input
+              type="text"
+              name="listVideoSub"
+              placeholder={movie.listVideoSub}
+              onChange={handleChange}
+            />
+            <label>Link video thuyết minh</label>
+            <input
+              type="text"
+              name="listVideoTM"
+              placeholder={movie.listVideoTM}
+              onChange={handleChange}
+            />
+
             <label>Kiểu phim</label>
 
             <select name="isSeries" id="isSeries" onChange={handleChange}>
@@ -340,52 +357,7 @@ export default function Product() {
               />
             </div>
 
-            <div className="productUpload">
-              <img
-                src="https://tino.org/wp-content/uploads/2021/08/word-image-320-1024x512.jpeg"
-                alt=""
-                className="productUploadImg"
-              />
-              <label>Video Sub</label>
-              <input
-                name="listVideoSub"
-                type="file"
-                id="file"
-                onChange={(e) => setListVideoSub(e.target.files[0])}
-              />
-            </div>
-
-            <div className="productUpload">
-              <img
-                src="https://photo.tinhte.vn/store/2013/11/2230095_Phim_VietSub.png"
-                alt=""
-                className="productUploadImg"
-              />
-              <label>Video Thuyết Minh</label>
-              <input
-                name="listVideoTM"
-                type="file"
-                id="file"
-                onChange={(e) => setListVideoTM(e.target.files[0])}
-              />
-            </div>
-
-            <div className="productUpload">
-              <img
-                src="https://videohive.img.customer.envatousercontent.com/files/272807.jpg?auto=compress%2Cformat&fit=crop&crop=top&max-h=8000&max-w=590&s=fbc236446cd45ef0951911b8e42d8ea3"
-                alt=""
-                className="productUploadImg"
-              />
-              <label>Movie Trailer</label>
-              <input
-                name="trailer"
-                type="file"
-                id="file"
-                onChange={(e) => setTrailer(e.target.files[0])}
-              />
-            </div>
-
-            {uploaded === 7 ? (
+            {uploaded === 4 ? (
               <button className="productButton" onClick={handleSubmit}>
                 Cập nhật
               </button>

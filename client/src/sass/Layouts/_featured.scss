@@ -1,6 +1,11 @@
 .featured {
   height: 100vh;
   position: relative;
+  .imgSlider {
+    width: 1920px;
+    height: 1080px;
+    object-fit: cover;
+  }
   .slider {
     .btnVolume {
       z-index: 30;
