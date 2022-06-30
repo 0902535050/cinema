@@ -1,6 +1,6 @@
 import React from "react";
 import { FaHome, FaHotjar, FaStar } from "react-icons/fa";
-import { MdTheaterComedy, MdScience } from "react-icons/md";
+import { MdTheaterComedy, MdScience, MdTrendingUp } from "react-icons/md";
 import {
   GiNinjaHeroicStance,
   GiRomanToga,
@@ -16,7 +16,12 @@ import MenuItem from "../menuitem/MenuItem";
 export default function Menu() {
   return (
     <MenuPane>
-      <MenuItem name="Thịnh hành" Icon={FaHotjar} to="THỊNH HÀNH" />
+      <MenuItem name="Thịnh hành" Icon={MdTrendingUp} to="THỊNH HÀNH" />
+      <MenuItem
+        name="Phim mới cập nhật"
+        Icon={FaHotjar}
+        to="PHIM MỚI CẬP NHẬT"
+      />
       <MenuItem name="Siêu anh hùng" Icon={FaStar} to="SIÊU ANH HÙNG" />
       <MenuItem
         name="Hành động"
