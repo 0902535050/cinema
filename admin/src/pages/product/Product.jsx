@@ -6,7 +6,10 @@ import { useContext, useEffect, useState } from "react";
 import Actor from "../../components/actor/Actor";
 import Skeleton from "../../components/skeleton/Skeleton";
 import { useHistory } from "react-router-dom";
-import { updateMoviesMore } from "../../context/movieContext/apiCalls";
+import {
+  getMovies,
+  updateMoviesMore,
+} from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 import storage from "../../firebase";
 
@@ -15,7 +18,7 @@ export default function Product() {
   const location = useLocation();
   const movie = location.movie || JSON.parse(localStorage.getItem("movie"));
   const { actors, dispatch: dispatchActors } = useContext(ActorContext);
-  const { dispatch: dispatchMovie } = useContext(MovieContext);
+  const { movies, dispatch: dispatchMovie } = useContext(MovieContext);
 
   const [loading, setLoading] = useState(null);
   const [uploaded, setUploaded] = useState(0);
@@ -27,7 +30,8 @@ export default function Product() {
 
   useEffect(() => {
     getActors(dispatchActors);
-  }, [dispatchActors]);
+    getMovies(dispatchMovie);
+  }, [dispatchActors, dispatchMovie]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -80,7 +84,13 @@ export default function Product() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateMoviesMore(updateMovie, movie, dispatchMovie);
+    updateMoviesMore(
+      updateMovie,
+      movie,
+      movie.listVideoSub,
+      movie.listVideoTM,
+      dispatchMovie
+    );
     history.push("/movies");
   };
   return (

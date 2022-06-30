@@ -80,7 +80,11 @@ export const updateMovies = async (array, item, dispatch) => {
   }
 };
 
-export const updateMoviesMore = async (values, item, dispatch) => {
+export const updateMoviesMore = async (values, item, sub, tm, dispatch) => {
+  console.log(sub);
+  sub.push(values.listVideoSub);
+  tm.push(values.listVideoTM);
+
   dispatch(updateMoviesStart());
   try {
     const res = await axios.put(
@@ -102,8 +106,8 @@ export const updateMoviesMore = async (values, item, dispatch) => {
         imgTitle: values.imgTitle,
         imgSm: values.imgSm,
         imgPost: values.imgPost,
-        listVideoSub: values.listVideoSub,
-        listVideoTM: values.listVideoTM,
+        listVideoSub: sub,
+        listVideoTM: tm,
         trailer: values.trailer,
         listActor: values.listActor,
       },

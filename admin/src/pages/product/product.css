@@ -166,9 +166,9 @@
 }
 
 .productButton {
-  position: absolute;
+  /* position: absolute;
   bottom: -250px;
-  right: 500px;
+  right: 500px; */
   width: 120px;
   height: 50px;
   margin-left: 30px;
