@@ -21,7 +21,7 @@ export default function ListitemWatchList({ item, type, setFlag }) {
             <div className="movie-Title-Item-Tag">
               <span className="movieName">{item.title}</span>
             </div>
-            <span className="supportSubItemTag">{item.isSup}</span>
+            <span className="supportSubItemTag">{item.isSup}</span> */}
             <div className="itemInfoMovieItemTag">
               <span className="limit">{item.limit}+</span>
               <span className="year">{item.year}</span>

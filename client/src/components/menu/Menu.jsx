@@ -17,11 +17,11 @@ export default function Menu() {
   return (
     <MenuPane>
       <MenuItem name="Thịnh hành" Icon={MdTrendingUp} to="THỊNH HÀNH" />
-      <MenuItem
+      {/* <MenuItem
         name="Phim mới cập nhật"
         Icon={FaHotjar}
         to="PHIM MỚI CẬP NHẬT"
-      />
+      /> */}
       <MenuItem name="Siêu anh hùng" Icon={FaStar} to="SIÊU ANH HÙNG" />
       <MenuItem
         name="Hành động"
